@@ -1,6 +1,7 @@
 /*External procedures*/
 USE ISOYEX
 go
+/*REGISTER USERS PROCEDURES*/
 CREATE PROCEDURE spRegistrarDonanteReceptor
 (		
 		 @UserName nvarchar(128),
@@ -130,6 +131,80 @@ BEGIN
 
 END
 go
+/*LOGIN PROCEDURES*/
+CREATE PROCEDURE spLoginEmail(
+@Email nvarchar(100),
+@contrasena nvarchar(128)
+)as
+BEGIN
+	DECLARE @CurrentEmail nVarchar(128),@currentContrasena nVarchar(128)
+
+	DECLARE c_usuario CURSOR FOR
+		SELECT Email FROM Usuario
+
+	OPEN c_usuario
+		WHILE 1=1
+		BEGIN
+			FETCH NEXT FROM c_usuario INTO @CurrentEmail
+			IF(@@FETCH_STATUS <> 0)
+			BEGIN
+				BREAK;
+			END
+			ELSE IF (@currentEmail = @Email)
+			BEGIN
+				
+				DECLARE c_contrasena CURSOR FOR
+					SELECT Contrasena FROM AutenticacionUsuario
+
+				OPEN c_contrasena
+					WHILE 1=1
+					BEGIN
+						FETCH NEXT FROM c_login INTO @currentContrasena
+						IF(@@FETCH_STATUS <> 0)
+						BEGIN
+							BREAK;
+						END
+						ELSE IF(@currentContrasena = @contrasena)
+						BEGIN
+							BREAK;
+						END
+					END;
+				CLOSE c_contrasena;
+				DEALLOCATE c_contrasena;
+			END
+		END
+	CLOSE c_usuario
+	DEALLOCATE c_usuario
+
+END
+go
+CREATE PROCEDURE spLoginUsername(
+@UserName nVarchar(128),
+@contrasena nVarchar(128)
+)as
+BEGIN 
+	DECLARE @MyUserName nVarchar(128),@MyContrasena nVarchar(128)
+	DECLARE c_login CURSOR FOR
+			SELECT UserName, Contrasena FROM AutenticacionUsuario
+
+	OPEN c_login
+		WHILE 1=1
+		BEGIN
+			FETCH NEXT FROM c_login INTO @MyUserName,@MyContrasena
+			IF(@@FETCH_STATUS <> 0)
+			BEGIN
+				BREAK;
+			END
+			ELSE IF(@UserName = @MyUserName AND @contrasena = @MyContrasena)
+			BEGIN
+				BREAK;
+			END
+		END;
+	CLOSE c_login;
+	DEALLOCATE c_login;
+End
+go
+/*USER DATA PROCEDURES*/
 CREATE PROCEDURE spUsuarioData
 (
 	@Id_Usuario nvarchar(128),
@@ -195,6 +270,7 @@ BEGIN
 	)
 END
 go
+/*MODIFY USER DATA PROCEDURES*/
 CREATE PROCEDURE spUpdateDonanteReceptorData
 (
 	@Id_Usuario int,
@@ -336,27 +412,3 @@ BEGIN
 	WHERE Usuario.Id_Usuario = @Id_Usuario
 
 END
-go
-CREATE PROCEDURE spLogin(
-@UserName nVarchar(128),
-@contrasena nVarchar(128)
-)as
-BEGIN DECLARE @MyUserName nVarchar(128),@MyContrasena nVarchar(128)
-DECLARE c_login CURSOR FOR
-		SELECT UserName, Contrasena FROM AutenticacionUsuario
-
-	OPEN c_login
-		WHILE 1=1
-		BEGIN
-			FETCH NEXT FROM c_login INTO @MyUserName,@MyContrasena
-			IF(@@FETCH_STATUS <> 0)
-			BEGIN
-				BREAK;
-			END
-			ELSE IF(@UserName = @MyUserName AND @contrasena = @MyContrasena)
-			BEGIN
-				BREAK;
-			END
-		END;
-	CLOSE c_login;
-	End
