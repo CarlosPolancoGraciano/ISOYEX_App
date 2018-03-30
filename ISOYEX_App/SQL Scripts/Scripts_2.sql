@@ -14,7 +14,8 @@ CREATE PROCEDURE spRegistrarDonanteReceptor
 		 @NumeroTelefonico varchar(15),
 		 @Id_TipoContacto int,
 		 @Id_Provincia int,
-		 @Id_Municipio int
+		 @Id_Municipio int,
+		 @Id_Usuario int
 ) as
 BEGIN 
 	DECLARE @Id_AutenticacionUsuario int, @Id_Direccion int, @DireccionId int, @MyProvinciaId int, @MyMunicipioId int, @Id_Contacto int
@@ -60,8 +61,7 @@ BEGIN
 
 	UPDATE [dbo].[Usuario]
 	SET Id_Contacto=@Id_Contacto
-	WHERE [dbo].[Usuario].Id_AspNetUsers = @Id_AspNetUsers
-
+	WHERE [dbo].[Usuario].Id_Usuario = @Id_Usuario
 	INSERT INTO
 	ContactoTipoContacto(Id_TipoContacto,Id_Contacto)
 	VALUES
@@ -80,7 +80,8 @@ CREATE PROCEDURE spRegistrarInstitucion
 	@NumeroTelefonico varchar(15),
 	@Id_TipoContacto int,
     @Id_Provincia int,
-	@Id_Municipio int
+	@Id_Municipio int,
+	@Id_Usuario int
 )as
 BEGIN
 	DECLARE @Id_AutenticacionUsuario int, @Id_Direccion int, @DireccionId int, @MyProvinciaId int, @MyMunicipioId int, @Id_Contacto int
@@ -113,9 +114,9 @@ BEGIN
 	SELECT @Id_AutenticacionUsuario=SCOPE_IDENTITY()
 	
 	INSERT INTO 
-	Usuario (RNC, Nombre, Imagen, Email, Contrasena, Id_AutenticacionUsuario, Id_Direccion)
+	Usuario (RNC, Nombre, Imagen, Email, Id_AutenticacionUsuario, Id_Direccion)
 	VALUES
-	(@RNC, @Nombre, @Imagen, @Email, @Contrasena, @Id_AutenticacionUsuario, @Id_Direccion)	
+	(@RNC, @Nombre, @Imagen, @Email, @Id_AutenticacionUsuario, @Id_Direccion)	
 	
 	INSERT INTO Contacto(Numero) VALUES (@NumeroTelefonico)
 
@@ -123,7 +124,7 @@ BEGIN
 
 	UPDATE [dbo].[Usuario]
 	SET Id_Contacto=@Id_Contacto
-	WHERE [dbo].[Usuario].Id_AspNetUsers = @Id_AspNetUsers
+	WHERE [dbo].[Usuario].Id_Usuario = @Id_Usuario
 
 	INSERT INTO ContactoTipoContacto(Id_TipoContacto, Id_Contacto) VALUES (@Id_TipoContacto, @Id_Contacto)
 
@@ -131,7 +132,8 @@ END
 go
 CREATE PROCEDURE spUsuarioData
 (
-	@Id_Usuario nvarchar(128)
+	@Id_Usuario nvarchar(128),
+	@UsuarioId int
 )as
 BEGIN
 	DECLARE @RolId int, @RolCurrentUsuarioId int, @CurrentRolId int
@@ -173,7 +175,7 @@ BEGIN
 		inner join TipoContacto as tc on tc.Id_TipoContacto = ctc.Id_TipoContacto
 		/*Blood Type*/
 		inner join TipoSangre as ts on ts.Id_TipoSangre = u.Id_TipoSangre
-		WHERE Usuario.Id_Usuario = @UsuarioId
+		WHERE u.Id_Usuario = @UsuarioId
 	)
 	ELSE
 	(
@@ -189,7 +191,7 @@ BEGIN
 		inner join Direccion as d on d.Id_Direccion = u.Id_Direccion
 		inner join Municipio as m on m.Id_Municipio = d.Id_Municipio
 		inner join Provincia as p on p.Id_Provincia = d.Id_Provincia
-		WHERE Usuario.Id_Usuario = @UsuarioId
+		WHERE	u.Id_Usuario = @UsuarioId
 	)
 END
 go
@@ -207,13 +209,17 @@ CREATE PROCEDURE spUpdateDonanteReceptorData
 	@Id_TipoContacto int,
 	@Id_TipoSangre int,
 	@Id_Provincia int,
-	@Id_Municipio int
+	@Id_Municipio int,
+	@CurrentRolId int,
+	@RolCurrentUsuarioId int,
+	@RolId int
+
 )as
 BEGIN
 	DECLARE @Id_Direccion int, 
 			@DireccionId int, 
 			@MyProvinciaId int, 
-			@MyMunicipioId int,
+			@MyMunicipioId int
 
 	DECLARE c_direccion CURSOR FOR
 		SELECT Id_Direccion, Id_Provincia, Id_Municipio FROM Direccion 
@@ -271,8 +277,8 @@ BEGIN
 	UPDATE [dbo].[Usuario]
 	SET Nombre = @Nombre, Apellido = @Apellido, Imagen = @Imagen, 
 	Email = @Email, FechaNacimiento = @FechaNacimiento, Id_TipoSangre = @Id_TipoSangre,
-	Id_Direccion = @Id_Direccion
-	WHERE u.Id_Usuario = @Id_Usuario
+	Id_Direccion = @Id_Direccion 
+	WHERE Usuario.Id_Usuario = @Id_Usuario
 
 END
 go
@@ -327,6 +333,30 @@ BEGIN
 	/*Update of user data*/
 	UPDATE [dbo].[Usuario]
 	SET RNC = @RNC, Nombre = @Nombre, Imagen = @Imagen, Email = @Email
-	WHERE u.Id_Usuario = @Id_Usuario
+	WHERE Usuario.Id_Usuario = @Id_Usuario
 
 END
+go
+CREATE PROCEDURE spLogin(
+@UserName nVarchar(128),
+@contrasena nVarchar(128)
+)as
+BEGIN DECLARE @MyUserName nVarchar(128),@MyContrasena nVarchar(128)
+DECLARE c_login CURSOR FOR
+		SELECT UserName, Contrasena FROM AutenticacionUsuario
+
+	OPEN c_login
+		WHILE 1=1
+		BEGIN
+			FETCH NEXT FROM c_login INTO @MyUserName,@MyContrasena
+			IF(@@FETCH_STATUS <> 0)
+			BEGIN
+				BREAK;
+			END
+			ELSE IF(@UserName = @MyUserName AND @contrasena = @MyContrasena)
+			BEGIN
+				BREAK;
+			END
+		END;
+	CLOSE c_login;
+	End
