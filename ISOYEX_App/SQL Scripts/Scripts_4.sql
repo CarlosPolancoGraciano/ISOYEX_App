@@ -1,6 +1,6 @@
 USE ISOYEX
 go
-CREATE PROCEDURE spFiltradoPorSangre
+ALTER PROCEDURE spFiltradoPorSangre
 (
 	@TipoSangre nvarchar(50)
 )
@@ -8,7 +8,7 @@ AS
 BEGIN
 	SELECT 
 		u.Id_Usuario, u.Nombre, u.Apellido, 
-		u.Imagen, u.Email, u.FechaNacimiento, c.Numero, 
+		u.Imagen, au.Email, u.FechaNacimiento, c.Numero, 
 		tc.Tipo, p.Provincia, m.Municipio, ts.Tipo
 		FROM Usuario as u
 		/*Address*/
@@ -21,13 +21,14 @@ BEGIN
 		inner join TipoContacto as tc on tc.Id_TipoContacto = ctc.Id_TipoContacto
 		/*Blood Type*/
 		inner join TipoSangre as ts on ts.Id_TipoSangre = u.Id_TipoSangre
-		WHERE Usuario.Id_TipoSangre = @TipoSangre
+		inner join AutenticacionUsuario as au on au.Id_AutenticacionUsuario = u.Id_AutenticacionUsuario
+		WHERE u.Id_TipoSangre = @TipoSangre
 END
 go
 /*PROCEDURE FiltradoPorDireccion - MAIKEL*/
 go
 /*PROCEDURE FiltradoPorDireccionYSangre - CARLOS*/
-CREATE PROCEDURE spFiltradoPorDireccionYSangre (
+alter PROCEDURE spFiltradoPorDireccionYSangre (
 	@Id_Provincia int,
 	@Id_Municipio int,
 	@Id_TipoSangre int
@@ -57,7 +58,7 @@ BEGIN
 
 	SELECT 
 		u.Id_Usuario, u.Nombre, u.Apellido, 
-		u.Imagen, u.Email, u.FechaNacimiento, c.Numero, 
+		u.Imagen, au.Email, u.FechaNacimiento, c.Numero, 
 		tc.Tipo, p.Provincia, m.Municipio, ts.Tipo
 		FROM Usuario as u
 		/*Address*/
@@ -70,6 +71,7 @@ BEGIN
 		inner join TipoContacto as tc on tc.Id_TipoContacto = ctc.Id_TipoContacto
 		/*Blood Type*/
 		inner join TipoSangre as ts on ts.Id_TipoSangre = u.Id_TipoSangre
-		WHERE Usuario.Id_TipoSangre = @Id_TipoSangre AND Usuario.Id_Direccion = @Id_Direccion
+		inner join AutenticacionUsuario as au on au.Id_AutenticacionUsuario = u.Id_AutenticacionUsuario
+		WHERE u.Id_TipoSangre = @Id_TipoSangre AND u.Id_Direccion = @Id_Direccion
 
 END

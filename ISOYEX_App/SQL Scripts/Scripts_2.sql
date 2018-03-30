@@ -2,7 +2,7 @@
 USE ISOYEX
 go
 /*REGISTER USERS PROCEDURES*/
-CREATE PROCEDURE spRegistrarDonanteReceptor
+alter PROCEDURE spRegistrarDonanteReceptor
 (		
 		 @UserName nvarchar(128),
 		 @Nombre nvarchar(100),
@@ -73,7 +73,7 @@ BEGIN
 
 END
 go
-CREATE PROCEDURE spRegistrarInstitucion
+alter PROCEDURE spRegistrarInstitucion
 (
 	@UserName nvarchar(128),
 	@RNC nvarchar(20),
@@ -138,7 +138,7 @@ BEGIN
 END
 go
 /*LOGIN PROCEDURES*/
-CREATE PROCEDURE spLoginEmail(
+alter PROCEDURE spLoginEmail(
 @Email nvarchar(100),
 @contrasena nvarchar(128)
 )as
@@ -257,7 +257,7 @@ End
 */
 go
 /*USER DATA PROCEDURES*/
-CREATE PROCEDURE spUsuarioData
+alter PROCEDURE spUsuarioData
 (
 	@Id_Usuario nvarchar(128),
 	@UsuarioId int
@@ -266,7 +266,7 @@ BEGIN
 	DECLARE @RolId int, @RolCurrentUsuarioId int, @CurrentRolId int
 
 	DECLARE c_rol CURSOR FOR
-			SELECT Id_Rol, Id_Usuario FROM UsuarioRol
+			SELECT Id_Rol, u.Id_UsuarioRol FROM UsuarioRol as u
 
 		OPEN c_rol
 			WHILE 1=1
@@ -289,7 +289,7 @@ BEGIN
 	(
 		SELECT 
 		u.Id_Usuario, u.Nombre, u.Apellido, 
-		u.Imagen, u.Email, u.FechaNacimiento, c.Numero, 
+		u.Imagen, au.Email, u.FechaNacimiento, c.Numero, 
 		tc.Tipo, p.Provincia, m.Municipio, ts.Tipo
 		FROM Usuario as u
 		/*Address*/
@@ -302,18 +302,20 @@ BEGIN
 		inner join TipoContacto as tc on tc.Id_TipoContacto = ctc.Id_TipoContacto
 		/*Blood Type*/
 		inner join TipoSangre as ts on ts.Id_TipoSangre = u.Id_TipoSangre
+		inner join AutenticacionUsuario as au on au.Id_AutenticacionUsuario = u.Id_AutenticacionUsuario
 		WHERE u.Id_Usuario = @UsuarioId
 	)
 	ELSE
 	(
 		SELECT u.Id_Usuario, u.RNC, 
-		u.Nombre, u.Imagen, u.Email, c.Numero, 
+		u.Nombre, u.Imagen, au.Email, c.Numero, 
 		tc.Tipo, p.Provincia, m.Municipio
 		FROM Usuario as u
 		inner join Contacto as c on c.Id_Contacto = u.Id_Contacto
 		/*Phone Number and Type*/
 		inner join ContactoTipoContacto as ctc on ctc.Id_Contacto = c.Id_Contacto
 		inner join TipoContacto as tc on tc.Id_TipoContacto = ctc.Id_TipoContacto
+		inner join AutenticacionUsuario as au on au.Id_AutenticacionUsuario = u.Id_AutenticacionUsuario
 		/*Address and Type*/
 		inner join Direccion as d on d.Id_Direccion = u.Id_Direccion
 		inner join Municipio as m on m.Id_Municipio = d.Id_Municipio
@@ -322,8 +324,59 @@ BEGIN
 	)
 END
 go
+/*Direccion Filter*/
+	ALTER PROCEDURE spFilterDireccion
+	(
+	@Id_provincia int,
+	@Id_Municipio int
+	)as
+	BEGIN
+		DECLARE @Id_Direccion int, 
+				@DireccionId int, 
+				@MyProvinciaId int, 
+				@MyMunicipioId int
+
+		DECLARE c_direccion CURSOR FOR
+			SELECT Id_Direccion, Id_Provincia, Id_Municipio FROM Direccion 
+
+		OPEN c_direccion
+			WHILE 1=1
+			BEGIN
+				FETCH NEXT FROM c_direccion INTO @DireccionId, @MyProvinciaId, @MyMunicipioId
+				IF(@@FETCH_STATUS <> 0)
+				BEGIN
+					BREAK;
+				END
+				ELSE IF(@Id_Provincia = @MyProvinciaId AND @Id_Municipio = @MyMunicipioId)
+				BEGIN
+					SET @Id_Direccion = @DireccionId;
+					BREAK;
+				END
+			END;
+		CLOSE c_direccion;
+		DEALLOCATE c_direccion;
+		SELECT 
+		u.Id_Usuario, u.Nombre, u.Apellido, 
+		u.Imagen, au.Email, u.FechaNacimiento, c.Numero, 
+		tc.Tipo, p.Provincia, m.Municipio, ts.Tipo
+		FROM Usuario as u
+		/*Address*/
+		inner join Direccion as d on d.Id_Direccion = u.Id_Direccion
+		inner join Municipio as m on m.Id_Municipio = d.Id_Municipio
+		inner join Provincia as p on p.Id_Provincia = d.Id_Provincia
+		/*Phone number & Type*/
+		inner join Contacto as c on c.Id_Contacto = u.Id_Contacto
+		inner join ContactoTipoContacto as ctc on ctc.Id_Contacto = c.Id_Contacto
+		inner join TipoContacto as tc on tc.Id_TipoContacto = ctc.Id_TipoContacto
+		/*Blood Type*/
+		inner join TipoSangre as ts on ts.Id_TipoSangre = u.Id_TipoSangre
+		inner join AutenticacionUsuario as au on au.Id_AutenticacionUsuario = u.Id_AutenticacionUsuario
+		where u.Id_Direccion = @Id_Direccion
+		End
+		GO 
+
 /*MODIFY USER DATA PROCEDURES*/
-CREATE PROCEDURE spUpdateDonanteReceptorData
+alter PROCEDURE spUpdateDonanteReceptorData
 (
 	@Id_Usuario int,
 	@UserName nvarchar(128),
@@ -370,7 +423,7 @@ BEGIN
 	DEALLOCATE c_direccion;
 
 	DECLARE c_rol CURSOR FOR
-			SELECT Id_Rol, Id_Usuario FROM UsuarioRol
+			SELECT u.Id_Rol, u.Id_UsuarioRol FROM UsuarioRol as u
 
 		OPEN c_rol
 			WHILE 1=1
@@ -404,13 +457,13 @@ BEGIN
 	 /*Update of user data*/
 	UPDATE [dbo].[Usuario]
 	SET Nombre = @Nombre, Apellido = @Apellido, Imagen = @Imagen, 
-	Email = @Email, FechaNacimiento = @FechaNacimiento, Id_TipoSangre = @Id_TipoSangre,
+    FechaNacimiento = @FechaNacimiento, Id_TipoSangre = @Id_TipoSangre,
 	Id_Direccion = @Id_Direccion 
 	WHERE Usuario.Id_Usuario = @Id_Usuario
 
 END
 go
-CREATE PROCEDURE spUpdateInstitucionData
+alter PROCEDURE spUpdateInstitucionData
 (
 	@Id_Usuario int,
 	@UserName nvarchar(256),
@@ -460,7 +513,7 @@ BEGIN
 
 	/*Update of user data*/
 	UPDATE [dbo].[Usuario]
-	SET RNC = @RNC, Nombre = @Nombre, Imagen = @Imagen, Email = @Email
+	SET RNC = @RNC, Nombre = @Nombre, Imagen = @Imagen
 	WHERE Usuario.Id_Usuario = @Id_Usuario
 
 END

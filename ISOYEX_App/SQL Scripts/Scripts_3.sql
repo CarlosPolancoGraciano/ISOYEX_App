@@ -1,6 +1,6 @@
 USE ISOYEX
 go
-CREATE PROCEDURE spCargarDatosDireccion
+alter PROCEDURE spCargarDatosDireccion
 AS
 BEGIN
 	DECLARE @Id_Provincia int
