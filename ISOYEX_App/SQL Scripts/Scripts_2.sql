@@ -15,11 +15,10 @@ CREATE PROCEDURE spRegistrarDonanteReceptor
 		 @NumeroTelefonico varchar(15),
 		 @Id_TipoContacto int,
 		 @Id_Provincia int,
-		 @Id_Municipio int,
-		 @Id_Usuario int
+		 @Id_Municipio int
 ) as
 BEGIN 
-	DECLARE @Id_AutenticacionUsuario int, @Id_Direccion int, @DireccionId int, @MyProvinciaId int, @MyMunicipioId int, @Id_Contacto int
+	DECLARE @Id_AutenticacionUsuario int, @Id_Direccion int, @DireccionId int, @MyProvinciaId int, @MyMunicipioId int, @Id_Contacto int, @Id_Usuario int
 
 	DECLARE c_direccion CURSOR FOR
 		SELECT Id_Direccion, Id_Provincia, Id_Municipio FROM Direccion 
@@ -52,6 +51,8 @@ BEGIN
 	Usuario (Nombre, Apellido, Imagen, Email, FechaNacimiento, Id_AutenticacionUsuario, Id_Direccion, Id_TipoSangre) 
 	VALUES 
 	(@Nombre, @Apellido, @Imagen, @Email, @FechaNacimiento, @Id_AutenticacionUsuario, @Id_Direccion, @Id_TipoSangre)
+
+	SELECT @Id_Usuario=SCOPE_IDENTITY()
 	
 	INSERT INTO 
 	Contacto (Numero)
@@ -81,11 +82,10 @@ CREATE PROCEDURE spRegistrarInstitucion
 	@NumeroTelefonico varchar(15),
 	@Id_TipoContacto int,
     @Id_Provincia int,
-	@Id_Municipio int,
-	@Id_Usuario int
+	@Id_Municipio int
 )as
 BEGIN
-	DECLARE @Id_AutenticacionUsuario int, @Id_Direccion int, @DireccionId int, @MyProvinciaId int, @MyMunicipioId int, @Id_Contacto int
+	DECLARE @Id_AutenticacionUsuario int, @Id_Direccion int, @DireccionId int, @MyProvinciaId int, @MyMunicipioId int, @Id_Contacto int, @Id_Usuario int
 
 	DECLARE c_direccion CURSOR FOR
 		SELECT Id_Direccion, Id_Provincia, Id_Municipio FROM Direccion 
@@ -117,7 +117,9 @@ BEGIN
 	INSERT INTO 
 	Usuario (RNC, Nombre, Imagen, Email, Id_AutenticacionUsuario, Id_Direccion)
 	VALUES
-	(@RNC, @Nombre, @Imagen, @Email, @Id_AutenticacionUsuario, @Id_Direccion)	
+	(@RNC, @Nombre, @Imagen, @Email, @Id_AutenticacionUsuario, @Id_Direccion)
+	
+	SELECT @Id_Usuario=SCOPE_IDENTITY()
 	
 	INSERT INTO Contacto(Numero) VALUES (@NumeroTelefonico)
 
@@ -137,8 +139,28 @@ CREATE PROCEDURE spLoginEmail(
 @contrasena nvarchar(128)
 )as
 BEGIN
-	DECLARE @CurrentEmail nVarchar(128),@currentContrasena nVarchar(128)
+	SELECT 
+		u.Id_Usuario, u.Nombre, u.Apellido, 
+		u.Imagen, u.Email, u.FechaNacimiento, c.Numero, 
+		tc.Tipo, p.Provincia, m.Municipio, ts.Tipo
+		FROM Usuario as u
+		/*Address*/
+		inner join Direccion as d on d.Id_Direccion = u.Id_Direccion
+		inner join Municipio as m on m.Id_Municipio = d.Id_Municipio
+		inner join Provincia as p on p.Id_Provincia = d.Id_Provincia
+		/*Phone number & Type*/
+		inner join Contacto as c on c.Id_Contacto = u.Id_Contacto
+		inner join ContactoTipoContacto as ctc on ctc.Id_Contacto = c.Id_Contacto
+		inner join TipoContacto as tc on tc.Id_TipoContacto = ctc.Id_TipoContacto
+		/*Blood Type*/
+		inner join TipoSangre as ts on ts.Id_TipoSangre = u.Id_TipoSangre
+		/*Link to password */
+		inner join AutenticacionUsuario as au on au.Id_AutenticacionUsuario = u.Id_AutenticacionUsuario
+		WHERE u.Email = @Email AND au.Contrasena = @contrasena
 
+/*
+	DECLARE @CurrentEmail nVarchar(128),@currentContrasena nVarchar(128)
+	
 	DECLARE c_usuario CURSOR FOR
 		SELECT Email FROM Usuario
 
@@ -175,7 +197,7 @@ BEGIN
 		END
 	CLOSE c_usuario
 	DEALLOCATE c_usuario
-
+*/
 END
 go
 CREATE PROCEDURE spLoginUsername(
@@ -183,6 +205,26 @@ CREATE PROCEDURE spLoginUsername(
 @contrasena nVarchar(128)
 )as
 BEGIN 
+	SELECT 
+		u.Id_Usuario, u.Nombre, u.Apellido, 
+		u.Imagen, u.Email, u.FechaNacimiento, c.Numero, 
+		tc.Tipo, p.Provincia, m.Municipio, ts.Tipo
+		FROM Usuario as u
+		/*Address*/
+		inner join Direccion as d on d.Id_Direccion = u.Id_Direccion
+		inner join Municipio as m on m.Id_Municipio = d.Id_Municipio
+		inner join Provincia as p on p.Id_Provincia = d.Id_Provincia
+		/*Phone number & Type*/
+		inner join Contacto as c on c.Id_Contacto = u.Id_Contacto
+		inner join ContactoTipoContacto as ctc on ctc.Id_Contacto = c.Id_Contacto
+		inner join TipoContacto as tc on tc.Id_TipoContacto = ctc.Id_TipoContacto
+		/*Blood Type*/
+		inner join TipoSangre as ts on ts.Id_TipoSangre = u.Id_TipoSangre
+		/*Link to password */
+		inner join AutenticacionUsuario as au on au.Id_AutenticacionUsuario = u.Id_AutenticacionUsuario
+		WHERE u.Email = @Email AND au.Contrasena = @contrasena
+
+	/*
 	DECLARE @MyUserName nVarchar(128),@MyContrasena nVarchar(128)
 	DECLARE c_login CURSOR FOR
 			SELECT UserName, Contrasena FROM AutenticacionUsuario
@@ -202,6 +244,7 @@ BEGIN
 		END;
 	CLOSE c_login;
 	DEALLOCATE c_login;
+	*/
 End
 go
 /*USER DATA PROCEDURES*/
