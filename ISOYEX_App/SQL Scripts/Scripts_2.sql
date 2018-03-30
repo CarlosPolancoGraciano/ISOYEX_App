@@ -41,16 +41,18 @@ BEGIN
 	DEALLOCATE c_direccion;
 
 	INSERT INTO 
-	AutenticacionUsuario (UserName, Contrasena) 
+	AutenticacionUsuario (Email, Contrasena) 
 	VALUES 
-	(@UserName, @Contrasena)
+	(@Email, @Contrasena)
 
 	SELECT @Id_AutenticacionUsuario=SCOPE_IDENTITY()
 
+	INSERT INTO UsuarioRol (Id_Rol, Id_AutenticacionUsuario) VALUES (1, @Id_AutenticacionUsuario)
+
 	INSERT INTO 
-	Usuario (Nombre, Apellido, Imagen, Email, FechaNacimiento, Id_AutenticacionUsuario, Id_Direccion, Id_TipoSangre) 
+	Usuario (Nombre, Apellido, Imagen, FechaNacimiento, Id_AutenticacionUsuario, Id_Direccion, Id_TipoSangre) 
 	VALUES 
-	(@Nombre, @Apellido, @Imagen, @Email, @FechaNacimiento, @Id_AutenticacionUsuario, @Id_Direccion, @Id_TipoSangre)
+	(@Nombre, @Apellido, @Imagen, @FechaNacimiento, @Id_AutenticacionUsuario, @Id_Direccion, @Id_TipoSangre)
 
 	SELECT @Id_Usuario=SCOPE_IDENTITY()
 	
@@ -108,16 +110,18 @@ BEGIN
 	DEALLOCATE c_direccion;
 
 	INSERT INTO 
-	AutenticacionUsuario (UserName, Contrasena) 
+	AutenticacionUsuario (Email, Contrasena) 
 	VALUES 
-	(@UserName, @Contrasena)
+	(@Email, @Contrasena)
 
 	SELECT @Id_AutenticacionUsuario=SCOPE_IDENTITY()
+
+	INSERT INTO UsuarioRol (Id_Rol, Id_AutenticacionUsuario) VALUES (2, @Id_AutenticacionUsuario)
 	
 	INSERT INTO 
-	Usuario (RNC, Nombre, Imagen, Email, Id_AutenticacionUsuario, Id_Direccion)
+	Usuario (RNC, Nombre, Imagen, Id_AutenticacionUsuario, Id_Direccion)
 	VALUES
-	(@RNC, @Nombre, @Imagen, @Email, @Id_AutenticacionUsuario, @Id_Direccion)
+	(@RNC, @Nombre, @Imagen, @Id_AutenticacionUsuario, @Id_Direccion)
 	
 	SELECT @Id_Usuario=SCOPE_IDENTITY()
 	
@@ -141,8 +145,9 @@ CREATE PROCEDURE spLoginEmail(
 BEGIN
 	SELECT 
 		u.Id_Usuario, u.Nombre, u.Apellido, 
-		u.Imagen, u.Email, u.FechaNacimiento, c.Numero, 
-		tc.Tipo, p.Provincia, m.Municipio, ts.Tipo
+		u.Imagen, u.FechaNacimiento, c.Numero, 
+		tc.Tipo, p.Provincia, m.Municipio, ts.Tipo,
+		au.Email, au.Contrasena, r.Nombre
 		FROM Usuario as u
 		/*Address*/
 		inner join Direccion as d on d.Id_Direccion = u.Id_Direccion
@@ -156,7 +161,9 @@ BEGIN
 		inner join TipoSangre as ts on ts.Id_TipoSangre = u.Id_TipoSangre
 		/*Link to password */
 		inner join AutenticacionUsuario as au on au.Id_AutenticacionUsuario = u.Id_AutenticacionUsuario
-		WHERE u.Email = @Email AND au.Contrasena = @contrasena
+		inner join UsuarioRol as ur on ur.Id_AutenticacionUsuario = au.Id_AutenticacionUsuario
+		inner join Rol as r on r.Id_Rol = ur.Id_Rol
+		WHERE au.Email = @Email AND au.Contrasena = @contrasena
 
 /*
 	DECLARE @CurrentEmail nVarchar(128),@currentContrasena nVarchar(128)
@@ -200,6 +207,7 @@ BEGIN
 */
 END
 go
+/*
 CREATE PROCEDURE spLoginUsername(
 @UserName nVarchar(128),
 @contrasena nVarchar(128)
@@ -246,6 +254,7 @@ BEGIN
 	DEALLOCATE c_login;
 	*/
 End
+*/
 go
 /*USER DATA PROCEDURES*/
 CREATE PROCEDURE spUsuarioData
