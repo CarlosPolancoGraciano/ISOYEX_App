@@ -22,7 +22,7 @@ Id_Provincia int not null,
 Id_Municipio int not null,
 CONSTRAINT fk_DireccionProvincia FOREIGN KEY(Id_Provincia)
 REFERENCES Provincia(Id_Provincia),
-CONSTRAINT fk_DireccionProvincia FOREIGN KEY(Id_Municipio)
+CONSTRAINT fk_DireccionMunicipio FOREIGN KEY(Id_Municipio)
 REFERENCES Municipio(Id_Municipio)
 )
 go
