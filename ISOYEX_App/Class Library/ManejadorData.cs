@@ -14,7 +14,7 @@ namespace ISOYEX_App
         private static SqlConnection GetConnection()
         {
             ///ISOYEX ConnectionString
-            SqlConnection cnn = new SqlConnection("Data Source=.;Initial Catalog=ISOYEX_App;Integrated Security=True");
+            SqlConnection cnn = new SqlConnection("Data Source=.;Initial Catalog=ISOYEX;Integrated Security=True");
             return cnn;
         }
 
