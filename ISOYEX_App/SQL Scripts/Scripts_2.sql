@@ -15,7 +15,6 @@ CREATE PROCEDURE spRegistrarDonanteReceptor
 		 @Id_TipoContacto int,
 		 @Id_Provincia int,
 		 @Id_Municipio int
-	
 ) as
 BEGIN 
 	DECLARE @Id_AutenticacionUsuario int, @Id_Direccion int, @DireccionId int, @MyProvinciaId int, @MyMunicipioId int, @Id_Contacto int
@@ -208,7 +207,7 @@ CREATE PROCEDURE spUpdateDonanteReceptorData
 	@Id_TipoContacto int,
 	@Id_TipoSangre int,
 	@Id_Provincia int,
-	@Id_Municipio int,
+	@Id_Municipio int
 )as
 BEGIN
 	DECLARE @Id_Direccion int, 
@@ -288,7 +287,7 @@ CREATE PROCEDURE spUpdateInstitucionData
 	@NumeroTelefonico nvarchar(15),
 	@Id_TipoContacto int,
 	@Id_Provincia int,
-	@Id_Municipio int,
+	@Id_Municipio int
 )as
 BEGIN
 	DECLARE @Id_Direccion int, @DireccionId int, @MyProvinciaId int, @MyMunicipioId int, @Id_Contacto int
