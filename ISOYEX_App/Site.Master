@@ -56,6 +56,9 @@
                         <li class="nav-item">
                             <a runat="server" class="nav-link" href="~/Contact">Contact</a>
                         </li>
+                        <li class="nav-item">
+                            <a runat="server" class="nav-link" href="login.aspx">Login</a>
+                        </li>
                     </ul>
                 </div>
             </div>
