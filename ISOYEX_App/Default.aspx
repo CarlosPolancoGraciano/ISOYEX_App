@@ -2,41 +2,98 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="jumbotron">
-        <h1>ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-        <p><a href="http://www.asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-    </div>
+    <!-- Page Content -->
+    <div class="container">
 
-    <div class="row">
-        <div class="col-md-4">
-            <h2>Getting started</h2>
-            <p>
-                ASP.NET Web Forms lets you build dynamic websites using a familiar drag-and-drop, event-driven model.
-            A design surface and hundreds of controls and components let you rapidly build sophisticated, powerful UI-driven sites with data access.
-            </p>
-            <p>
-                <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301948">Learn more &raquo;</a>
-            </p>
+        <!-- Heading Row -->
+        <div class="row my-4">
+            <div class="col-lg-8">
+                <img class="img-fluid rounded" src="http://placehold.it/900x400" alt="">
+            </div>
+            <!-- /.col-lg-8 -->
+            <div class="col-lg-4">
+                <h1>Business Name or Tagline</h1>
+                <p>This is a template that is great for small businesses. It doesn't have too much fancy flare to it, but it makes a great use of the standard Bootstrap core components. Feel free to use this template for any project you want!</p>
+                <a class="btn btn-primary btn-lg" href="#">Call to Action!</a>
+            </div>
+            <!-- /.col-md-4 -->
         </div>
-        <div class="col-md-4">
-            <h2>Get more libraries</h2>
-            <p>
-                NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.
-            </p>
-            <p>
-                <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301949">Learn more &raquo;</a>
-            </p>
+        <!-- /.row -->
+        <!-- Filter form -->
+        <div class="card text-white bg-secondary my-4 text-center">
+            <div class="card-body">
+                <p class="text-white m-0">This call to action card is a great place to showcase some important information or display a clever tagline!</p>
+            </div>
         </div>
-        <div class="col-md-4">
-            <h2>Web Hosting</h2>
-            <p>
-                You can easily find a web hosting company that offers the right mix of features and price for your applications.
-            </p>
-            <p>
-                <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301950">Learn more &raquo;</a>
-            </p>
-        </div>
-    </div>
 
+        <!-- Content Row -->
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-img-top">
+                        <img class="img-fluid" src="http://placehold.it/900x400" alt="">
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title h2">Carlos Polanco</h2>
+                        <h6 class="card-subtitle mb-2 text-muted">Tipo de sangre: A+</h6>
+                        <p class="card-text">
+                            <p class="h4">Contacto</p>
+                            <ul class="list-unstyled">
+                                <li><span class="text-muted h6">Personal</span>: 829-555-xxxx</li>
+                                <li><span class="text-muted h6">Oficina</span>: 809-555-yxyx</li>
+                            </ul>
+                        </p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="#" class="btn btn-primary">Más información</a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.col-md-4 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-img-top">
+                        <img class="img-fluid" src="http://placehold.it/900x400" alt="">
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">Fidel Acosta</h2>
+                        <h6 class="card-subtitle mb-2 text-muted">Tipo de sangre: O+</h6>
+                        <p class="card-text">
+                            <p class="h4">Contacto</p>
+                            <ul class="list-unstyled">
+                                <li><span class="text-muted h6">Personal</span>: 829-555-xxxx</li>
+                            </ul>
+                        </p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="#" class="btn btn-primary">Más información</a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.col-md-4 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-img-top">
+                        <img class="img-fluid" src="http://placehold.it/900x400" alt="">
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">Maikel Cuevas</h2>
+                        <h6 class="card-subtitle mb-2 text-muted">Tipo de sangre: AB+</h6>
+                        <p class="card-text">
+                            <p class="h4">Contacto</p>
+                            <ul class="list-unstyled">
+                                <li><span class="text-muted h6">Personal</span>: 829-555-xxxx</li>
+                            </ul>
+                        </p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="#" class="btn btn-primary">Más información</a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.col-md-4 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
 </asp:Content>
