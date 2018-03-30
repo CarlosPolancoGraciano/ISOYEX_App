@@ -1,5 +1,7 @@
 CREATE DATABASE ISOYEX
 go
+USE ISOYEX
+go
 /*Systems tables*/
 CREATE TABLE Provincia(
 Id_Provincia int identity(1,1) PRIMARY KEY,
