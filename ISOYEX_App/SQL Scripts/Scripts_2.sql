@@ -15,11 +15,10 @@ CREATE PROCEDURE spRegistrarDonanteReceptor
 		 @NumeroTelefonico varchar(15),
 		 @Id_TipoContacto int,
 		 @Id_Provincia int,
-		 @Id_Municipio int,
-		 @Id_Usuario int
+		 @Id_Municipio int
 ) as
 BEGIN 
-	DECLARE @Id_AutenticacionUsuario int, @Id_Direccion int, @DireccionId int, @MyProvinciaId int, @MyMunicipioId int, @Id_Contacto int
+	DECLARE @Id_AutenticacionUsuario int, @Id_Direccion int, @DireccionId int, @MyProvinciaId int, @MyMunicipioId int, @Id_Contacto int, @Id_Usuario int
 
 	DECLARE c_direccion CURSOR FOR
 		SELECT Id_Direccion, Id_Provincia, Id_Municipio FROM Direccion 
@@ -52,6 +51,8 @@ BEGIN
 	Usuario (Nombre, Apellido, Imagen, Email, FechaNacimiento, Id_AutenticacionUsuario, Id_Direccion, Id_TipoSangre) 
 	VALUES 
 	(@Nombre, @Apellido, @Imagen, @Email, @FechaNacimiento, @Id_AutenticacionUsuario, @Id_Direccion, @Id_TipoSangre)
+
+	SELECT @Id_Usuario=SCOPE_IDENTITY()
 	
 	INSERT INTO 
 	Contacto (Numero)
@@ -81,11 +82,10 @@ CREATE PROCEDURE spRegistrarInstitucion
 	@NumeroTelefonico varchar(15),
 	@Id_TipoContacto int,
     @Id_Provincia int,
-	@Id_Municipio int,
-	@Id_Usuario int
+	@Id_Municipio int
 )as
 BEGIN
-	DECLARE @Id_AutenticacionUsuario int, @Id_Direccion int, @DireccionId int, @MyProvinciaId int, @MyMunicipioId int, @Id_Contacto int
+	DECLARE @Id_AutenticacionUsuario int, @Id_Direccion int, @DireccionId int, @MyProvinciaId int, @MyMunicipioId int, @Id_Contacto int, @Id_Usuario int
 
 	DECLARE c_direccion CURSOR FOR
 		SELECT Id_Direccion, Id_Provincia, Id_Municipio FROM Direccion 
@@ -117,7 +117,9 @@ BEGIN
 	INSERT INTO 
 	Usuario (RNC, Nombre, Imagen, Email, Id_AutenticacionUsuario, Id_Direccion)
 	VALUES
-	(@RNC, @Nombre, @Imagen, @Email, @Id_AutenticacionUsuario, @Id_Direccion)	
+	(@RNC, @Nombre, @Imagen, @Email, @Id_AutenticacionUsuario, @Id_Direccion)
+	
+	SELECT @Id_Usuario=SCOPE_IDENTITY()
 	
 	INSERT INTO Contacto(Numero) VALUES (@NumeroTelefonico)
 
