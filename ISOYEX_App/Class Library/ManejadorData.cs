@@ -11,7 +11,7 @@ namespace ISOYEX_App
 {
     public class ManejadorData
     {
-        private static SqlConnection GetConnection()
+        private static SqlConnection GetConnection() 
         {
             ///ISOYEX ConnectionString
             SqlConnection cnn = new SqlConnection("Data Source=.;Initial Catalog=ISOYEX;Integrated Security=True");
@@ -116,6 +116,7 @@ namespace ISOYEX_App
             SqlTransaction ot = null;
             try
             {
+                
                 cmd = GetConnection().CreateCommand();
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = stp_name;
@@ -130,11 +131,8 @@ namespace ISOYEX_App
 
                 if (c.Equals('m'))
                 {
-                    ot = GetConnection().BeginTransaction(IsolationLevel.ReadUncommitted);
-                    cmd.Transaction = ot;
-                    debug(cmd);
-                    int ret = cmd.ExecuteNonQuery();
-                    ot.Commit();
+                    
+                    cmd.ExecuteNonQuery();
                 }
                 else
                 {
