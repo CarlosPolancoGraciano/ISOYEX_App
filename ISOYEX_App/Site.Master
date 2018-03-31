@@ -14,18 +14,10 @@
 
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-<<<<<<< HEAD
-<<<<<<< HEAD
+
      <asp:ContentPlaceHolder ID="ContentHeader" runat="server">
             </asp:ContentPlaceHolder>
-=======
     <link href="Content/Website CSS/WebsiteCSS.css" rel="stylesheet" type="text/css"/>
-
->>>>>>> Front-End
-=======
-     <asp:ContentPlaceHolder ID="ContentHeader" runat="server">
-           </asp:ContentPlaceHolder>
->>>>>>> Back-End
 </head>
 <body>
     <form runat="server">
