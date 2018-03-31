@@ -22,29 +22,31 @@
         <!-- Filter form -->
         <div class="card my-4 text-center">
             <div class="card-body">
-                <div class="form-inline">
-                    <div class="form-group">
-                        <asp:Label ID="ProvinciaLabel" runat="server" Text="Provincia: " AssociatedControlID="ProvinciaDropDown"></asp:Label>
+                <form>
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <asp:Label ID="ProvinciaLabel" runat="server" Text="Provincia: " AssociatedControlID="ProvinciaDropDown"></asp:Label>
+                            <div class="ml-4">
+                                <asp:DropDownList ID="ProvinciaDropDown" CssClass="form-control form-control-lg" runat="server"></asp:DropDownList>
+                            </div>
+                        </div>
+                        <div class="form-group ml-4">
+                            <asp:Label ID="MunicipioLabel" runat="server" Text="Municipio: " AssociatedControlID="MunicipioDropDown"></asp:Label>
+                            <div class="ml-4">
+                                <asp:DropDownList ID="MunicipioDropDown" CssClass="form-control form-control-lg" runat="server"></asp:DropDownList>
+                            </div>
+                        </div>
+                        <div class="form-group ml-4">
+                            <asp:Label ID="TipoSangreLabel" runat="server" Text="Tipo de sangre: " AssociatedControlID="TipoSangreDropDown"></asp:Label>
+                            <div class="ml-4">
+                                <asp:DropDownList ID="TipoSangreDropDown" CssClass="form-control form-control-lg" runat="server"></asp:DropDownList>
+                            </div>
+                        </div>
                         <div class="ml-4">
-                            <asp:DropDownList ID="ProvinciaDropDown" CssClass="form-control form-control-lg" runat="server"></asp:DropDownList>
+                            <asp:Button ID="SearchButton" runat="server" Text="Buscar" CssClass="btn btn-wine-color btn-lg" />
                         </div>
                     </div>
-                    <div class="form-group ml-4">
-                        <asp:Label ID="MunicipioLabel" runat="server" Text="Municipio: " AssociatedControlID="MunicipioDropDown"></asp:Label>
-                        <div class="ml-4">
-                            <asp:DropDownList ID="MunicipioDropDown" CssClass="form-control form-control-lg" runat="server"></asp:DropDownList>
-                        </div>
-                    </div>
-                    <div class="form-group ml-4">
-                        <asp:Label ID="TipoSangreLabel" runat="server" Text="Tipo de sangre: " AssociatedControlID="TipoSangreDropDown"></asp:Label>
-                        <div class="ml-4">
-                            <asp:DropDownList ID="TipoSangreDropDown" CssClass="form-control form-control-lg" runat="server"></asp:DropDownList>
-                        </div>
-                    </div>
-                    <div class="ml-4">
-                        <asp:Button ID="SearchButton" runat="server" Text="Buscar" CssClass="btn btn-wine-color btn-lg" />
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
 
