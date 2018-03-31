@@ -41,14 +41,14 @@ namespace ISOYEX_App
 
         protected void btnRegistrarse_Click(object sender, EventArgs e)
         {
-
+            
             if (hdnOpcion.Value == "ind")
             {
                 string[] parametros =
                     {
                     "@Nombre",txtNombre.Text,
                     "@Apellido",txtApellido.Text,
-                    "@Imagen","",
+                    "@Imagen","0x",
                     "@Email",txtEmail.Text,
                     "@Contrasena",txtContrasena.Text,
                     "@FechaNacimiento",txtFechaNacimiento.Text,

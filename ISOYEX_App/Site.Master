@@ -14,8 +14,10 @@
 
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
      <asp:ContentPlaceHolder ID="ContentHeader" runat="server">
-           </asp:ContentPlaceHolder>
+            </asp:ContentPlaceHolder>
+    <link href="Content/Website CSS/WebsiteCSS.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
     <form runat="server">
@@ -40,9 +42,9 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-dark red-custom fixed-top">
             <div class="container">
-                <a class="navbar-brand" runat="server" href="~/">Application name</a>
+                <a class="navbar-brand" runat="server" href="~/">Donantes RD</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -57,15 +59,23 @@
                         <li class="nav-item">
                             <a runat="server" class="nav-link" href="~/Contact">Contact</a>
                         </li>
+                        <li class="nav-item">
+                            <a runat="server" class="nav-link" href="Registrarse.aspx">Registrarse</a>
+                        </li>
+                        <li class="nav-item">
+                            <a runat="server" class="nav-link" href="Login.aspx">Login</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
         <div class="container body-content">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server">
-            </asp:ContentPlaceHolder>
+            <div class="p-4">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
         </div>
-        <footer class="py-5 bg-dark footer">
+        <footer class="py-4 red-custom footer fixed-bottom">
             <div class="container">
                 <p class="m-0 text-center text-white">Copyright &copy; <%: DateTime.Now.Year %> - Donantes RD 2018</p>
             </div>
