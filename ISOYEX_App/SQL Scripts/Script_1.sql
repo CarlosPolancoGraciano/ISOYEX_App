@@ -64,7 +64,6 @@ RNC nvarchar(20),
 Nombre nvarchar(100) not null,
 Apellido nvarchar(100),
 Imagen varbinary(max),
-Email nvarchar(100) not null,
 FechaNacimiento datetime,
 Id_AutenticacionUsuario int,
 Id_TipoSangre int,
@@ -82,19 +81,19 @@ REFERENCES TipoSangre(Id_TipoSangre)
 go
 CREATE TABLE AutenticacionUsuario(
 Id_AutenticacionUsuario int identity(1,1) PRIMARY KEY,
-UserName nvarchar(128) not null,
-Contrasena nvarchar(100) not null
+Email nvarchar(128) not null,
+Contrasena nvarchar(100) not null,
 )
 go
 CREATE TABLE UsuarioRol
 (
 Id_UsuarioRol int identity(1,1) PRIMARY KEY,
 Id_Rol int not null,
-Id_Usuario int not null,
+Id_AutenticacionUsuario int not null,
 CONSTRAINT fk_RolUsuarioRol FOREIGN KEY (Id_Rol)
 REFERENCES Rol(Id_Rol),
-CONSTRAINT fk_UsuarioRolUsuario FOREIGN KEY (Id_Usuario)
-REFERENCES Usuario(Id_Usuario)
+CONSTRAINT fk_UsuarioRolAutenticacionUsuario FOREIGN KEY (Id_AutenticacionUsuario)
+REFERENCES AutenticacionUsuario(Id_AutenticacionUsuario)
 )
 go
 CREATE TABLE Publicacion(
@@ -263,3 +262,19 @@ INSERT INTO Municipio VALUES ('Bayahibe', 1), ('Boca de Yuma', 1), ('Higuey', 1)
 ('Guatapanal', 32),('Jaibon', 32),('Jaiñan', 32),
 ('Jicome', 32),('La Caya', 32),('Laguna Salada', 32),
 ('Maizal', 32),('Mao', 32),('Paradero', 32)
+
+/*Para Fidel*/
+ALTER TABLE Usuario
+DROP COLUMN Email
+ALTER TABLE AutenticacionUsuario
+DROP COLUMN UserName
+ALTER TABLE AutenticacionUsuario
+ADD Email nvarchar(100)
+ALTER TABLE UsuarioRol
+DROP CONSTRAINT fk_UsuarioRolUsuario
+ALTER TABLE UsuarioRol
+DROP COLUMN Id_Usuario
+ALTER TABLE UsuarioRol
+ADD Id_AutenticacionUsuario int
+CONSTRAINT fk_UsuarioRolAutenticacionUsuario FOREIGN KEY (Id_AutenticacionUsuario)
+REFERENCES AutenticacionUsuario(Id_AutenticacionUsuario)

@@ -69,3 +69,18 @@ AS
 BEGIN
 	SELECT Id_TipoContacto, Tipo FROM TipoContacto
 END
+go
+create proc spCargarProvincias
+as
+begin
+select * from Provincia
+end
+go
+create proc spCargarMunicipio
+@idProvincia int
+as
+begin
+	select Id_Municipio, Municipio from Municipio
+	where
+	(@idProvincia = '' or (@idProvincia <> '' and Id_Provincia = @idProvincia))
+end
