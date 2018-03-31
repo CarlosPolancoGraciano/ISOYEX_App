@@ -1,6 +1,6 @@
 USE ISOYEX
 go
-alter PROCEDURE spCargarDatosDireccion
+ALTER PROCEDURE spCargarDatosDireccion
 AS
 BEGIN
 	DECLARE @Id_Provincia int
@@ -49,7 +49,7 @@ go
 EXEC [dbo].[spCargarDatosDireccion]
 go
 /* Carga de Provincia y Municipio (Con sus Ids y nombres) */
-CREATE PROCEDURE spCargarDirecciones
+ALTER PROCEDURE spCargarDirecciones
 AS
 BEGIN
 	SELECT p.Id_Provincia, p.Provincia, m.Id_Municipio, m.Municipio FROM Municipio as m
@@ -57,30 +57,30 @@ BEGIN
 END
 go
 /* Carga de tipos de sangre */
-CREATE PROCEDURE spCargarTipoSangre
+ALTER PROCEDURE spCargarTipoSangre
 AS
 BEGIN
 	SELECT Id_TipoSangre, Tipo FROM TipoSangre
 END
 go
 /* Carga de tipos de contacto */
-CREATE PROCEDURE spCargarTipoContacto
+ALTER PROCEDURE spCargarTipoContacto
 AS
 BEGIN
 	SELECT Id_TipoContacto, Tipo FROM TipoContacto
 END
 go
-create proc spCargarProvincias
-as
-begin
-select * from Provincia
-end
+ALTER PROCEDURE spCargarProvincias
+AS
+BEGIN
+SELECT * FROM Provincia
+END
 go
-create proc spCargarMunicipio
+ALTER PROCEDURE spCargarMunicipio
 @idProvincia int
-as
-begin
-	select Id_Municipio, Municipio from Municipio
-	where
+AS
+BEGIN
+	SELECT Id_Municipio, Municipio FROM Municipio
+	WHERE
 	(@idProvincia = '' or (@idProvincia <> '' and Id_Provincia = @idProvincia))
-end
+END
