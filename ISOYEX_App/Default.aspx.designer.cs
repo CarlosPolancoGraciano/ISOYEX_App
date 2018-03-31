@@ -22,13 +22,13 @@ namespace ISOYEX_App {
         protected global::System.Web.UI.WebControls.Label ProvinciaLabel;
         
         /// <summary>
-        /// ProvinciaDropDown control.
+        /// ddlProvincia control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ProvinciaDropDown;
+        protected global::System.Web.UI.WebControls.DropDownList ddlProvincia;
         
         /// <summary>
         /// MunicipioLabel control.
@@ -40,13 +40,13 @@ namespace ISOYEX_App {
         protected global::System.Web.UI.WebControls.Label MunicipioLabel;
         
         /// <summary>
-        /// MunicipioDropDown control.
+        /// ddlMunicipio control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList MunicipioDropDown;
+        protected global::System.Web.UI.WebControls.DropDownList ddlMunicipio;
         
         /// <summary>
         /// TipoSangreLabel control.
@@ -58,13 +58,13 @@ namespace ISOYEX_App {
         protected global::System.Web.UI.WebControls.Label TipoSangreLabel;
         
         /// <summary>
-        /// TipoSangreDropDown control.
+        /// ddlTipoSangre control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList TipoSangreDropDown;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoSangre;
         
         /// <summary>
         /// SearchButton control.
