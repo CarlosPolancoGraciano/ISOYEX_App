@@ -6,7 +6,7 @@ alter PROCEDURE spRegistrarDonanteReceptor
 (		
 		 @Nombre nvarchar(100),
 		 @Apellido nvarchar(100), 
-		 @Imagen nvarchar(max), 
+		 @Imagen nvarchar(100), 
 		 @Email nvarchar(100), 
 		 @Contrasena nvarchar(100),
 		 @FechaNacimiento nvarchar(100),
@@ -53,7 +53,7 @@ BEGIN
 	INSERT INTO 
 	Usuario (Nombre, Apellido, Imagen, FechaNacimiento, Id_AutenticacionUsuario, Id_Direccion, Id_TipoSangre) 
 	VALUES 
-	(@Nombre, @Apellido, CONVERT(varbinary(max), @Imagen), CONVERT(datetime, @FechaNacimiento, 103), @Id_AutenticacionUsuario, @Id_Direccion, @Id_TipoSangre)
+	(@Nombre, @Apellido, @Imagen, CONVERT(datetime, @FechaNacimiento, 103), @Id_AutenticacionUsuario, @Id_Direccion, @Id_TipoSangre)
 
 	SELECT @Id_Usuario=SCOPE_IDENTITY()
 	
@@ -78,7 +78,7 @@ alter PROCEDURE spRegistrarInstitucion
 (
 	@RNC nvarchar(20),
 	@Nombre nvarchar(100),
-	@Imagen nvarchar(max),
+	@Imagen nvarchar(100),
 	@Email nvarchar(100),
 	@Contrasena nvarchar(100),
 	@NumeroTelefonico varchar(15),
@@ -123,7 +123,7 @@ BEGIN
 	INSERT INTO 
 	Usuario (RNC, Nombre, Imagen, Id_AutenticacionUsuario, Id_Direccion)
 	VALUES
-	(@RNC, @Nombre, CONVERT(varbinary(max), @Imagen), @Id_AutenticacionUsuario, @Id_Direccion)
+	(@RNC, @Nombre,  @Imagen, @Id_AutenticacionUsuario, @Id_Direccion)
 	
 	SELECT @Id_Usuario=SCOPE_IDENTITY()
 	
@@ -145,8 +145,6 @@ alter PROCEDURE spLoginEmail(
 @contrasena nvarchar(128)
 )as
 BEGIN
-<<<<<<< HEAD
-=======
 	SELECT 
 		u.Id_Usuario, u.Nombre, u.Apellido, 
 		u.Imagen, u.FechaNacimiento, c.Numero, 
@@ -241,8 +239,8 @@ BEGIN
 <<<<<<< HEAD
 */
 
-*/
->>>>>>> 4b0e09c50ddfdae0d7573f847faa2bddb9b821b8
+
+
 END
 go
 /*
@@ -272,12 +270,7 @@ BEGIN
 	DEALLOCATE c_login;
 <<<<<<< HEAD
 End*/
-=======
 
-	*/
-End
-*/
->>>>>>> 4b0e09c50ddfdae0d7573f847faa2bddb9b821b8
 go
 /*USER DATA PROCEDURES*/
 alter PROCEDURE spUsuarioData
@@ -289,16 +282,14 @@ BEGIN
 	DECLARE @RolId int, @RolCurrentUsuarioId int, @CurrentRolId int
 
 	DECLARE c_rol CURSOR FOR
-<<<<<<< HEAD
 			SELECT Id_Rol, Id_Usuario FROM UsuarioRol
-=======
 
 			SELECT Id_Rol, u.Id_UsuarioRol FROM UsuarioRol as u
 
 			SELECT ur.Id_Rol, u.Id_Usuario FROM UsuarioRol as ur
 			inner join AutenticacionUsuario as au on au.Id_AutenticacionUsuario = ur.Id_AutenticacionUsuario
 			inner join Usuario as u on u.Id_AutenticacionUsuario = au.Id_AutenticacionUsuario
->>>>>>> 4b0e09c50ddfdae0d7573f847faa2bddb9b821b8
+
 
 		OPEN c_rol
 			WHILE 1=1
@@ -319,7 +310,7 @@ BEGIN
 	
 	IF(@RolId = 1)
 	(
-<<<<<<< HEAD
+
 			SELECT  u.Id_Usuario, u.Nombre, u.Apellido, 
 			u.Imagen, au.Email, au.Contrasena, u.FechaNacimiento, c.Numero,
 			tc.Id_TipoContacto, tc.Tipo, d.Id_Provincia, p.Provincia,
@@ -339,26 +330,8 @@ BEGIN
 			inner join AutenticacionUsuario as au on au.Id_AutenticacionUsuario = u.Id_AutenticacionUsuario
 			inner join UsuarioRol as ur on ur.Id_AutenticacionUsuario = au.Id_AutenticacionUsuario
 			WHERE u.Id_Usuario = @UsuarioId
-=======
-		SELECT 
-		u.Id_Usuario, u.Nombre, u.Apellido, 
-		u.Imagen, au.Email, u.FechaNacimiento, c.Numero, 
-		tc.Tipo, p.Provincia, m.Municipio, ts.Tipo
-		FROM Usuario as u
-		/*Address*/
-		inner join Direccion as d on d.Id_Direccion = u.Id_Direccion
-		inner join Municipio as m on m.Id_Municipio = d.Id_Municipio
-		inner join Provincia as p on p.Id_Provincia = d.Id_Provincia
-		/*Phone number & Type*/
-		inner join Contacto as c on c.Id_Contacto = u.Id_Contacto
-		inner join ContactoTipoContacto as ctc on ctc.Id_Contacto = c.Id_Contacto
-		inner join TipoContacto as tc on tc.Id_TipoContacto = ctc.Id_TipoContacto
-		/*Blood Type*/
-		inner join TipoSangre as ts on ts.Id_TipoSangre = u.Id_TipoSangre
-		inner join AutenticacionUsuario as au on au.Id_AutenticacionUsuario = u.Id_AutenticacionUsuario
-		WHERE u.Id_Usuario = @UsuarioId
->>>>>>> 4b0e09c50ddfdae0d7573f847faa2bddb9b821b8
-	)
+			)
+	
 	ELSE
 	(
 			SELECT u.Id_Usuario, u.RNC, 
@@ -434,16 +407,14 @@ go
 		GO 
 
 /*MODIFY USER DATA PROCEDURES*/
-<<<<<<< HEAD
+
 ALTER PROCEDURE spUpdateDonanteReceptorData
-=======
-alter PROCEDURE spUpdateDonanteReceptorData
->>>>>>> 4b0e09c50ddfdae0d7573f847faa2bddb9b821b8
+
 (
 	@Id_Usuario int,
 	@Nombre nvarchar(100),
 	@Apellido nvarchar(100), 
-	@Imagen varbinary(max), 
+	@Imagen varbinary(100), 
 	@Email nvarchar(100),
 	@Contrasena nvarchar(100),
 	@FechaNacimiento datetime,
@@ -537,7 +508,7 @@ alter PROCEDURE spUpdateInstitucionData
 	@Id_Usuario int,
 	@RNC nvarchar(20),
 	@Nombre nvarchar(100),
-	@Imagen varbinary(max),
+	@Imagen varbinary(100),
 	@Email nvarchar(100),
 	@Contrasena nvarchar(100),
 	@NumeroTelefonico nvarchar(15),
