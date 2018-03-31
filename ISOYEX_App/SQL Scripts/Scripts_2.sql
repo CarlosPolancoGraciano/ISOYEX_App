@@ -53,7 +53,7 @@ BEGIN
 	INSERT INTO 
 	Usuario (Nombre, Apellido, Imagen, FechaNacimiento, Id_AutenticacionUsuario, Id_Direccion, Id_TipoSangre) 
 	VALUES 
-	(@Nombre, @Apellido, CAST(@Imagen AS varbinary(max)), CONVERT(datetime, @FechaNacimiento, 103), @Id_AutenticacionUsuario, @Id_Direccion, @Id_TipoSangre)
+	(@Nombre, @Apellido, CONVERT(varbinary(max), @Imagen), CONVERT(datetime, @FechaNacimiento, 103), @Id_AutenticacionUsuario, @Id_Direccion, @Id_TipoSangre)
 
 	SELECT @Id_Usuario=SCOPE_IDENTITY()
 	
@@ -123,7 +123,7 @@ BEGIN
 	INSERT INTO 
 	Usuario (RNC, Nombre, Imagen, Id_AutenticacionUsuario, Id_Direccion)
 	VALUES
-	(@RNC, @Nombre, CAST(@Imagen AS varbinary(max)), @Id_AutenticacionUsuario, @Id_Direccion)
+	(@RNC, @Nombre, CONVERT(varbinary(max), @Imagen), @Id_AutenticacionUsuario, @Id_Direccion)
 	
 	SELECT @Id_Usuario=SCOPE_IDENTITY()
 	
@@ -338,23 +338,6 @@ BEGIN
 		inner join TipoSangre as ts on ts.Id_TipoSangre = u.Id_TipoSangre
 		inner join AutenticacionUsuario as au on au.Id_AutenticacionUsuario = u.Id_AutenticacionUsuario
 		WHERE u.Id_Usuario = @UsuarioId
-	)
-	ELSE
-	(
-		SELECT u.Id_Usuario, u.RNC, 
-		u.Nombre, u.Imagen, au.Email, c.Numero, 
-		tc.Tipo, p.Provincia, m.Municipio
-		FROM Usuario as u
-		inner join Contacto as c on c.Id_Contacto = u.Id_Contacto
-		/*Phone Number and Type*/
-		inner join ContactoTipoContacto as ctc on ctc.Id_Contacto = c.Id_Contacto
-		inner join TipoContacto as tc on tc.Id_TipoContacto = ctc.Id_TipoContacto
-		inner join AutenticacionUsuario as au on au.Id_AutenticacionUsuario = u.Id_AutenticacionUsuario
-		/*Address and Type*/
-		inner join Direccion as d on d.Id_Direccion = u.Id_Direccion
-		inner join Municipio as m on m.Id_Municipio = d.Id_Municipio
-		inner join Provincia as p on p.Id_Provincia = d.Id_Provincia
-		WHERE	u.Id_Usuario = @UsuarioId
 	)
 	ELSE
 	(
