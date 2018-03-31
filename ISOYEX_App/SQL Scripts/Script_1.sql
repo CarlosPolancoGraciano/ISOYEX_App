@@ -263,18 +263,9 @@ INSERT INTO Municipio VALUES ('Bayahibe', 1), ('Boca de Yuma', 1), ('Higuey', 1)
 ('Jicome', 32),('La Caya', 32),('Laguna Salada', 32),
 ('Maizal', 32),('Mao', 32),('Paradero', 32)
 
-/*Para Fidel*/
+/*Modificación para tabla de Usuario*/
 ALTER TABLE Usuario
-DROP COLUMN Email
-ALTER TABLE AutenticacionUsuario
-DROP COLUMN UserName
-ALTER TABLE AutenticacionUsuario
-ADD Email nvarchar(100)
-ALTER TABLE UsuarioRol
-DROP CONSTRAINT fk_UsuarioRolUsuario
-ALTER TABLE UsuarioRol
-DROP COLUMN Id_Usuario
-ALTER TABLE UsuarioRol
-ADD Id_AutenticacionUsuario int
-CONSTRAINT fk_UsuarioRolAutenticacionUsuario FOREIGN KEY (Id_AutenticacionUsuario)
-REFERENCES AutenticacionUsuario(Id_AutenticacionUsuario)
+DROP COLUMN Imagen
+ALTER TABLE Usuario
+ADD Imagen nvarchar(100)
+

@@ -77,7 +77,9 @@ SELECT * FROM Provincia
 END
 go
 CREATE PROCEDURE spCargarMunicipio
-@idProvincia int
+(
+	@idProvincia int
+)
 AS
 BEGIN
 	SELECT Id_Municipio, Municipio FROM Municipio
