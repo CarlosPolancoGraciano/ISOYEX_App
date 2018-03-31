@@ -60,6 +60,9 @@
                         <li class="nav-item">
                             <a runat="server" class="nav-link" href="Login.aspx">Login</a>
                         </li>
+                        <li class="nav-item">
+                            <a runat="server" class="nav-link" href="perfil.aspx">Perfil</a>
+                        </li>
                     </ul>
                 </div>
             </div>
