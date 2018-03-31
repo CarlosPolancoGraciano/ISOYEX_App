@@ -10,69 +10,51 @@
 namespace ISOYEX_App {
     
     
-    public partial class _Default {
+    public partial class login {
         
         /// <summary>
-        /// ProvinciaLabel control.
+        /// labelEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ProvinciaLabel;
+        protected global::System.Web.UI.WebControls.Label labelEmail;
         
         /// <summary>
-        /// ProvinciaDropDown control.
+        /// txtemail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ProvinciaDropDown;
+        protected global::System.Web.UI.WebControls.TextBox txtemail;
         
         /// <summary>
-        /// MunicipioLabel control.
+        /// labelPassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label MunicipioLabel;
+        protected global::System.Web.UI.WebControls.Label labelPassword;
         
         /// <summary>
-        /// MunicipioDropDown control.
+        /// txtpassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList MunicipioDropDown;
+        protected global::System.Web.UI.WebControls.TextBox txtpassword;
         
         /// <summary>
-        /// TipoSangreLabel control.
+        /// btningresar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label TipoSangreLabel;
-        
-        /// <summary>
-        /// TipoSangreDropDown control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList TipoSangreDropDown;
-        
-        /// <summary>
-        /// SearchButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SearchButton;
+        protected global::System.Web.UI.WebControls.Button btningresar;
     }
 }
