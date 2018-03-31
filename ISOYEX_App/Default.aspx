@@ -14,15 +14,37 @@
             <div class="col-lg-4">
                 <h1>Business Name or Tagline</h1>
                 <p>This is a template that is great for small businesses. It doesn't have too much fancy flare to it, but it makes a great use of the standard Bootstrap core components. Feel free to use this template for any project you want!</p>
-                <a class="btn btn-primary btn-lg" href="#">Call to Action!</a>
+                <a class="btn btn-wine-color btn-lg" href="#">Call to Action!</a>
             </div>
             <!-- /.col-md-4 -->
         </div>
         <!-- /.row -->
         <!-- Filter form -->
-        <div class="card text-white bg-secondary my-4 text-center">
+        <div class="card my-4 text-center">
             <div class="card-body">
-                <p class="text-white m-0">This call to action card is a great place to showcase some important information or display a clever tagline!</p>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <asp:Label ID="ProvinciaLabel" runat="server" Text="Provincia: " AssociatedControlID="ProvinciaDropDown"></asp:Label>
+                        <div class="ml-4">
+                            <asp:DropDownList ID="ProvinciaDropDown" CssClass="form-control form-control-lg" runat="server"></asp:DropDownList>
+                        </div>
+                    </div>
+                    <div class="form-group ml-4">
+                        <asp:Label ID="MunicipioLabel" runat="server" Text="Municipio: " AssociatedControlID="MunicipioDropDown"></asp:Label>
+                        <div class="ml-4">
+                            <asp:DropDownList ID="MunicipioDropDown" CssClass="form-control form-control-lg" runat="server"></asp:DropDownList>
+                        </div>
+                    </div>
+                    <div class="form-group ml-4">
+                        <asp:Label ID="TipoSangreLabel" runat="server" Text="Tipo de sangre: " AssociatedControlID="TipoSangreDropDown"></asp:Label>
+                        <div class="ml-4">
+                            <asp:DropDownList ID="TipoSangreDropDown" CssClass="form-control form-control-lg" runat="server"></asp:DropDownList>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <asp:Button ID="SearchButton" runat="server" Text="Buscar" CssClass="btn btn-wine-color btn-lg" />
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -45,7 +67,7 @@
                         </p>
                     </div>
                     <div class="card-footer text-center">
-                        <a href="#" class="btn btn-primary">Más información</a>
+                        <a href="#" class="btn btn-wine-color">Más información</a>
                     </div>
                 </div>
             </div>
@@ -66,7 +88,7 @@
                         </p>
                     </div>
                     <div class="card-footer text-center">
-                        <a href="#" class="btn btn-primary">Más información</a>
+                        <a href="#" class="btn btn-wine-color">Más información</a>
                     </div>
                 </div>
             </div>
@@ -87,7 +109,7 @@
                         </p>
                     </div>
                     <div class="card-footer text-center">
-                        <a href="#" class="btn btn-primary">Más información</a>
+                        <a href="#" class="btn btn-wine-color">Más información</a>
                     </div>
                 </div>
             </div>

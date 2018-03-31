@@ -13,13 +13,31 @@ namespace ISOYEX_App {
     public partial class login {
         
         /// <summary>
-        /// txtusuario control.
+        /// labelEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtusuario;
+        protected global::System.Web.UI.WebControls.Label labelEmail;
+        
+        /// <summary>
+        /// txtemail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtemail;
+        
+        /// <summary>
+        /// labelPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label labelPassword;
         
         /// <summary>
         /// txtpassword control.
