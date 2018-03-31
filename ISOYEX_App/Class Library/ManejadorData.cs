@@ -131,8 +131,8 @@ namespace ISOYEX_App
 
                 if (c.Equals('m'))
                 {
-                    
-                    cmd.ExecuteNonQuery();
+                    OCConn(cmd);
+                    int ret = cmd.ExecuteNonQuery();
                 }
                 else
                 {
