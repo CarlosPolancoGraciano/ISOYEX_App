@@ -78,7 +78,7 @@ alter PROCEDURE spRegistrarInstitucion
 (
 	@RNC nvarchar(20),
 	@Nombre nvarchar(100),
-	@Imagen varbinary(max),
+	@Imagen nvarchar(max),
 	@Email nvarchar(100),
 	@Contrasena nvarchar(100),
 	@NumeroTelefonico varchar(15),
