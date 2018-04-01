@@ -53,7 +53,7 @@ BEGIN
 	INSERT INTO 
 	Usuario (Nombre, Apellido, Imagen, FechaNacimiento, Id_AutenticacionUsuario, Id_Direccion, Id_TipoSangre) 
 	VALUES 
-	(@Nombre, @Apellido, @Imagen, CONVERT(datetime, @FechaNacimiento, 103), @Id_AutenticacionUsuario, @Id_Direccion, @Id_TipoSangre)
+	(@Nombre, @Apellido, @Imagen, CONVERT(date, @FechaNacimiento, 103), @Id_AutenticacionUsuario, @Id_Direccion, @Id_TipoSangre)
 
 	SELECT @Id_Usuario=SCOPE_IDENTITY()
 	

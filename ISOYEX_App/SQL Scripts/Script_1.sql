@@ -269,3 +269,10 @@ DROP COLUMN Imagen
 ALTER TABLE Usuario
 ADD Imagen nvarchar(100)
 
+/* Modificación para datetime a date en campo de FechaNacimiento*/
+ALTER TABLE Usuario
+DROP COLUMN FechaNacimiento
+go
+ALTER TABLE Usuario
+ADD FechaNacimiento date
+
