@@ -52,8 +52,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <form>
             <div class="p-4 m-4">
-                <div class="form-group">
-            
                 <div>
                     <label>Tipo de Registro</label>
                 </div>
@@ -68,59 +66,80 @@
                     </label>
                 </div>
             </div>
-            <div class="AllControl">
-                <div class="form-group VisiInst">
-                    <label>RNC</label>
-                    <asp:TextBox ID="txtRNC" onKeyPress="return soloNumeros(event)" class="form-control txt" runat="server"></asp:TextBox>
-                </div>
-                <div class="form-group">
-                    <label>Nombre</label>
-                    <asp:TextBox ID="txtNombre" class="form-control txt" runat="server"></asp:TextBox>
-                </div>
-                <div class="form-group VisiIndi">
-                    <label>Apellido</label>
-                    <asp:TextBox ID="txtApellido" class="form-control txt" runat="server"></asp:TextBox>
-                </div>
-                <div class="form-group VisiIndi">
-                    <label>Fecha Nacimiento</label>
-                    <asp:TextBox ID="txtFechaNacimiento" TextMode="Date" class="form-control txt" runat="server"></asp:TextBox>
-                </div>
-                <div class="form-group VisiIndi">
-                    <label>Tipo de Sangre</label>
-                    <asp:DropDownList ID="ddlTipoSangre" class="form-control ddl" runat="server"></asp:DropDownList>
-                </div>
-                <div class="form-group ">
-                    <label>Email</label>
-                    <asp:TextBox ID="txtEmail" TextMode="Email" class="form-control txt" runat="server"></asp:TextBox>
-                </div>
-                <div class="form-group ">
-                    <label>Tipo de Contacto</label>
-                    <asp:DropDownList ID="ddlTipoContacto" class="form-control ddl" runat="server"></asp:DropDownList>
-                </div>
-                <div class="form-group">
-                    <label>No. Telefono</label>
-                    <asp:TextBox ID="txtTelefono" onKeyPress="return soloNumeros(event)" class="form-control txt" runat="server"></asp:TextBox>
-                </div>
-                <div class="form-group ">
-                    <label>Provincia</label>
-                    <asp:DropDownList ID="ddlProvincia" ClientIDMode="Static" class="form-control ddl" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlProvincia_SelectedIndexChanged"></asp:DropDownList>
-                </div>
-                <div class="form-group">
-                    <label>Municipio</label>
-                    <asp:DropDownList ID="ddlMunicipio" class="form-control" runat="server"></asp:DropDownList>
-                </div>
-                <div class="form-group">
-                    <label>Contraseña</label>
-                    <asp:TextBox ID="txtContrasena" class="form-control txt" runat="server"></asp:TextBox>
-                </div>
-                <div class="form-group">
-                    <label>Confirmar Contraseña</label>
-                    <asp:TextBox ID="txtConfContrasena" class="form-control txt" runat="server"></asp:TextBox>
+            <div class="card p-5">
+                <div class="card-body">
+                    <div class="container AllControl">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="txtNombre">Nombre</label>
+                                <asp:TextBox ID="txtNombre" class="form-control txt" runat="server"></asp:TextBox>
+                            </div>
+                            <div class="form-group col-md-6 VisiIndi">
+                                <label for="txtApellido">Apellido</label>
+                                <asp:TextBox ID="txtApellido" class="form-control txt" runat="server"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4 VisiInst">
+                                <label for="txtRNC">RNC</label>
+                                <asp:TextBox ID="txtRNC" onKeyPress="return soloNumeros(event)" class="form-control txt" runat="server"></asp:TextBox>
+                            </div>
+                            <div class="form-group col-md-6">
+                                    <label for="ImageUpload">Imagen de perfil</label>
+                                    <asp:FileUpload ID="ImageUpload" CssClass="form-control" runat="server" />
+                                 </div>
+                            <div class="form-group col-md-6 VisiIndi">
+                                <label for="txtFechaNacimiento">Fecha Nacimiento</label>
+                                <asp:TextBox ID="txtFechaNacimiento" TextMode="Date" class="form-control txt" runat="server"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6 VisiIndi">
+                                <label for="ddlTipoSangre">Tipo de Sangre</label>
+                                <asp:DropDownList ID="ddlTipoSangre" class="form-control ddl" runat="server"></asp:DropDownList>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="txtEmail">Email</label>
+                                <asp:TextBox ID="txtEmail" TextMode="Email" class="form-control txt" runat="server"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="ddlTipoContacto">Tipo de Contacto</label>
+                                <asp:DropDownList ID="ddlTipoContacto" class="form-control ddl" runat="server"></asp:DropDownList>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="txtTelefono">No. Telefono</label>
+                                <asp:TextBox ID="txtTelefono" onKeyPress="return soloNumeros(event)" class="form-control txt" runat="server"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="ddlProvincia">Provincia</label>
+                                <asp:DropDownList ID="ddlProvincia" ClientIDMode="Static" class="form-control ddl" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlProvincia_SelectedIndexChanged"></asp:DropDownList>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="ddlMunicipio">Municipio</label>
+                                <asp:DropDownList ID="ddlMunicipio" class="form-control" runat="server"></asp:DropDownList>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="txtContrasena">Contraseña</label>
+                                <asp:TextBox ID="txtContrasena" class="form-control txt" runat="server"></asp:TextBox>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="txtConfContrasena">Confirmar Contraseña</label>
+                                <asp:TextBox ID="txtConfContrasena" class="form-control txt" runat="server"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="row text-center col-md-6">
+                            <asp:Button ID="btnRegistrarse" class="btn btn-success AllControl" runat="server" Text="Button" OnClick="btnRegistrarse_Click" />
+                            <asp:HiddenField ID="hdnOpcion" ClientIDMode="Static" Value="" runat="server" />
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <asp:Button ID="btnRegistrarse" class="btn btn-success AllControl" runat="server" Text="Button" OnClick="btnRegistrarse_Click" />
-            <asp:HiddenField ID="hdnOpcion" ClientIDMode="Static" Value="" runat="server" />
         </div>
     </form>
 </asp:Content>

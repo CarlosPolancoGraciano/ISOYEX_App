@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using ISOYEX_App.Class_Library;
+using System.IO;
 
 namespace ISOYEX_App
 {
@@ -71,17 +72,16 @@ namespace ISOYEX_App
 
         protected void btnRegistrarse_Click(object sender, EventArgs e)
         {
+            var something = ImageUpload;
             if (ValidarControles())
             {
                 if (hdnOpcion.Value == "ind")
                 {
-                    
-
                     string[] parametros =
                         {
                     "@Nombre",txtNombre.Text,
                     "@Apellido",txtApellido.Text,
-                    "@Imagen","0x",
+                    "@Imagen", saveImage(ImageUpload),
                     "@Email",txtEmail.Text,
                     "@Contrasena",txtContrasena.Text,
                     "@FechaNacimiento",helper.dateFormat(txtFechaNacimiento.Text,"yyyy-dd-MM"),
@@ -107,17 +107,17 @@ namespace ISOYEX_App
                 else if (hdnOpcion.Value == "ins")
                 {
                     string[] parametros =
-                        {
-                    "@RNC",txtRNC.Text,
-                    "@Nombre",txtNombre.Text,
-                    "@Imagen","0x",
-                    "@Email",txtEmail.Text,
-                    "@Contrasena",txtContrasena.Text,
-                    "@NumeroTelefonico",txtTelefono.Text,
-                    "@Id_TipoContacto",ddlTipoContacto.SelectedValue,
-                    "@Id_Provincia",ddlProvincia.SelectedValue,
-                    "@Id_Municipio",ddlMunicipio.SelectedValue
-                };
+                     {
+                        "@RNC",txtRNC.Text,
+                        "@Nombre",txtNombre.Text,
+                        "@Imagen", saveImage(ImageUpload),
+                        "@Email",txtEmail.Text,
+                        "@Contrasena",txtContrasena.Text,
+                        "@NumeroTelefonico",txtTelefono.Text,
+                        "@Id_TipoContacto",ddlTipoContacto.SelectedValue,
+                        "@Id_Provincia",ddlProvincia.SelectedValue,
+                        "@Id_Municipio",ddlMunicipio.SelectedValue
+                    };
                     try
                     {
                         ManejadorData.Exec_Stp("spRegistrarInstitucion", 'm', parametros);
@@ -133,6 +133,34 @@ namespace ISOYEX_App
                 }
 
             }
+        }
+
+        private string saveImage(FileUpload imageUpload)
+        {
+            String url = string.Empty;
+            if (imageUpload.HasFile)
+            {
+                try
+                {
+                    if(imageUpload.PostedFile.ContentType == "image/jpeg" || imageUpload.PostedFile.ContentType == "image/png"
+                       || imageUpload.PostedFile.ContentType == "image/webp" || imageUpload.PostedFile.ContentType == "image/bmp"
+                       || imageUpload.PostedFile.ContentType == "image/gif")
+                    {
+                        string fileName = Path.GetFileName(ImageUpload.FileName);
+                        url = Server.MapPath("~/") + fileName;
+                        imageUpload.SaveAs(url);
+                    }
+                    else
+                    {
+                        return url;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            return url;
         }
     }
 }
