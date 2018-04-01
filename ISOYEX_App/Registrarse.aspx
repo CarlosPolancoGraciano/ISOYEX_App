@@ -4,6 +4,7 @@
         $(document).ready(function () {
 
             $(".AllControl").hide();
+
             $('input[type=radio][name=options]').change(function () {
                 $("#hdnOpcion").val(this.value);
                 $(".AllControl").show();
@@ -24,24 +25,29 @@
 
             if ($("#hdnOpcion").val() == 'ind') {
                 $(".AllControl").show();
-                $('input[type=radio][name=options]').val("ind");
-                $('input[type=radio][name=options]').addClass('active');
+                $(".form-group").show();
+                $(".VisiInst").hide();
             }
             else if ($("#hdnOpcion").val() == 'ins') {
                 $(".AllControl").show();
-                $('input[type=radio][name=options]').val("ins");
-                $('input[type=radio][name=options]').addClass('active');
+                $(".form-group").show();
+                $(".VisiIndi").hide();
             }
-
             
             function ResetControls() {
                 $(".txt").val("");
                 $(".ddl").val('');
             }
+            
         });
 
+        function soloNumeros(e) {
+            var key = window.Event ? e.which : e.keyCode
+            return (key >= 48 && key <= 57)
+        }
         
     </script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <form>
@@ -65,7 +71,7 @@
             <div class="AllControl">
                 <div class="form-group VisiInst">
                     <label>RNC</label>
-                    <asp:TextBox ID="txtRNC" class="form-control txt" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtRNC" onKeyPress="return soloNumeros(event)" class="form-control txt" runat="server"></asp:TextBox>
                 </div>
                 <div class="form-group">
                     <label>Nombre</label>
@@ -77,7 +83,7 @@
                 </div>
                 <div class="form-group VisiIndi">
                     <label>Fecha Nacimiento</label>
-                    <asp:TextBox ID="txtFechaNacimiento" class="form-control txt" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtFechaNacimiento" TextMode="Date" class="form-control txt" runat="server"></asp:TextBox>
                 </div>
                 <div class="form-group VisiIndi">
                     <label>Tipo de Sangre</label>
@@ -85,7 +91,7 @@
                 </div>
                 <div class="form-group ">
                     <label>Email</label>
-                    <asp:TextBox ID="txtEmail" class="form-control txt" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtEmail" TextMode="Email" class="form-control txt" runat="server"></asp:TextBox>
                 </div>
                 <div class="form-group ">
                     <label>Tipo de Contacto</label>
@@ -93,7 +99,7 @@
                 </div>
                 <div class="form-group">
                     <label>No. Telefono</label>
-                    <asp:TextBox ID="txtTelefono" class="form-control txt" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtTelefono" onKeyPress="return soloNumeros(event)" class="form-control txt" runat="server"></asp:TextBox>
                 </div>
                 <div class="form-group ">
                     <label>Provincia</label>
