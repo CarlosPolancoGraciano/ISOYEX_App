@@ -14,6 +14,8 @@
 
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <asp:ContentPlaceHolder ID="ContentHeader" runat="server">
+        </asp:ContentPlaceHolder>
     <link href="Content/Website CSS/WebsiteCSS.css" rel="stylesheet" type="text/css"/>
 
 </head>
@@ -40,7 +42,7 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <nav class="navbar navbar-expand-lg navbar-dark red-custom fixed-top">
+        <nav id="navbar" class="navbar navbar-expand-lg navbar-dark navbar-color navbar-inverse fixed-top">
             <div class="container">
                 <a class="navbar-brand" runat="server" href="~/">Donantes RD</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,31 +51,27 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a runat="server" class="nav-link" href="~/">Home</a>
+                            <a runat="server" class="nav-link red-text" href="~/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a runat="server" class="nav-link" href="~/About">About</a>
+                            <a runat="server" class="nav-link red-text" href="~/About">About</a>
                         </li>
                         <li class="nav-item">
-                            <a runat="server" class="nav-link" href="~/Contact">Contact</a>
+                            <a runat="server" class="nav-link red-text" href="~/Contact">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a runat="server" class="nav-link" href="Login.aspx">Login</a>
+                            <a runat="server" class="nav-link red-text" href="Login.aspx">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a runat="server" class="nav-link" href="perfil.aspx">Perfil</a>
+                            <a runat="server" class="nav-link red-text" href="perfil.aspx">Perfil</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
-        <div class="container body-content">
-            <div class="p-4">
-                <asp:ContentPlaceHolder ID="MainContent" runat="server">
-                </asp:ContentPlaceHolder>
-            </div>
-        </div>
-        <footer class="py-4 red-custom footer fixed-bottom">
+        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+        </asp:ContentPlaceHolder>
+        <footer class="py-4 red-custom footer">
             <div class="container">
                 <p class="m-0 text-center text-white">Copyright &copy; <%: DateTime.Now.Year %> - Donantes RD 2018</p>
             </div>

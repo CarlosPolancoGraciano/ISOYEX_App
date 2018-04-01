@@ -1,13 +1,16 @@
-﻿#LoginWebPage {
-    background: url('../Imagenes/LoginBackground.jpeg') no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+﻿body {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    padding-top: 0;
 }
 
 .red-custom {
-    background-color: #ff3838;
+    background-color: #b71540;
+}
+
+.navbar-color {
+    background-color: #b71540;
 }
 
 .avatar {
@@ -20,6 +23,10 @@
     color: #FFF;
     background-color: #7f8fa6;
     border-color: #7f8fa6;
+}
+
+button .btn-wine-color:hover {
+    color: #FFF;
 }
 
 .btn-wine-color {
