@@ -17,8 +17,6 @@ namespace ISOYEX_App
         {
             if (!IsPostBack)
             {
-                
-
                 string[] parametros = { };
                 DataTable tabla = ManejadorData.Exec_Stp("spCargarTipoSangre", 's', parametros);
                 helper.LLenaDrop(ddlTipoSangre, tabla, "Tipo", "Id_TipoSangre");
