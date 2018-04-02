@@ -17,5 +17,29 @@ namespace ISOYEX_App.Class_Library
             Drop.DataBind();
             Drop.Items.Insert(0, (new ListItem("-- Seleccionar --", "")));
         }
+
+        public bool validarVacio(TextBox textBox)
+        {
+            if (String.IsNullOrWhiteSpace(textBox.Text))
+                return true;
+            else
+            return false;
+        }
+
+        public bool validarNoSeleccionado(DropDownList dropDown)
+        {
+            if (dropDown.SelectedIndex == 0)
+                return true;
+            else
+            return false;
+        }
+
+        public string dateFormat(string facha, string formato)
+        {
+            DateTime dt = DateTime.Parse(facha);
+            string formateada = dt.ToString(formato);
+            return formateada;
+        }
+
     }
 }

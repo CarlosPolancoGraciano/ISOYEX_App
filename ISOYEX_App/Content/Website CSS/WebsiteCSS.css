@@ -13,6 +13,10 @@
     background-color: #b71540;
 }
 
+.input-big{
+    width: 20em;
+}
+
 .avatar {
     position: relative;
     top: -50px;
