@@ -9,7 +9,7 @@ BEGIN
 	SELECT 
 		u.Id_Usuario, u.Nombre, u.Apellido, 
 		u.Imagen, au.Email, u.FechaNacimiento, c.Numero, 
-		tc.Tipo, p.Provincia, m.Municipio, ts.Tipo
+		tc.Tipo, p.Provincia, m.Municipio, ts.TipoSangre
 		FROM Usuario as u
 		/*Address*/
 		inner join Direccion as d on d.Id_Direccion = u.Id_Direccion
@@ -60,7 +60,7 @@ BEGIN
 	SELECT 
 	u.Id_Usuario, u.Nombre, u.Apellido, 
 	u.Imagen, au.Email, u.FechaNacimiento, c.Numero, 
-	tc.Tipo, p.Provincia, m.Municipio, ts.Tipo
+	tc.Tipo, p.Provincia, m.Municipio, ts.TipoSangre
 	FROM Usuario as u
 	/*Address*/
 	inner join Direccion as d on d.Id_Direccion = u.Id_Direccion
@@ -108,7 +108,7 @@ BEGIN
 	SELECT 
 		u.Id_Usuario, u.Nombre, u.Apellido, 
 		u.Imagen, au.Email, u.FechaNacimiento, c.Numero, 
-		tc.Tipo, p.Provincia, m.Municipio, ts.Tipo
+		tc.Tipo, p.Provincia, m.Municipio, ts.TipoSangre
 		FROM Usuario as u
 		/*Address*/
 		inner join Direccion as d on d.Id_Direccion = u.Id_Direccion

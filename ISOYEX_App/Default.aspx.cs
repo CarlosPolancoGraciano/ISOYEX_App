@@ -1,6 +1,5 @@
 ﻿using ISOYEX_App.Class_Library;
 using ISOYEX_App.Models;
-using ISOYEX_App.Web_Api;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -23,7 +22,7 @@ namespace ISOYEX_App
                 DataTable table = ManejadorData.Exec_Stp("spCargarProvincias", 's', parametros);
                 helper.LLenaDrop(ProvinciaDropDown, table, "Provincia", "Id_Provincia");
                 table = ManejadorData.Exec_Stp("spCargarTipoSangre", 's', parametros);
-                helper.LLenaDrop(TipoSangreDropDown, table, "Tipo", "Id_TipoSangre");
+                helper.LLenaDrop(TipoSangreDropDown, table, "TipoSangre", "Id_TipoSangre");
             }
         }
 
@@ -50,6 +49,7 @@ namespace ISOYEX_App
 
         protected void SearchButton_Click(object sender, EventArgs e)
         {
+            FilteredUsersController ajaxFilteredUseres = new FilteredUsersController();
             String indexProvincia = ProvinciaDropDown.SelectedValue;
             String indexMunicipio = MunicipioDropDown.SelectedValue;
             String indexTipoSangre = TipoSangreDropDown.SelectedValue;
@@ -66,7 +66,8 @@ namespace ISOYEX_App
                 try
                 {
                     filteredUsers = ManejadorData.Exec_Stp("spFiltradoPorDireccion", 's', parametros);
-                    Response.Write("<script>alert('Funcionando')</script>");
+                    ajaxFilteredUseres.formatUsers(filteredUsers);
+                    //Response.Write("<script>alert('Funcionando')</script>");
                 }
                 catch (Exception ex)
                 {
@@ -83,6 +84,7 @@ namespace ISOYEX_App
                 try
                 {
                     filteredUsers = ManejadorData.Exec_Stp("spFiltradoPorSangre", 's', parametros);
+                    ajaxFilteredUseres.formatUsers(filteredUsers);
                     Response.Write("<script>alert('Funcionando')</script>");
                 }
                 catch (Exception ex)
@@ -103,6 +105,7 @@ namespace ISOYEX_App
                 try
                 {
                     filteredUsers = ManejadorData.Exec_Stp("spFiltradoPorDireccionYSangre", 's', parametros);
+                    ajaxFilteredUseres.formatUsers(filteredUsers);
                     Response.Write("<script>alert('Funcionando')</script>");
                 }
                 catch(Exception ex)

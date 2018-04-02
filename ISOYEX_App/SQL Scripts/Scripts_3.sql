@@ -1,10 +1,6 @@
 USE ISOYEX
 go
-<<<<<<< HEAD
-ALTER PROCEDURE spCargarDatosDireccion
-=======
 Alter PROCEDURE spCargarDatosDireccion
->>>>>>> Back-End
 AS
 BEGIN
 	DECLARE @Id_Provincia int
@@ -53,11 +49,8 @@ go
 EXEC [dbo].[spCargarDatosDireccion]
 go
 /* Carga de Provincia y Municipio (Con sus Ids y nombres) */
-<<<<<<< HEAD
+
 ALTER PROCEDURE spCargarDirecciones
-=======
-Create PROCEDURE spCargarDirecciones
->>>>>>> Back-End
 AS
 BEGIN
 	SELECT p.Id_Provincia, p.Provincia, m.Id_Municipio, m.Municipio FROM Municipio as m
@@ -68,7 +61,7 @@ go
 ALTER PROCEDURE spCargarTipoSangre
 AS
 BEGIN
-	SELECT Id_TipoSangre, Tipo FROM TipoSangre
+	SELECT Id_TipoSangre, TipoSangre FROM TipoSangre
 END
 go
 /* Carga de tipos de contacto */
@@ -78,25 +71,16 @@ BEGIN
 	SELECT Id_TipoContacto, Tipo FROM TipoContacto
 END
 go
-<<<<<<< HEAD
 ALTER PROCEDURE spCargarProvincias
-=======
-CREATE PROCEDURE spCargarProvincias
->>>>>>> Back-End
 AS
 BEGIN
 SELECT * FROM Provincia
 END
 go
-<<<<<<< HEAD
 ALTER PROCEDURE spCargarMunicipio
-@idProvincia int
-=======
-CREATE PROCEDURE spCargarMunicipio
 (
 	@idProvincia int
 )
->>>>>>> Back-End
 AS
 BEGIN
 	SELECT Id_Municipio, Municipio FROM Municipio

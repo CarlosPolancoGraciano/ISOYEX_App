@@ -49,7 +49,7 @@ go
 CREATE TABLE TipoSangre
 (
 Id_TipoSangre int identity(1,1) PRIMARY KEY,
-Tipo varchar(15) not null
+TipoSangre varchar(15) not null
 )
 go
 CREATE TABLE Rol
@@ -276,3 +276,39 @@ go
 ALTER TABLE Usuario
 ADD FechaNacimiento date
 
+/*Run this code*/
+TRUNCATE TABLE Usuario
+ALTER TABLE Usuario
+DROP CONSTRAINT fk_UsuarioAutenticacionUsuario
+ALTER TABLE UsuarioRol
+DROP CONSTRAINT fk_UsuarioRolAutenticacionUsuario
+TRUNCATE TABLE AutenticacionUsuario
+ALTER TABLE Usuario
+ADD CONSTRAINT fk_UsuarioAutenticacionUsuario
+FOREIGN KEY (Id_AutenticacionUsuario) REFERENCES AutenticacionUsuario(Id_AutenticacionUsuario);
+TRUNCATE TABLE UsuarioRol
+ALTER TABLE UsuarioRol
+ADD CONSTRAINT fk_UsuarioRolAutenticacionUsuario
+FOREIGN KEY (Id_AutenticacionUsuario) REFERENCES AutenticacionUsuario(Id_AutenticacionUsuario);
+ALTER TABLE Usuario
+DROP CONSTRAINT fk_UsuarioContacto
+ALTER TABLE ContactoTipoContacto
+DROP CONSTRAINT fk_ContactoTipoContactoContacto
+TRUNCATE TABLE Contacto
+ALTER TABLE Usuario
+ADD CONSTRAINT fk_UsuarioContacto
+FOREIGN KEY (Id_Contacto) REFERENCES Contacto(Id_Contacto);
+TRUNCATE TABLE ContactoTipoContacto
+ALTER TABLE ContactoTipoContacto
+ADD CONSTRAINT fk_ContactoTipoContactoContacto
+FOREIGN KEY (Id_Contacto) REFERENCES Contacto(Id_Contacto);
+ALTER TABLE Usuario
+DROP CONSTRAINT fk_UsuarioTipoSangre
+TRUNCATE TABLE TipoSangre
+ALTER TABLE TipoSangre
+DROP COLUMN Tipo
+ALTER TABLE TipoSangre
+ADD TipoSangre varchar(15) not null
+ALTER TABLE Usuario
+ADD CONSTRAINT fk_UsuarioTipoSangre 
+FOREIGN KEY (Id_TipoSangre) REFERENCES TipoSangre(Id_TipoSangre)

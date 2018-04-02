@@ -19,7 +19,7 @@ namespace ISOYEX_App
             {
                 string[] parametros = { };
                 DataTable tabla = ManejadorData.Exec_Stp("spCargarTipoSangre", 's', parametros);
-                helper.LLenaDrop(ddlTipoSangre, tabla, "Tipo", "Id_TipoSangre");
+                helper.LLenaDrop(ddlTipoSangre, tabla, "TipoSangre", "Id_TipoSangre");
 
                 tabla = ManejadorData.Exec_Stp("spCargarTipoContacto", 'S', parametros);
                 helper.LLenaDrop(ddlTipoContacto, tabla, "Tipo", "Id_TipoContacto");
@@ -82,7 +82,7 @@ namespace ISOYEX_App
                 return false;
             else if (helper.validarVacio(txtContrasena))
                 return false;
-            else if (ImageUpload.HasFile)
+            else if (!ImageUpload.HasFile)
                 return false;
             else
                 return true;

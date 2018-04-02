@@ -1,7 +1,9 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="ISOYEX_App._Default" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentHeader" runat="server">
+    <script src="Scripts/knockout-3.4.2.js"></script>
     <script src="Scripts/jquery-3.0.0.min.js"></script>
     <script>
+        /*jQuery*/
        $(window).scroll(function () {
            if ($(window).scrollTop() >= 500) {
                $('.navbar').removeClass('navbar-color');
@@ -28,104 +30,106 @@
         <!-- Filter form -->
         <div class="container">
             <div class="card my-4 text-center">
-            <div class="card-body">
-                <form>
-                    <div class="form-inline">
-                        <div class="form-group">
-                            <asp:Label ID="ProvinciaLabel" runat="server" Text="Provincia: " AssociatedControlID="ProvinciaDropDown"></asp:Label>
+                <div class="card-body">
+                    <form>
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <asp:Label ID="ProvinciaLabel" runat="server" Text="Provincia: " AssociatedControlID="ProvinciaDropDown"></asp:Label>
+                                <div class="ml-4">
+                                    <asp:DropDownList ID="ProvinciaDropDown" CssClass="form-control" runat="server"></asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="form-group ml-4">
+                                <asp:Label ID="MunicipioLabel" runat="server" Text="Municipio: " AssociatedControlID="MunicipioDropDown"></asp:Label>
+                                <div class="ml-4">
+                                    <asp:DropDownList ID="MunicipioDropDown" CssClass="form-control" runat="server"></asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="form-group ml-4">
+                                <asp:Label ID="TipoSangreLabel" runat="server" Text="Tipo de sangre: " AssociatedControlID="TipoSangreDropDown"></asp:Label>
+                                <div class="ml-4">
+                                    <asp:DropDownList ID="TipoSangreDropDown" CssClass="form-control" runat="server"></asp:DropDownList>
+                                </div>
+                            </div>
                             <div class="ml-4">
-                                <asp:DropDownList ID="ProvinciaDropDown" CssClass="form-control form-control-lg" runat="server"></asp:DropDownList>
+                                <asp:Button ID="SearchButton" runat="server" Text="Buscar" CssClass="btn btn-wine-color btn-lg" OnClick="SearchButton_Click" />
                             </div>
                         </div>
-                        <div class="form-group ml-4">
-                            <asp:Label ID="MunicipioLabel" runat="server" Text="Municipio: " AssociatedControlID="MunicipioDropDown"></asp:Label>
-                            <div class="ml-4">
-                                <asp:DropDownList ID="MunicipioDropDown" CssClass="form-control form-control-lg" runat="server"></asp:DropDownList>
+                    </form>
+                </div>
+            </div>
+            <!-- Content Row -->
+            <div class="container" data-bind="if: UserListHasData">
+                <div class="row p-4" data-bind=" foreach: UsersList">
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-img-top">
+                                <!-- <img class="img-fluid"  alt=""> -->
                             </div>
-                        </div>
-                        <div class="form-group ml-4">
-                            <asp:Label ID="TipoSangreLabel" runat="server" Text="Tipo de sangre: " AssociatedControlID="TipoSangreDropDown"></asp:Label>
-                            <div class="ml-4">
-                                <asp:DropDownList ID="TipoSangreDropDown" CssClass="form-control form-control-lg" runat="server"></asp:DropDownList>
+                            <div class="card-body">
+                                <h2 class="card-title h2" data-bind="text: Nombre"></h2>
+                                <h6 class="card-subtitle mb-2 text-muted">Tipo de sangre: <span class="text-muted" data-bind="text: TipoSangre"></span></h6>
+                                <div class="card-text">
+                                    <p class="h4">Dirección</p>
+                                    <ul class="list-unstyled">
+                                        <li><span class="text-muted h6">Provincia</span>: <span class="font-weight-bold" data-bind="text: Provincia"></span></li>
+                                        <li><span class="text-muted h6">Municipio</span>: <span class="font-weight-bold" data-bind="text: Municipio"></span></li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                        <div class="ml-4">
-                            <asp:Button ID="SearchButton" runat="server" Text="Buscar" CssClass="btn btn-wine-color btn-lg" />
+                            <div class="card-footer text-center">
+                                <a href="#" class="btn btn-wine-color">Más información</a>
+                            </div>
                         </div>
                     </div>
-                </form>
+                    <!-- /.col-md-4 -->
+                </div>
+            </div>
+            <div class="container bg-light" data-bind="ifnot: UserListHasData">
+                <div class="text-center">
+                    <span class="Display-3">No hay resultados previos</span>
+                </div>
             </div>
         </div>
-        <!-- Content Row -->
-        <div class="row p-4">
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <div class="card-img-top">
-                        <img class="img-fluid" src="http://placehold.it/900x400" alt="">
-                    </div>
-                    <div class="card-body">
-                        <h2 class="card-title h2">Carlos Polanco</h2>
-                        <h6 class="card-subtitle mb-2 text-muted">Tipo de sangre: A+</h6>
-                        <p class="card-text">
-                            <p class="h4">Dirección</p>
-                            <ul class="list-unstyled">
-                                <li><span class="text-muted h6">Provincia</span>: XXXXXXXXXXXX</li>
-                                <li><span class="text-muted h6">Municipio</span>: XXXXXXXXXXXX</li>
-                            </ul>
-                        </p>
-                    </div>
-                    <div class="card-footer text-center">
-                        <a href="#" class="btn btn-wine-color">Más información</a>
-                    </div>
-                </div>
-            </div>
-            <!-- /.col-md-4 -->
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <div class="card-img-top">
-                        <img class="img-fluid" src="http://placehold.it/900x400" alt="">
-                    </div>
-                    <div class="card-body">
-                        <h2 class="card-title">Fidel Acosta</h2>
-                        <h6 class="card-subtitle mb-2 text-muted">Tipo de sangre: O+</h6>
-                        <p class="card-text">
-                            <p class="h4">Dirección</p>
-                            <ul class="list-unstyled">
-                                <li><span class="text-muted h6">Provincia</span>: XXXXXXXXXXXX</li>
-                                <li><span class="text-muted h6">Municipio</span>: XXXXXXXXXXXX</li>
-                            </ul>
-                        </p>
-                    </div>
-                    <div class="card-footer text-center">
-                        <a href="#" class="btn btn-wine-color">Más información</a>
-                    </div>
-                </div>
-            </div>
-            <!-- /.col-md-4 -->
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <div class="card-img-top">
-                        <img class="img-fluid" src="http://placehold.it/900x400" alt="">
-                    </div>
-                    <div class="card-body">
-                        <h2 class="card-title">Maikel Cuevas</h2>
-                        <h6 class="card-subtitle mb-2 text-muted">Tipo de sangre: AB+</h6>
-                        <p class="card-text">
-                            <p class="h4">Dirección</p>
-                            <ul class="list-unstyled">
-                                <li><span class="text-muted h6">Provincia</span>: XXXXXXXXXXXX</li>
-                                <li><span class="text-muted h6">Municipio</span>: XXXXXXXXXXXX</li>
-                            </ul>
-                        </p>
-                    </div>
-                    <div class="card-footer text-center">
-                        <a href="#" class="btn btn-wine-color">Más información</a>
-                    </div>
-                </div>
-            </div>
-            <!-- /.col-md-4 -->
-        </div>
-       <!-- /.row -->
+        <!-- /.row -->
     </div>
     <!-- /.container -->
+    <script>
+        /*Knockout.js*/
+        function HomeAppViewModel() {
+            var self = this;
+            self.UsersList = ko.observableArray([]);
+            self.UserListHasData = ko.observable(false);
+
+            self.GetUsers = function (){
+              $.ajax({
+                dataType: "json",
+                url: 'api/FilteredUsers',
+                success: function (data) {
+                    self.UserListHasData(true);
+                    //Here you map and create a new instance of userDetailVM
+                    self.UsersList($.map(data, function (user) {
+                       return new FilteredUsersViewModel(user);
+                    }));
+                }
+              });
+            }
+           //call to get users list when the VM is loading or you can call it on any event on your model
+           self.GetUsers();
+        }
+
+        function FilteredUsersViewModel(data){
+            var self = this;
+            debugger;
+            self.UserId = ko.observable(data.UserId);
+            self.Nombre= ko.observable(data.Nombre);
+            self.Apellido = ko.observable(data.Apellido);
+            self.ImagenURL = ko.observable(data.ImagenURL);
+            self.TipoSangre = ko.observable(data.TipoSangre);
+            self.Provincia = ko.observable(data.Provincia);
+            self.Municipio = ko.observable(data.Municipio);
+        }
+        
+        ko.applyBindings(new HomeAppViewModel());
+    </script>
 </asp:Content>
