@@ -1,0 +1,67 @@
+﻿/* HERO SECTION - DEFAULT.ASPX */
+.hero-section {
+    /*background-color: #0a3d62;*/
+    background: url("https://images.pexels.com/photos/748780/pexels-photo-748780.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260") no-repeat center center fixed;
+    filter: brightness(75%);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 60vh;
+    text-align: center;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.hero-section .hero-section-text {
+    color: #FFF;
+    text-shadow: 1px 1px 2px #0a0a0a;
+}
+
+.navbar {
+    -webkit-transition: all 0.6s ease-out;
+    -moz-transition: all 0.6s ease-out;
+    -o-transition: all 0.6s ease-out;
+    -ms-transition: all 0.6s ease-out;
+    transition: all 0.6s ease-out;
+}
+
+.navbar-color {
+    background: transparent;
+}
+
+.white-text {
+    color: #FFF;
+}
+
+.white-text:hover {
+    color: #FFF;
+}
+
+.red-text {
+    color: #FFF;
+}
+
+.red-text:hover {
+    color: #b71540;
+}
+
+.navbar-brand {
+    color: #FFF;
+}
+
+.navbar-brand:hover {
+    color: #b71540;
+}
+
+.no-padding {
+    padding-left: 0;
+    padding-right: 0;
+}
