@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Perfil.aspx.cs" Inherits="ISOYEX_App.perfil" %>
 <asp:Content ID="PerfilWebPage" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="container-fluid p-4 mt-4">
+    <div class="container-fluid p-4 mt-5">
         <div class="row justify-content-center">
             <div class="col-8">
                 <div class="card">
