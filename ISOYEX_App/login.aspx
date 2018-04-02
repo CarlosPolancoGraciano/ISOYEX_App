@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="ISOYEX_App.login" %>
 <asp:Content ID="LoginWebPage" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="container p-4 m-4">
+    <div class="container p-4 mt-4">
         <div class="row justify-content-center">
             <div class="col-8">
                 <div class="card">
