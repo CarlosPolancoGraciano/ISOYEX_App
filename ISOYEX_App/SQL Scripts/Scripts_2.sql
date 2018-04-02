@@ -148,8 +148,10 @@ BEGIN
 	SELECT 
 		u.Id_Usuario, u.Nombre, u.Apellido, 
 		u.Imagen, u.FechaNacimiento, c.Numero, 
-		tc.Tipo, p.Provincia, m.Municipio, ts.TipoSangre,
-		au.Email, au.Contrasena, r.Nombre
+		tc.Id_TipoContacto, tc.Tipo, d.Id_Provincia,
+	 	p.Provincia, d.Id_Municipio, m.Municipio, 
+		ts.Id_TipoSangre, ts.TipoSangre,au.Email, 
+		au.Contrasena, r.Nombre
 		FROM Usuario as u
 		/*Address*/
 		inner join Direccion as d on d.Id_Direccion = u.Id_Direccion
@@ -168,10 +170,12 @@ BEGIN
 		WHERE au.Email = @Email AND au.Contrasena = @contrasena
 END
 go
+/*
 SELECT ur.Id_Rol, u.Id_Usuario FROM UsuarioRol as ur
 			inner join AutenticacionUsuario as au on au.Id_AutenticacionUsuario = ur.Id_AutenticacionUsuario
 			inner join Usuario as u on u.Id_AutenticacionUsuario = au.Id_AutenticacionUsuario
 go
+*/
 /*USER DATA PROCEDURES*/
 ALTER PROCEDURE spUsuarioData
 (

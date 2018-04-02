@@ -17,9 +17,12 @@ namespace ISOYEX_App.Models
         public DateTime FechaNacimiento { get; set; }
         public int? ContactoId { get; set; }
         public string NumeroTelefonico { get; set; }
+        public int? TipoContactoId { get; set; }
         public string TipoContacto { get; set; }
         public int? DireccionId { get; set; }
+        public int? ProvinciaId { get; set; }
         public string Provincia { get; set; }
+        public int? MunicipioId { get; set; }
         public string Municipio { get; set; }
         public int? TipoSangreId { get; set; }
         public string TipoSangre { get; set; }

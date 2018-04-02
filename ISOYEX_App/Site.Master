@@ -59,7 +59,7 @@
                             <a runat="server" class="nav-link red-text" href="~/Contact">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a runat="server" id="itemNologin" class="nav-link" href="Registrarse.aspx">Registrarse</a>
+                            <a runat="server" id="itemNologin" class="nav-link red-text" href="Registrarse.aspx">Registrarse</a>
                         </li>
                         <li class="nav-item">
                             <a runat="server" id="itemNologin2" class="nav-link red-text" href="Login.aspx">Login</a>

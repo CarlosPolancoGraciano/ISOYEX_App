@@ -94,7 +94,7 @@ namespace ISOYEX_App
             {
                 if (hdnOpcion.Value == "ind")
                 {
-                    String url = saveImage(this.ImageUpload);
+                    String url = SaveImage(this.ImageUpload);
                     string[] parametros =
                     {
                         "@Nombre",txtNombre.Text,
@@ -124,7 +124,7 @@ namespace ISOYEX_App
                 }
                 else if (hdnOpcion.Value == "ins")
                 {
-                    String url = saveImage(this.ImageUpload);
+                    String url = SaveImage(this.ImageUpload);
                     string[] parametros =
                      {
                         "@RNC",txtRNC.Text,
@@ -154,7 +154,7 @@ namespace ISOYEX_App
             }
         }
 
-        private string saveImage(FileUpload imageUpload)
+        private string SaveImage(FileUpload imageUpload)
         {
             String url = string.Empty;
             if (imageUpload.HasFile)
