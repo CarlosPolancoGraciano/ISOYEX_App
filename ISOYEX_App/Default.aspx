@@ -28,13 +28,15 @@
        <!-- Filter form -->
         <div id="startchange">
             <div class="p-5">
+                <div class="row">
+                    <div class="col-8 text-center">
+                    <h1 class="display-6">Uso filtro de donantes.</h1>
+                    <p class="lead">Puede realizar el filtrado seleccionando todos los campos (provincia, direccion y tipo de sangre) o seleccionando la direccion (provincia y municipio) o seleccionando el tipo de sangre.</p>
+                        </div>
+                </div>
                 <div class="card my-4 text-center p-4">
                     <div class="card-body">
                         <div class="form-inline">
-                            <div class="hero-section-text">
-                            <h2 class="display-4">Uso filtro de donantes.</h2>
-                            <p class="lead"> Puede realizar el filtrado seleccionando todos los campos (provincia, direccion y tipo de sangre) o seleccionando la direccion (provincia y municipio) o seleccionando el tipo de sangre.</p>
-                           </div>
                             <div class="form-group">
                                 <asp:Label ID="ProvinciaLabel" runat="server" Text="Provincia: " AssociatedControlID="ProvinciaDropDown"></asp:Label>
                                 <div class="ml-4">
