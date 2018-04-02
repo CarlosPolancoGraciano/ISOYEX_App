@@ -24,7 +24,8 @@ namespace ISOYEX_App
 
                 if (tabla.Rows.Count > 0)
                 {
-                    Session["NombreUsuario"] = (tabla.Rows[0]["Nombre"] + " "+ tabla.Rows[0]["Apellido"]);
+                    //Session["NombreUsuario"] = (tabla.Rows[0]["Nombre"] + " "+ tabla.Rows[0]["Apellido"]);
+                    Session["NombreUsuario"] = (tabla.Rows[0]["Nombre"]);
                     Session["Id_Usuario"] = tabla.Rows[0]["Id_Usuario"].ToString();
                     Response.Redirect("Default.aspx");
                 }

@@ -19,7 +19,7 @@ namespace ISOYEX_App
                 else
                 {
                     string nombreUsuario = Session["NombreUsuario"].ToString();
-                    navbarDropdown.Text = "Hola " + nombreUsuario+ " !";
+                    navbarDropdown.Text = "Hola " + nombreUsuario;
                     itemNologin.Visible = false;
                     itemNologin2.Visible = false;
                 }

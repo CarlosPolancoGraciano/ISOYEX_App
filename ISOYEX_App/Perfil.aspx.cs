@@ -16,7 +16,7 @@ namespace ISOYEX_App
         DataTable tabla = new DataTable();
         Users user = null;
         protected void Page_Load(object sender, EventArgs e)
-        {
+       {
             if (!IsPostBack)
             {
                 if(user == null)
@@ -48,7 +48,25 @@ namespace ISOYEX_App
             }
             PersistUserData();
         }
-        
+        /*Update user data*/
+        protected void ddlProvincia_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DropDownList drop = (DropDownList)sender;
+            ddlMunicipio.ClearSelection();
+            if (drop.SelectedValue.ToString() != "")
+            {
+                string[] parametros = { "@idProvincia", drop.SelectedValue.ToString() };
+                tabla = ManejadorData.Exec_Stp("spCargarMunicipio", 'S', parametros);
+                helper.LLenaDrop(ddlMunicipio, tabla, "Municipio", "Id_Municipio");
+            }
+        }
+
+        protected void btnSaveChanges_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        /*Load user data*/
         private Users UsuarioData(DataTable userData)
         { 
             Users user = new Users();
@@ -100,11 +118,22 @@ namespace ISOYEX_App
             txtNombre.Text = user.Nombre;
             txtApellido.Text = user.Apellido;
             txtFechaNacimiento.Text = user.FechaNacimiento.ToString("dd-MM-yyyy");
-            ddlTipoSangre.SelectedValue = user.TipoSangreId.ToString();
+            ddlTipoSangre.Text = user.TipoSangre;
             txtEmail.Text = user.Email;
-            ddlTipoContacto.SelectedValue = user.TipoContactoId.ToString();
+            ddlTipoContacto.Text = user.TipoContacto;
             txtTelefono.Text = user.NumeroTelefonico;
-            ddlProvincia.SelectedValue = user.ProvinciaId.ToString();
+            ddlProvincia.Text = user.Provincia;
+            if (user.ProvinciaId.ToString() != "")
+            {
+                string[] parametros = { "@idProvincia", user.ProvinciaId.ToString() };
+                tabla = ManejadorData.Exec_Stp("spCargarMunicipio", 'S', parametros);
+                helper.LLenaDrop(ddlMunicipio, tabla, "Municipio", "Id_Municipio");
+                ddlMunicipio.Text = user.Municipio;
+            }
+            else
+            {
+                ddlMunicipio.Items.Clear();
+            }
         }
     }
 }

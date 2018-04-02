@@ -51,11 +51,15 @@ namespace ISOYEX_App
         {
             DropDownList drop = (DropDownList)sender;
             string[] parametros = { "@idProvincia", drop.SelectedValue.ToString() };
-            DataTable tabla = ManejadorData.Exec_Stp("spCargarMunicipio", 's', parametros);
             if (drop.SelectedValue.ToString() != "")
+            {
+                DataTable tabla = ManejadorData.Exec_Stp("spCargarMunicipio", 's', parametros);
                 helper.LLenaDrop(ddlMunicipio, tabla, "Municipio", "Id_Municipio");
+            }
             else
+            {
                 ddlMunicipio.Items.Clear();
+            }
         }
 
         public bool ValidarControles()

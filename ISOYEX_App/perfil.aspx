@@ -61,7 +61,7 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <asp:Label ID="ddlProvinciaLabel" runat="server" Text="Provincia"></asp:Label>
-                                <asp:DropDownList ID="ddlProvincia" runat="server" CssClass="form-control"></asp:DropDownList>
+                                <asp:DropDownList ID="ddlProvincia" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlProvincia_SelectedIndexChanged"></asp:DropDownList>
                             </div>
                             <div class="form-group col-md-6">
                                 <asp:Label ID="ddlMunicipioLabel" runat="server" Text="Municipio"></asp:Label>
@@ -71,7 +71,7 @@
                         <div class="text-center mt-2">
                             <div class="btn-group" role="group">
                                 <asp:Button ID="btnResetToDefault" Text="Valores por default" CssClass="btn btn-warning" runat="server" />
-                                <asp:Button ID="btnSaveChanges" Text="Guardar cambios" CssClass="btn btn-wine-color" runat="server" />
+                                <asp:Button ID="btnSaveChanges" Text="Guardar cambios" CssClass="btn btn-wine-color" runat="server" OnClick="btnSaveChanges_Click" />
                             </div>
                         </div>
                     </div>
