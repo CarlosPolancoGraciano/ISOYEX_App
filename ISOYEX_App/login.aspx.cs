@@ -32,6 +32,5 @@ namespace ISOYEX_App
                     pnlError.Visible = true;
             }
         }
-
     }
 }
