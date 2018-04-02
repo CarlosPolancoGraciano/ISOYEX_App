@@ -23,7 +23,7 @@
                             </div>
                         </div>
                         <div class="text-center">
-                            <asp:Button ID="btningresar" runat="server" Text="Iniciar Sesión" CssClass="btn btn-login-color btn-lg" />
+                            <asp:Button ID="btningresar" runat="server" Text="Iniciar Sesión" CssClass="btn btn-login-color btn-lg" OnClick="btningresar_Click" />
                             <asp:Panel Visible="false" class="form-group col-12 offset-3" ID="pnlError" runat="server">
                                 <small id="emailHelp" class="form-text text-muted" style="color: red !important;">Error en Email y/o Contraseña.</small>
                             </asp:Panel>
