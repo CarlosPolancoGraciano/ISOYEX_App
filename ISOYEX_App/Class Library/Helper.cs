@@ -41,6 +41,5 @@ namespace ISOYEX_App.Class_Library
             return formateada;
         }
 
-
     }
 }

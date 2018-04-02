@@ -12,12 +12,12 @@
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
 
-    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
-     <asp:ContentPlaceHolder ID="ContentHeader" runat="server">
-            </asp:ContentPlaceHolder>
-    <link href="Content/Website CSS/WebsiteCSS.css" rel="stylesheet" type="text/css"/>
+    <asp:ContentPlaceHolder ID="ContentHeader" runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="Content/Website CSS/WebsiteCSS.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <form runat="server">
@@ -56,14 +56,24 @@
                         <li class="nav-item">
                             <a runat="server" class="nav-link" href="~/About">About</a>
                         </li>
-                        <li class="nav-item">
+                        <li id="item" class="nav-item" runat="server">
                             <a runat="server" class="nav-link" href="~/Contact">Contact</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" id="itemNologin" runat="server">
                             <a runat="server" class="nav-link" href="Registrarse.aspx">Registrarse</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" id="itemNologin2" runat="server">
                             <a runat="server" class="nav-link" href="Login.aspx">Login</a>
+                        </li>
+                        <li class="nav-item dropdown" id="itemLogin" runat="server">
+                            
+                            <asp:Label class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" runat="server" Text=""></asp:Label>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <%-- En caso de necesitar una opcion agregarla aqui --%>
+                                <a class="dropdown-item" href="#">Mi perfil</a>
+                                <div class="dropdown-divider"></div>
+                                <asp:LinkButton class="dropdown-item" ID="lkbsalir" runat="server" OnClick="lkbsalir_Click">Logout</asp:LinkButton>
+                            </div>
                         </li>
                     </ul>
                 </div>

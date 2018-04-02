@@ -13,7 +13,7 @@
                         <div class="row"> 
                             <div class="form-group col-12 offset-3"> 
                                 <asp:Label ID="labelEmail" runat="server" Text="Correo electrónico" AssociatedControlID="txtemail"></asp:Label>
-                                <asp:TextBox ID="txtemail" runat="server" CssClass="form-control" placeholder="Ingresar Correo Electrónico"></asp:TextBox>
+                                <asp:TextBox ID="txtemail" runat="server" TextMode="Email" CssClass="form-control" placeholder="Ingresar Correo Electrónico"></asp:TextBox>
                             </div>
                          </div>
                          <div class="row">
@@ -22,8 +22,11 @@
                                 <asp:TextBox ID="txtpassword" runat="server" TextMode="Password" CssClass="form-control" placeholder="Ingresar contraseña"></asp:TextBox>
                             </div>
                          </div>
+                          <asp:Panel Visible="false" class="form-group col-12 offset-3" ID="pnlError" runat="server">
+                              <small id="emailHelp" class="form-text text-muted" style="color:red !important;">Error en Email y/o Contraseña.</small>
+                          </asp:Panel>
                          <div class="text-center">
-                            <asp:Button ID="btningresar" runat="server" Text="Iniciar Sesión" CssClass="btn btn-login-color btn-lg"/>
+                            <asp:Button ID="btningresar" runat="server" Text="Iniciar Sesión" CssClass="btn btn-login-color btn-lg" OnClick="btningresar_Click"/>
                          </div>
                       </div>
                     </div>
