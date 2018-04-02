@@ -27,6 +27,24 @@ namespace ISOYEX_App
                 tabla = ManejadorData.Exec_Stp("spCargarProvincias", 'S', parametros);
                 helper.LLenaDrop(ddlProvincia, tabla, "Provincia", "Id_Provincia");
             }
+            /*Manage File Upload*/
+            /*The first time the image get's upload*/
+            if (Session["ImageUpload"] == null && ImageUpload.HasFile)
+            {
+                Session["ImageUpload"] = ImageUpload;
+                ImageUploadLabel.Text = ImageUpload.FileName;
+
+            }/*If postback was made, persist the image*/
+            else if (Session["ImageUpload"] != null && (!ImageUpload.HasFile))
+            {
+                ImageUpload = (FileUpload) Session["ImageUpload"];
+                ImageUploadLabel.Text = ImageUpload.FileName;
+            }/*If user changes image*/
+            else if (ImageUpload.HasFile)
+            {
+                Session["ImageUpload"] = ImageUpload;
+                ImageUploadLabel.Text = ImageUpload.FileName;
+            }
         }
 
         protected void ddlProvincia_SelectedIndexChanged(object sender, EventArgs e)
@@ -64,31 +82,33 @@ namespace ISOYEX_App
                 return false;
             else if (helper.validarVacio(txtContrasena))
                 return false;
+            else if (ImageUpload.HasFile)
+                return false;
             else
                 return true;
         }
 
         protected void btnRegistrarse_Click(object sender, EventArgs e)
         {
-            var something = ImageUpload;
             if (ValidarControles())
             {
                 if (hdnOpcion.Value == "ind")
                 {
+                    String url = saveImage(this.ImageUpload);
                     string[] parametros =
-                        {
-                    "@Nombre",txtNombre.Text,
-                    "@Apellido",txtApellido.Text,
-                    "@Imagen", saveImage(ImageUpload),
-                    "@Email",txtEmail.Text,
-                    "@Contrasena",txtContrasena.Text,
-                    "@FechaNacimiento",helper.dateFormat(txtFechaNacimiento.Text,"yyyy-dd-MM"),
-                    "@Id_TipoSangre",ddlTipoSangre.SelectedValue,
-                    "@NumeroTelefonico",txtTelefono.Text,
-                    "@Id_TipoContacto",ddlTipoContacto.SelectedValue,
-                    "@Id_Provincia",ddlProvincia.SelectedValue,
-                    "@Id_Municipio",ddlMunicipio.SelectedValue
-                };
+                    {
+                        "@Nombre",txtNombre.Text,
+                        "@Apellido",txtApellido.Text,
+                        "@Imagen", url,
+                        "@Email",txtEmail.Text,
+                        "@Contrasena",txtContrasena.Text,
+                        "@FechaNacimiento",helper.dateFormat(txtFechaNacimiento.Text,"yyyy-dd-MM"),
+                        "@Id_TipoSangre",ddlTipoSangre.SelectedValue,
+                        "@NumeroTelefonico",txtTelefono.Text,
+                        "@Id_TipoContacto",ddlTipoContacto.SelectedValue,
+                        "@Id_Provincia",ddlProvincia.SelectedValue,
+                        "@Id_Municipio",ddlMunicipio.SelectedValue
+                    };
                     try
                     {
                         ManejadorData.Exec_Stp("spRegistrarDonanteReceptor", 'm', parametros);
@@ -104,11 +124,12 @@ namespace ISOYEX_App
                 }
                 else if (hdnOpcion.Value == "ins")
                 {
+                    String url = saveImage(this.ImageUpload);
                     string[] parametros =
                      {
                         "@RNC",txtRNC.Text,
                         "@Nombre",txtNombre.Text,
-                        "@Imagen", saveImage(ImageUpload),
+                        "@Imagen", url,
                         "@Email",txtEmail.Text,
                         "@Contrasena",txtContrasena.Text,
                         "@NumeroTelefonico",txtTelefono.Text,
@@ -140,12 +161,12 @@ namespace ISOYEX_App
             {
                 try
                 {
-                    if(imageUpload.PostedFile.ContentType == "image/jpeg" || imageUpload.PostedFile.ContentType == "image/png"
+                    if (imageUpload.PostedFile.ContentType == "image/jpeg" || imageUpload.PostedFile.ContentType == "image/png"
                        || imageUpload.PostedFile.ContentType == "image/webp" || imageUpload.PostedFile.ContentType == "image/bmp"
                        || imageUpload.PostedFile.ContentType == "image/gif")
                     {
-                        string fileName = Path.GetFileName(ImageUpload.FileName);
-                        url = Server.MapPath("~/") + fileName;
+                        string fileName = Path.GetFileName(imageUpload.FileName);
+                        url = Server.MapPath("~/Images/") + txtEmail.Text + "-" + fileName;
                         imageUpload.SaveAs(url);
                     }
                     else
