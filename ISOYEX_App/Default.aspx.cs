@@ -21,9 +21,9 @@ namespace ISOYEX_App
             {
                 string[] parametros = { };
                 DataTable table = ManejadorData.Exec_Stp("spCargarProvincias", 's', parametros);
-                helper.LLenaDrop(ddlProvincia, table, "Provincia", "Id_Provincia");
+                helper.LLenaDrop(ProvinciaDropDown, table, "Provincia", "Id_Provincia");
                 table = ManejadorData.Exec_Stp("spCargarTipoSangre", 's', parametros);
-                helper.LLenaDrop(ddlTipoSangre, table, "Tipo", "Id_TipoSangre");
+                helper.LLenaDrop(TipoSangreDropDown, table, "Tipo", "Id_TipoSangre");
             }
         }
 
@@ -34,11 +34,11 @@ namespace ISOYEX_App
             DataTable table = ManejadorData.Exec_Stp("spCargarMunicipio", 's', parametros);
             if(provinciaDrop.SelectedValue.ToString() != "")
             {
-                helper.LLenaDrop(ddlMunicipio, table, "Municipio", "Id_Municipio");
+                helper.LLenaDrop(MunicipioDropDown, table, "Municipio", "Id_Municipio");
             }
             else
             {
-                ddlMunicipio.Items.Clear();
+                MunicipioDropDown.Items.Clear();
             }
             
         }
@@ -50,9 +50,9 @@ namespace ISOYEX_App
 
         protected void SearchButton_Click(object sender, EventArgs e)
         {
-            String indexProvincia = ddlProvincia.SelectedValue;
-            String indexMunicipio = ddlMunicipio.SelectedValue;
-            String indexTipoSangre = ddlTipoSangre.SelectedValue;
+            String indexProvincia = ProvinciaDropDown.SelectedValue;
+            String indexMunicipio = MunicipioDropDown.SelectedValue;
+            String indexTipoSangre = TipoSangreDropDown.SelectedValue;
 
             if (indexProvincia != string.Empty &&
                 indexMunicipio != string.Empty &&

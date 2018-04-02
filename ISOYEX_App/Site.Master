@@ -14,13 +14,6 @@
 
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-<<<<<<< HEAD
-=======
-    <asp:ContentPlaceHolder ID="ContentHeader" runat="server">
-        </asp:ContentPlaceHolder>
-    <link href="Content/Website CSS/WebsiteCSS.css" rel="stylesheet" type="text/css"/>
->>>>>>> Front-End
-
      <asp:ContentPlaceHolder ID="ContentHeader" runat="server">
             </asp:ContentPlaceHolder>
     <link href="Content/Website CSS/WebsiteCSS.css" rel="stylesheet" type="text/css"/>
@@ -66,17 +59,19 @@
                             <a runat="server" class="nav-link red-text" href="~/Contact">Contact</a>
                         </li>
                         <li class="nav-item">
-<<<<<<< HEAD
-                            <a runat="server" class="nav-link" href="Registrarse.aspx">Registrarse</a>
+                            <a runat="server" id="itemNologin" class="nav-link" href="Registrarse.aspx">Registrarse</a>
                         </li>
                         <li class="nav-item">
-                            <a runat="server" class="nav-link" href="Login.aspx">Login</a>
-=======
-                            <a runat="server" class="nav-link red-text" href="Login.aspx">Login</a>
+                            <a runat="server" id="itemNologin2" class="nav-link red-text" href="Login.aspx">Login</a>
                         </li>
-                        <li class="nav-item">
-                            <a runat="server" class="nav-link red-text" href="perfil.aspx">Perfil</a>
->>>>>>> Front-End
+                        <li class="nav-item dropdown" id="itemLogin" runat="server">
+                            <asp:Label class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" runat="server" Text=""></asp:Label>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <%-- En caso de necesitar una opcion agregarla aqui --%>
+                                <a class="dropdown-item" href="Perfil.aspx">Mi perfil</a>
+                                <div class="dropdown-divider"></div>
+                                <asp:LinkButton class="dropdown-item" ID="lkbsalir" runat="server" OnClick="lkbsalir_Click">Logout</asp:LinkButton>
+                            </div>
                         </li>
                     </ul>
                 </div>

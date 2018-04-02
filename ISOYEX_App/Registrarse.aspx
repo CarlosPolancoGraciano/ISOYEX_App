@@ -58,7 +58,8 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="card p-3 m-3">
+    <div class="container">
+        <div class="card p-3 m-3">
             <div class="card-body ml-2">
                 <div class="p-1 m-1 text-center">
                     <h1 class="display-4">Registro de usuarios</h1>
@@ -145,7 +146,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <asp:Label ID="txtConfContrasenaLabel" runat="server" Text="Confirmar Contraseña" AssociatedControlID="txtConfContrasena"></asp:Label>
-                            <asp:TextBox ID="txtConfContrasena" TextMode="Password" CssClass="form-control txt"  runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtConfContrasena" TextMode="Password" CssClass="form-control txt" runat="server"></asp:TextBox>
                         </div>
                     </div>
                     <div class="text-center mx-auto">
@@ -155,4 +156,5 @@
                 </div>
             </div>
         </div>
+    </div>
 </asp:Content>

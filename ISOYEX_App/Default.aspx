@@ -24,10 +24,10 @@
                 <p class="lead">This is a simple hero unit, a simple Hero-style component for calling extra attention to featured content or information.</p>
             </div>
         </div>
-<<<<<<< HEAD
         <!-- /.row -->
         <!-- Filter form -->
-        <div class="card my-4 text-center">
+        <div class="container">
+            <div class="card my-4 text-center">
             <div class="card-body">
                 <form>
                     <div class="form-inline">
@@ -56,110 +56,74 @@
                 </form>
             </div>
         </div>
-=======
-       <!-- /.row -->
-       <!-- Filter form -->
-        <div id="startchange">
-            <div class="p-5">
-                <div class="card my-4 text-center p-4">
+        <!-- Content Row -->
+        <div class="row p-4">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-img-top">
+                        <img class="img-fluid" src="http://placehold.it/900x400" alt="">
+                    </div>
                     <div class="card-body">
-                        <div class="form-inline">
-                            <div class="form-group">
-                                <asp:Label ID="ProvinciaLabel" runat="server" Text="Provincia: " AssociatedControlID="ProvinciaDropDown"></asp:Label>
-                                <div class="ml-4">
-                                    <asp:DropDownList ID="ProvinciaDropDown" CssClass="form-control form-control-lg" runat="server"></asp:DropDownList>
-                                </div>
-                            </div>
-                            <div class="form-group ml-4">
-                                <asp:Label ID="MunicipioLabel" runat="server" Text="Municipio: " AssociatedControlID="MunicipioDropDown"></asp:Label>
-                                <div class="ml-4">
-                                    <asp:DropDownList ID="MunicipioDropDown" CssClass="form-control form-control-lg" runat="server"></asp:DropDownList>
-                                </div>
-                            </div>
-                            <div class="form-group ml-4">
-                                <asp:Label ID="TipoSangreLabel" runat="server" Text="Tipo de sangre: " AssociatedControlID="TipoSangreDropDown"></asp:Label>
-                                <div class="ml-4">
-                                    <asp:DropDownList ID="TipoSangreDropDown" CssClass="form-control form-control-lg" runat="server"></asp:DropDownList>
-                                </div>
-                            </div>
-                            <div class="ml-4">
-                                <asp:Button ID="SearchButton" runat="server" Text="Buscar" CssClass="btn btn-wine-color btn-lg" />
-                            </div>
-                        </div>
+                        <h2 class="card-title h2">Carlos Polanco</h2>
+                        <h6 class="card-subtitle mb-2 text-muted">Tipo de sangre: A+</h6>
+                        <p class="card-text">
+                            <p class="h4">Dirección</p>
+                            <ul class="list-unstyled">
+                                <li><span class="text-muted h6">Provincia</span>: XXXXXXXXXXXX</li>
+                                <li><span class="text-muted h6">Municipio</span>: XXXXXXXXXXXX</li>
+                            </ul>
+                        </p>
                     </div>
-                </div>
->>>>>>> Front-End
-
-                <!-- Content Row -->
-                <div class="row p-4">
-                    <div class="col-md-4 mb-4">
-                        <div class="card h-100">
-                            <div class="card-img-top">
-                                <img class="img-fluid" src="http://placehold.it/900x400" alt="">
-                            </div>
-                            <div class="card-body">
-                                <h2 class="card-title h2">Carlos Polanco</h2>
-                                <h6 class="card-subtitle mb-2 text-muted">Tipo de sangre: A+</h6>
-                                <p class="card-text">
-                                    <p class="h4">Dirección</p>
-                                    <ul class="list-unstyled">
-                                        <li><span class="text-muted h6">Provincia</span>: XXXXXXXXXXXX</li>
-                                        <li><span class="text-muted h6">Municipio</span>: XXXXXXXXXXXX</li>
-                                    </ul>
-                                </p>
-                            </div>
-                            <div class="card-footer text-center">
-                                <a href="#" class="btn btn-wine-color">Más información</a>
-                            </div>
-                        </div>
+                    <div class="card-footer text-center">
+                        <a href="#" class="btn btn-wine-color">Más información</a>
                     </div>
-                    <!-- /.col-md-4 -->
-                    <div class="col-md-4 mb-4">
-                        <div class="card h-100">
-                            <div class="card-img-top">
-                                <img class="img-fluid" src="http://placehold.it/900x400" alt="">
-                            </div>
-                            <div class="card-body">
-                                <h2 class="card-title">Fidel Acosta</h2>
-                                <h6 class="card-subtitle mb-2 text-muted">Tipo de sangre: O+</h6>
-                                <p class="card-text">
-                                    <p class="h4">Dirección</p>
-                                    <ul class="list-unstyled">
-                                        <li><span class="text-muted h6">Provincia</span>: XXXXXXXXXXXX</li>
-                                        <li><span class="text-muted h6">Municipio</span>: XXXXXXXXXXXX</li>
-                                    </ul>
-                                </p>
-                            </div>
-                            <div class="card-footer text-center">
-                                <a href="#" class="btn btn-wine-color">Más información</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.col-md-4 -->
-                    <div class="col-md-4 mb-4">
-                        <div class="card h-100">
-                            <div class="card-img-top">
-                                <img class="img-fluid" src="http://placehold.it/900x400" alt="">
-                            </div>
-                            <div class="card-body">
-                                <h2 class="card-title">Maikel Cuevas</h2>
-                                <h6 class="card-subtitle mb-2 text-muted">Tipo de sangre: AB+</h6>
-                                <p class="card-text">
-                                    <p class="h4">Dirección</p>
-                                    <ul class="list-unstyled">
-                                        <li><span class="text-muted h6">Provincia</span>: XXXXXXXXXXXX</li>
-                                        <li><span class="text-muted h6">Municipio</span>: XXXXXXXXXXXX</li>
-                                    </ul>
-                                </p>
-                            </div>
-                            <div class="card-footer text-center">
-                                <a href="#" class="btn btn-wine-color">Más información</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.col-md-4 -->
                 </div>
             </div>
+            <!-- /.col-md-4 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-img-top">
+                        <img class="img-fluid" src="http://placehold.it/900x400" alt="">
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">Fidel Acosta</h2>
+                        <h6 class="card-subtitle mb-2 text-muted">Tipo de sangre: O+</h6>
+                        <p class="card-text">
+                            <p class="h4">Dirección</p>
+                            <ul class="list-unstyled">
+                                <li><span class="text-muted h6">Provincia</span>: XXXXXXXXXXXX</li>
+                                <li><span class="text-muted h6">Municipio</span>: XXXXXXXXXXXX</li>
+                            </ul>
+                        </p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="#" class="btn btn-wine-color">Más información</a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.col-md-4 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-img-top">
+                        <img class="img-fluid" src="http://placehold.it/900x400" alt="">
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">Maikel Cuevas</h2>
+                        <h6 class="card-subtitle mb-2 text-muted">Tipo de sangre: AB+</h6>
+                        <p class="card-text">
+                            <p class="h4">Dirección</p>
+                            <ul class="list-unstyled">
+                                <li><span class="text-muted h6">Provincia</span>: XXXXXXXXXXXX</li>
+                                <li><span class="text-muted h6">Municipio</span>: XXXXXXXXXXXX</li>
+                            </ul>
+                        </p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="#" class="btn btn-wine-color">Más información</a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.col-md-4 -->
         </div>
        <!-- /.row -->
     </div>
