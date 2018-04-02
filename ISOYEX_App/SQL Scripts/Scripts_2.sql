@@ -168,34 +168,32 @@ BEGIN
 		WHERE au.Email = @Email AND au.Contrasena = @contrasena
 END
 go
+SELECT ur.Id_Rol, u.Id_Usuario FROM UsuarioRol as ur
+			inner join AutenticacionUsuario as au on au.Id_AutenticacionUsuario = ur.Id_AutenticacionUsuario
+			inner join Usuario as u on u.Id_AutenticacionUsuario = au.Id_AutenticacionUsuario
+go
 /*USER DATA PROCEDURES*/
 ALTER PROCEDURE spUsuarioData
 (
-	@Id_Usuario nvarchar(128),
-	@UsuarioId int
+	@Id_Usuario int
 )as
 BEGIN
-	DECLARE @RolId int, @RolCurrentUsuarioId int, @CurrentRolId int
+	DECLARE @RolId int, @CurrentUsuarioId int, @CurrentRolId int, @UsuarioId int
 
 	DECLARE c_rol CURSOR FOR
-			SELECT Id_Rol, Id_Usuario FROM UsuarioRol
-
-			SELECT Id_Rol, u.Id_UsuarioRol FROM UsuarioRol as u
-
 			SELECT ur.Id_Rol, u.Id_Usuario FROM UsuarioRol as ur
 			inner join AutenticacionUsuario as au on au.Id_AutenticacionUsuario = ur.Id_AutenticacionUsuario
 			inner join Usuario as u on u.Id_AutenticacionUsuario = au.Id_AutenticacionUsuario
 
-
 		OPEN c_rol
 			WHILE 1=1
 			BEGIN
-				FETCH NEXT FROM c_rol INTO @CurrentRolId, @RolCurrentUsuarioId
+				FETCH NEXT FROM c_rol INTO @CurrentRolId, @CurrentUsuarioId
 				IF(@@FETCH_STATUS <> 0)
 				BEGIN
 					BREAK;
 				END
-				ELSE IF(@RolCurrentUsuarioId = @Id_Usuario)
+				ELSE IF(@CurrentUsuarioId = @Id_Usuario)
 				BEGIN
 					SET @RolId = @CurrentRolId;
 					BREAK;
@@ -225,7 +223,7 @@ BEGIN
 			/*User email, Role and Contrasena*/
 			inner join AutenticacionUsuario as au on au.Id_AutenticacionUsuario = u.Id_AutenticacionUsuario
 			inner join UsuarioRol as ur on ur.Id_AutenticacionUsuario = au.Id_AutenticacionUsuario
-			WHERE u.Id_Usuario = @UsuarioId		
+			WHERE u.Id_Usuario = @Id_Usuario		
 	)
 	ELSE
 	(
@@ -245,7 +243,7 @@ BEGIN
 			/*User email, Role and Contrasena*/
 			inner join AutenticacionUsuario as au on au.Id_AutenticacionUsuario = u.Id_AutenticacionUsuario
 			inner join UsuarioRol as ur on ur.Id_AutenticacionUsuario = au.Id_AutenticacionUsuario
-			WHERE	u.Id_Usuario = @UsuarioId
+			WHERE	u.Id_Usuario = @Id_Usuario
 	)
 END
 go
