@@ -157,10 +157,12 @@
     <Content Include="Content\Imagenes\Avatar2_Login.png" />
     <Content Include="Content\Imagenes\Avatar_Login.png" />
     <Content Include="Content\Imagenes\LoginBackground.jpeg" />
+    <Content Include="Content\Imagenes\LoginBackground2.jpg" />
     <Content Include="Content\Imagenes\Test-Image.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\sweetalert.css" />
     <Content Include="Content\Website CSS\DefaultView.css" />
+    <Content Include="Content\Website CSS\LoginView.css" />
     <Content Include="Content\Website CSS\WebsiteCSS.css" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />

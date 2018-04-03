@@ -24,23 +24,22 @@
         </div>
         <!-- /.row -->
         <!-- Filter form -->
-<<<<<<< HEAD
         <div id="startchange">
             <div class="p-5">
                 <div class="row">
-                    <div class="col-8 text-center">
+                    <div class="col-2"></div>
+                    <div class="col-8 text-center p-3">
                         <h1 class="display-6">Uso filtro de donantes.</h1>
                         <p class="lead">Puede realizar el filtrado seleccionando todos los campos (provincia, direccion y tipo de sangre) o seleccionando la direccion (provincia y municipio) o seleccionando el tipo de sangre.</p>
                     </div>
+                    <div class="col-2"></div>
                 </div>
-                <div class="card my-4 text-center p-4">
-                    <div class="card-body">
-=======
+            </div>
+        </div>
         <div class="container">
             <div class="row">
-                <div class="card my-2 col-12 bg-light">
+                <div class="card mb-2 col-12 bg-light">
                     <div class="card-body text-center">
->>>>>>> Back-End
                         <div class="form-inline">
                             <div class="form-group ml-2">
                                 <asp:Label ID="ProvinciaLabel" runat="server" Text="Provincia: " AssociatedControlID="ProvinciaDropDown"></asp:Label>
@@ -66,30 +65,6 @@
                         </div>
                     </div>
                 </div>
-<<<<<<< HEAD
-                <!-- Content Row -->
-                <div id="UserListHasData" class="container">
-                    <div class="row-fluid p-4">
-                        <div class="col-md-4" data-bind=" foreach: UsersList">
-                            <div class="card">
-                                <div class="card-img-top">
-                                    <!-- <img class="img-fluid"  alt=""> -->
-                                </div>
-                                <div class="card-body">
-                                    <h2 class="card-title h2" data-bind="text: Nombre"></h2>
-                                    <h6 class="card-subtitle mb-2 text-muted">Tipo de sangre: <span class="text-muted" data-bind="text: TipoSangre"></span></h6>
-                                    <div class="card-text">
-                                        <p class="h4">Dirección</p>
-                                        <ul class="list-unstyled">
-                                            <li><span class="text-muted h6">Provincia</span>: <span class="font-weight-bold" data-bind="text: Provincia"></span></li>
-                                            <li><span class="text-muted h6">Municipio</span>: <span class="font-weight-bold" data-bind="text: Municipio"></span></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="card-footer text-center">
-                                    <a href="#" class="btn btn-wine-color">Más información</a>
-                                </div>
-=======
             </div>
             <!-- Content Row -->
             <div id="UserListHasData">
@@ -115,22 +90,10 @@
                                 </div>
                             </div>
                             <div class="card-footer text-center">
-                                <a class="btn btn-wine-color text-white" data-bind="click: function(){  $root.checkProfileInformation }">Más información</a>
->>>>>>> Back-End
+                                <a class="btn btn-wine-color text-white" data-bind="click: function () { $root.checkProfileInformation }">Más información</a>
                             </div>
                         </div>
-                        <!-- /.col-md-4 -->
                     </div>
-<<<<<<< HEAD
-                </div>
-                <div id="UserListHasNoData" class="bg-light mt-4 mb-4">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="container-fluid p-4 m-4">
-                                <div class="text-center">
-                                    <span class="h3 text-muted">No hay resultados previos</span>
-                                </div>
-=======
                     <!-- /ko -->
                 </div>
                 <div class="mt-4">
@@ -143,21 +106,20 @@
                     </nav>
                 </div>
             </div>
-        </div>
-        <div class="container">
-            <div id="UserListHasNoData" class="bg-light mt-4 mb-4">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="p-4 m-4">
-                            <div class="text-center">
-                                <span class="h3 text-muted">No hay resultados encontrados</span>
->>>>>>> Back-End
+            <div class="container">
+                <div id="UserListHasNoData" class="bg-light mt-4 mb-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="p-4 m-4">
+                                <div class="text-center">
+                                    <span class="h3 text-muted">No hay resultados encontrados</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- /.row -->
             </div>
-            <!-- /.row -->
         </div>
     </div>
     <!-- /.container -->
