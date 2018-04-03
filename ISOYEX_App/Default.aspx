@@ -5,7 +5,7 @@
     <script>
         /*jQuery*/
        $(window).scroll(function () {
-           if ($(window).scrollTop() >= 500) {
+           if ($(window).scrollTop() >= 450) {
                $('.navbar').removeClass('navbar-color');
                $('.navbar').addClass('red-custom');
            } else {
