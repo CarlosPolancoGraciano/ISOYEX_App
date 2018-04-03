@@ -36,7 +36,7 @@
                             <div class="form-group">
                                 <asp:Label ID="ProvinciaLabel" runat="server" Text="Provincia: " AssociatedControlID="ProvinciaDropDown"></asp:Label>
                                 <div class="ml-4">
-                                    <asp:DropDownList ID="ProvinciaDropDown" CssClass="form-control" runat="server"></asp:DropDownList>
+                                    <asp:DropDownList ID="ProvinciaDropDown" CssClass="form-control" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlProvincia_SelectedIndexChanged"></asp:DropDownList>
                                 </div>
                             </div>
                             <div class="form-group ml-4">
@@ -59,21 +59,22 @@
                 </div>
             </div>
             <!-- Content Row -->
-            <div id="UserListHasData" class="container">
-                <div class="row-fluid p-4">
-                    <div class="col-md-4" data-bind=" foreach: UsersList">
+            <div id="UserListHasData">
+                <div class="row p-4">
+                    <!-- ko foreach: paginated -->
+                    <div class="col-md-4">
                         <div class="card">
                             <div class="card-img-top">
-                                <!-- <img class="img-fluid"  alt=""> -->
+                                <img class="img-fluid" data-bind="attr: { src: $data.ImagenURL, alt: $data.Nombre }">
                             </div>
                             <div class="card-body">
-                                <h2 class="card-title h2" data-bind="text: Nombre"></h2>
-                                <h6 class="card-subtitle mb-2 text-muted">Tipo de sangre: <span class="text-muted" data-bind="text: TipoSangre"></span></h6>
+                                <h2 class="card-title h2" data-bind="text: $data.Nombre"></h2>
+                                <h6 class="card-subtitle mb-2 text-muted">Tipo de sangre: <span class="text-muted" data-bind="text: $data.TipoSangre"></span></h6>
                                 <div class="card-text">
                                     <p class="h4">Dirección</p>
                                     <ul class="list-unstyled">
-                                        <li><span class="text-muted h6">Provincia</span>: <span class="font-weight-bold" data-bind="text: Provincia"></span></li>
-                                        <li><span class="text-muted h6">Municipio</span>: <span class="font-weight-bold" data-bind="text: Municipio"></span></li>
+                                        <li><span class="text-muted h6">Provincia</span>: <span class="font-weight-bold" data-bind="text: $data.Provincia"></span></li>
+                                        <li><span class="text-muted h6">Municipio</span>: <span class="font-weight-bold" data-bind="text: $data.Municipio"></span></li>
                                     </ul>
                                 </div>
                             </div>
@@ -82,13 +83,24 @@
                             </div>
                         </div>
                     </div>
-                    <!-- /.col-md-4 -->
+                    <!-- /ko -->
+                </div>
+                <div class="mt-4">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination pagination-lg justify-content-center">
+                            <li class="page-item"><a class="page-link" data-bind="click: previous">&laquo;</a></li>
+                            <li class="page-item"><a class="page-link active" data-bind="text: $root.pageNumber"></a></li>
+                            <li class="page-item"><a class="page-link" data-bind="click: next">&raquo;</a></li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
+        </div>
+        <div class="container">
             <div id="UserListHasNoData" class="bg-light mt-4 mb-4">
                 <div class="row">
                     <div class="col-12">
-                        <div class="container-fluid p-4 m-4">
+                        <div class="p-4 m-4">
                             <div class="text-center">
                                 <span class="h3 text-muted">No hay resultados previos</span>
                             </div>
@@ -105,7 +117,39 @@
         function HomeAppViewModel() {
             var self = this;
             let PersistUsersList = [];
+            /* BEGIN PAGINATOR */
             self.UsersList = ko.observableArray([]);
+            self.pageNumber = ko.observable(0);
+            self.nbPerPage = 6;
+
+	        self.totalPages = ko.computed(function() {
+		        let div = Math.floor(self.UsersList().length / self.nbPerPage);
+		        div += self.UsersList().length % self.nbPerPage > 0 ? 1 : 0;
+		        return div - 1;
+	        });
+    
+            self.paginated = ko.computed(function() {
+                let first = self.pageNumber() * self.nbPerPage;
+                return self.UsersList.slice(first, first + self.nbPerPage);
+            });
+	        self.hasPrevious = ko.computed(function() {
+		        return self.pageNumber() !== 0;
+	        });
+	        self.hasNext = ko.computed(function() {
+		        return self.pageNumber() !== self.totalPages();
+	        });
+	        self.next = function() {
+		        if(self.pageNumber() < self.totalPages()) {
+			        self.pageNumber(self.pageNumber() + 1);
+		        }
+	        }
+	
+	        self.previous = function() {
+		        if(self.pageNumber() != 0) {
+			        self.pageNumber(self.pageNumber() - 1);
+		        }
+            }
+            /* END PAGINATOR */
 
             self.GetUsers = function (){
               $.ajax({

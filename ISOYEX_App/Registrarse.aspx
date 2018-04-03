@@ -100,7 +100,7 @@
                             <label>Foto de perfil</label>
                             <div class="custom-file">
                                 <asp:Label ID="ImageUploadLabel" runat="server" CssClass="custom-file-label" AssociatedControlID="ImageUpload"></asp:Label>
-                                <asp:FileUpload ID="ImageUpload" CssClass="custom-file-input" runat="server" />
+                                <asp:FileUpload ID="ImageUpload" CssClass="custom-file-input" accept="image/*" runat="server" />
                             </div>
                         </div>
                         <div class="col-2"></div>

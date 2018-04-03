@@ -19,6 +19,10 @@ namespace ISOYEX_App
        {
             if (!IsPostBack)
             {
+                if (Session["Id_Usuario"] == null)
+                {
+                    Response.Redirect("Login.aspx");
+                }
                 if(user == null)
                 {
                     /*Obtaining User Id*/

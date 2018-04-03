@@ -116,6 +116,7 @@ namespace ISOYEX_App
                     try
                     {
                         ManejadorData.Exec_Stp("spRegistrarDonanteReceptor", 'm', parametros);
+                        Session["ImageUpload"] = null;
                         Response.Write("<script>alert('Registrado con exito');</script>");
                         Response.Redirect("Default.aspx");
                     }
@@ -144,6 +145,7 @@ namespace ISOYEX_App
                     try
                     {
                         ManejadorData.Exec_Stp("spRegistrarInstitucion", 'm', parametros);
+                        Session["ImageUpload"] = null;
                         Response.Write("<script>alert('Registrado con exito');</script>");
                         Response.Redirect("Default.aspx");
                     }
@@ -160,7 +162,8 @@ namespace ISOYEX_App
 
         private string SaveImage(FileUpload imageUpload)
         {
-            String url = string.Empty;
+            String FolderSaveurl = string.Empty;
+            String DBUrl = string.Empty;
             if (imageUpload.HasFile)
             {
                 try
@@ -170,12 +173,13 @@ namespace ISOYEX_App
                        || imageUpload.PostedFile.ContentType == "image/gif")
                     {
                         string fileName = Path.GetFileName(imageUpload.FileName);
-                        url = Server.MapPath("~/Images/") + txtEmail.Text + "-" + fileName;
-                        imageUpload.SaveAs(url);
+                        FolderSaveurl = Server.MapPath("Images/") + txtEmail.Text + "-" + fileName;
+                        DBUrl = "../Images/" + txtEmail.Text + "-" + fileName;
+                        imageUpload.SaveAs(FolderSaveurl);
                     }
                     else
                     {
-                        return url;
+                        return DBUrl;
                     }
                 }
                 catch (Exception ex)
@@ -183,7 +187,7 @@ namespace ISOYEX_App
                     throw ex;
                 }
             }
-            return url;
+            return DBUrl;
         }
     }
 }
