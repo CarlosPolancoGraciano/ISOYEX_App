@@ -59,10 +59,10 @@
                 </div>
             </div>
             <!-- Content Row -->
-            <div class="container" data-bind="if: UserListHasData">
-                <div class="row p-4" data-bind=" foreach: UsersList">
-                    <div class="col-md-4 mb-4">
-                        <div class="card h-100">
+            <div id="UserListHasData" class="container">
+                <div class="row-fluid p-4">
+                    <div class="col-md-4" data-bind=" foreach: UsersList">
+                        <div class="card">
                             <div class="card-img-top">
                                 <!-- <img class="img-fluid"  alt=""> -->
                             </div>
@@ -85,9 +85,15 @@
                     <!-- /.col-md-4 -->
                 </div>
             </div>
-            <div class="container bg-light" data-bind="ifnot: UserListHasData">
-                <div class="text-center">
-                    <span class="Display-3">No hay resultados previos</span>
+            <div id="UserListHasNoData" class="bg-light mt-4 mb-4">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="container-fluid p-4 m-4">
+                            <div class="text-center">
+                                <span class="h3 text-muted">No hay resultados previos</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -98,19 +104,28 @@
         /*Knockout.js*/
         function HomeAppViewModel() {
             var self = this;
+            let PersistUsersList = [];
             self.UsersList = ko.observableArray([]);
-            self.UserListHasData = ko.observable(false);
 
             self.GetUsers = function (){
               $.ajax({
                 dataType: "json",
                 url: 'api/FilteredUsers',
                 success: function (data) {
-                    self.UserListHasData(true);
-                    //Here you map and create a new instance of userDetailVM
-                    self.UsersList($.map(data, function (user) {
-                       return new FilteredUsersViewModel(user);
-                    }));
+                    debugger;
+                    if (data.length == 0) {
+                        $("#UserListHasData").hide();
+                        $("#UserListHasNoData").show();
+                    } else {
+                        $("#UserListHasNoData").hide();
+                        $("#UserListHasData").show();
+                    }
+                    if (data.length != self.UsersList().length) {
+                        //Here you map and create a new instance of userDetailVM
+                        self.UsersList($.map(data, function (user) {
+                            return new FilteredUsersViewModel(user);
+                        }));
+                    }
                 }
               });
             }
