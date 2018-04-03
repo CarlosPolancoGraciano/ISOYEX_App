@@ -94,13 +94,21 @@ namespace ISOYEX_App {
         protected global::System.Web.UI.WebControls.Label txtEmailLabel;
         
         /// <summary>
+<<<<<<< HEAD
         /// txtEmail control.
+=======
+        /// txtnewpassword control.
+>>>>>>> Front-End
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
+<<<<<<< HEAD
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
+=======
+        protected global::System.Web.UI.WebControls.TextBox txtnewpassword;
+>>>>>>> Front-End
         
         /// <summary>
         /// txtPasswordLabel control.

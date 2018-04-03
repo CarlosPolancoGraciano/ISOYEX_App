@@ -56,10 +56,14 @@
                             <a runat="server" class="nav-link red-text" href="~/About">About</a>
                         </li>
                         <li class="nav-item">
+<<<<<<< HEAD
                             <a runat="server" class="nav-link red-text" href="~/Contact">Contact</a>
                         </li>
                         <li class="nav-item">
                             <a runat="server" id="itemNologin" class="nav-link red-text" href="Registrarse.aspx">Registrarse</a>
+=======
+                            <a runat="server" class="nav-link red-text" href="Login.aspx">Login</a>
+>>>>>>> Front-End
                         </li>
                         <li class="nav-item">
                             <a runat="server" id="itemNologin2" class="nav-link red-text" href="Login.aspx">Login</a>
@@ -72,6 +76,9 @@
                                 <div class="dropdown-divider"></div>
                                 <asp:LinkButton class="dropdown-item" ID="lkbsalir" runat="server" OnClick="lkbsalir_Click">Logout</asp:LinkButton>
                             </div>
+                        </li>
+                        <li class="nav-item">
+                            <a runat="server" class="nav-link red-text" href="Publicacion.aspx">Publicacion</a>
                         </li>
                     </ul>
                 </div>
