@@ -277,7 +277,13 @@ ALTER TABLE Usuario
 ADD FechaNacimiento date
 
 /*Run this code*/
+TRUNCATE TABLE Publicacion
+ALTER TABLE Publicacion
+DROP CONSTRAINT fk_PublicacionUsuario
 TRUNCATE TABLE Usuario
+ALTER TABLE Publicacion
+ADD CONSTRAINT fk_PublicacionUsuario
+FOREIGN KEY (Id_Usuario) REFERENCES Usuario(Id_Usuario)
 ALTER TABLE Usuario
 DROP CONSTRAINT fk_UsuarioAutenticacionUsuario
 ALTER TABLE UsuarioRol

@@ -14,6 +14,7 @@ namespace ISOYEX_App
     {
         Helper helper = new Helper();
         DataTable filteredUsers = new DataTable();
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -85,7 +86,7 @@ namespace ISOYEX_App
                 {
                     filteredUsers = ManejadorData.Exec_Stp("spFiltradoPorSangre", 's', parametros);
                     ajaxFilteredUseres.formatUsers(filteredUsers);
-                    Response.Write("<script>alert('Funcionando')</script>");
+                    //Response.Write("<script>alert('Funcionando')</script>");
                 }
                 catch (Exception ex)
                 {
@@ -106,7 +107,7 @@ namespace ISOYEX_App
                 {
                     filteredUsers = ManejadorData.Exec_Stp("spFiltradoPorDireccionYSangre", 's', parametros);
                     ajaxFilteredUseres.formatUsers(filteredUsers);
-                    Response.Write("<script>alert('Funcionando')</script>");
+                    //Response.Write("<script>alert('Funcionando')</script>");
                 }
                 catch(Exception ex)
                 {
