@@ -258,7 +258,7 @@ ALTER PROCEDURE spUpdateDonanteReceptorData
 	@Id_Usuario int,
 	@Nombre nvarchar(100),
 	@Apellido nvarchar(100), 
-	@Imagen varbinary(100), 
+	@Imagen nvarchar(100), 
 	@Email nvarchar(100),
 	@Contrasena nvarchar(100),
 	@FechaNacimiento datetime,

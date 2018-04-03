@@ -126,29 +126,36 @@ BEGIN
 END
 GO
 --PROCEDURE TO VALIDATE EMAIL
-ALTER procedure spValidateEmail(
+CREATE PROCEDURE spValidateEmail(
 @Email nvarchar(100)
-)as
-Declare @emailExist int
+)AS
 BEGIN
-IF EXISTS (SELECT *  FROM AutenticacionUsuario as u where  @Email = u.Email) BEGIN
-Set @emailExist = 1
- END
- Else BEGIN
- Set @emailExist = 0
- END
+	DECLARE @emailExist int
+	 IF EXISTS (SELECT *  FROM AutenticacionUsuario as u where  @Email = u.Email) 
+	 BEGIN
+		Set @emailExist = 1
+		SELECT @emailExist
+	 END
+	 Else 
+	 BEGIN
+		Set @emailExist = 0
+		SELECT @emailExist
+	 END
 END
-Go
+GO
 --PROCEDURE TO VALIDATE RNC
-Create procedure spValidateRNC(
+CREATE PROCEDURE spValidateRNC(
 @Rnc nvarchar(100)
-)as
-Declare @rncExist int
+)AS
 BEGIN
-IF EXISTS (SELECT *  FROM Usuario as u where u.RNC = @Rnc) BEGIN
-Set @rncExist = 1
- END
- Else BEGIN
- Set @rncExist = 0
- END
+	DECLARE @rncExist int
+	IF EXISTS (SELECT *  FROM Usuario as u where u.RNC = @Rnc) BEGIN
+		Set @rncExist = 1
+		SELECT @rncExist
+	END
+	Else 
+	BEGIN
+		Set @rncExist = 0
+		SELECT @rncExist
+	END
 END
