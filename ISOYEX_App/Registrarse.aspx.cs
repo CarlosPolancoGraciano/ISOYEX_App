@@ -92,15 +92,44 @@ namespace ISOYEX_App
                 return true;
         }
 
-        protected void btnRegistrarse_Click(object sender, EventArgs e)
+        public string ValidarVacio()
         {
-            if (ValidarControles())
+            if (hdnOpcion.Value == "ins" && helper.validarVacio(txtRNC))
+                return txtRNCError.Text = "Favor agregar RNC";
+            else if (helper.validarVacio(txtNombre))
+                return txtNombreError.Text = "Favor agregar Nombre";
+            else if (hdnOpcion.Value == "ind" && helper.validarVacio(txtApellido))
+                return txtApellidoError.Text = "Favor agregar Apellido";
+            else if (hdnOpcion.Value == "ind" && helper.validarNoSeleccionado(ddlTipoSangre))
+                return TipoSangreError.Text = "Favor seleccionar Tipo de Sangre";
+            else if (helper.validarVacio(txtEmail))
+                return txtEmailError.Text = "Favor agregar Email";
+            else if (helper.validarNoSeleccionado(ddlTipoContacto))
+                return ddlTipoContactError.Text = "Favor seleccionar tipo de contacto";
+            else if (helper.validarVacio(txtTelefono))
+                return txtTelefonoError.Text = "Favor agregar numero de telefono";
+            else if (helper.validarNoSeleccionado(ddlProvincia))
+                return ddlProvinciaError.Text = "Favor seleccionar Provincia";
+            else if (helper.validarNoSeleccionado(ddlMunicipio))
+                return ddlMunicipioError.Text = "Favor seleccionar Municipio";
+            else if (helper.validarVacio(txtContrasena))
+                return txtContrasenaError.Text = "Favor escribir Contraseña";
+            else
+                return null;
+        }
+
+
+        protected void btnRegistrarse_Click(object sender, EventArgs e)
+        { if (ValidarVacio() == null)
             {
-                if (hdnOpcion.Value == "ind")
+
+                if (ValidarControles())
                 {
-                    String url = SaveImage(this.ImageUpload);
-                    string[] parametros =
+                    if (hdnOpcion.Value == "ind")
                     {
+                        String url = SaveImage(this.ImageUpload);
+                        string[] parametros =
+                        {
                         "@Nombre",txtNombre.Text,
                         "@Apellido",txtApellido.Text,
                         "@Imagen", url,
@@ -113,24 +142,24 @@ namespace ISOYEX_App
                         "@Id_Provincia",ddlProvincia.SelectedValue,
                         "@Id_Municipio",ddlMunicipio.SelectedValue
                     };
-                    try
-                    {
-                        ManejadorData.Exec_Stp("spRegistrarDonanteReceptor", 'm', parametros);
-                        Response.Write("<script>alert('Registrado con exito');</script>");
-                        Response.Redirect("Default.aspx");
-                    }
-                    catch (Exception)
-                    {
+                        try
+                        {
+                            ManejadorData.Exec_Stp("spRegistrarDonanteReceptor", 'm', parametros);
+                            Response.Write("<script>alert('Registrado con exito');</script>");
+                            Response.Redirect("Default.aspx");
+                        }
+                        catch (Exception)
+                        {
 
-                        throw;
-                    }
+                            throw;
+                        }
 
-                }
-                else if (hdnOpcion.Value == "ins")
-                {
-                    String url = SaveImage(this.ImageUpload);
-                    string[] parametros =
-                     {
+                    }
+                    else if (hdnOpcion.Value == "ins")
+                    {
+                        String url = SaveImage(this.ImageUpload);
+                        string[] parametros =
+                         {
                         "@RNC",txtRNC.Text,
                         "@Nombre",txtNombre.Text,
                         "@Imagen", url,
@@ -141,16 +170,18 @@ namespace ISOYEX_App
                         "@Id_Provincia",ddlProvincia.SelectedValue,
                         "@Id_Municipio",ddlMunicipio.SelectedValue
                     };
-                    try
-                    {
-                        ManejadorData.Exec_Stp("spRegistrarInstitucion", 'm', parametros);
-                        Response.Write("<script>alert('Registrado con exito');</script>");
-                        Response.Redirect("Default.aspx");
-                    }
-                    catch (Exception)
-                    {
-                        throw;
-                        
+                        try
+                        {
+                            ManejadorData.Exec_Stp("spRegistrarInstitucion", 'm', parametros);
+                            Response.Write("<script>alert('Registrado con exito');</script>");
+                            Response.Redirect("Default.aspx");
+                        }
+                        catch (Exception)
+                        {
+                            throw;
+
+                        }
+
                     }
 
                 }
