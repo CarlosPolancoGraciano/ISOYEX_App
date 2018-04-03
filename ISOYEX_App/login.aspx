@@ -1,17 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="ISOYEX_App.login" %>
 <asp:Content ID="LoginWebPage" ContentPlaceHolderID="MainContent" runat="server">
-<<<<<<< HEAD
-    <div class="container mt-4 p-4">
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-6 mt-4">
-=======
 
-    <div class="row mt-5"> </div>
+    <div class="row mt-5"></div>
     <div class="container p-4 mt-5">
         <div class="row justify-content-center">
             <div class="col-8">
->>>>>>> Front-End
                 <div class="card">
                     <div class="card-body">
                         <div class="avatar">
@@ -42,8 +35,6 @@
             <div class="col-3"></div>
         </div>
     </div>
-
-    <div class="row mt-5"> </div>
-    
-    <div class="row mt-5"> </div>
+    <div class="row mt-5"></div>
+    <div class="row mt-5"></div>
 </asp:Content>

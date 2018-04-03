@@ -50,13 +50,8 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">
-<<<<<<< HEAD
                                 <asp:Label ID="labelcontacto" runat="server" Text="Tipo de contacto" AssociatedControlID="ddlTipoContacto"></asp:Label>
                                 <asp:DropDownList ID="ddlTipoContacto" runat="server" CssClass="form-control"></asp:DropDownList>
-=======
-                                <asp:Label ID="labelnuevacontraseña" runat="server" Text="Nueva Contraseña"></asp:Label>
-                                <asp:TextBox ID="txtnewpassword" runat="server" CssClass="form-control" placeholder="Ingresar Nueva Contraseña"></asp:TextBox>
->>>>>>> Front-End
                             </div>
                             <div class="form-group col-md-6">
                                 <asp:Label ID="labeltelefono" runat="server" Text="Numero Telefonico"></asp:Label>
@@ -65,7 +60,6 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">
-<<<<<<< HEAD
                                 <asp:Label ID="ddlProvinciaLabel" runat="server" Text="Provincia"></asp:Label>
                                 <asp:DropDownList ID="ddlProvincia" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlProvincia_SelectedIndexChanged"></asp:DropDownList>
                             </div>
@@ -78,28 +72,6 @@
                             <div class="btn-group" role="group">
                                 <asp:Button ID="btnResetToDefault" Text="Valores por default" CssClass="btn btn-warning" runat="server" />
                                 <asp:Button ID="btnSaveChanges" Text="Guardar cambios" CssClass="btn btn-wine-color" runat="server" OnClick="btnSaveChanges_Click" />
-=======
-                                <asp:Label ID="labelcontacto" runat="server" Text="Tipo de contacto"></asp:Label>
-                                <select id="txttipocontacto" class="form-control">
-                                    <option></option>
-                                    <option></option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <asp:Label ID="Labelprrovincia" runat="server" Text="Provincia"></asp:Label>
-                                <select id="txtprovincia" class="form-control">
-                                    <option></option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <asp:Label ID="Labelmunicipio" runat="server" Text="Municipio"></asp:Label>
-                                <select id="Municipio" class="form-control">
-                                    <option></option>
-                                    <option selected></option>
-                                </select>
->>>>>>> Front-End
                             </div>
                         </div>
                     </div>

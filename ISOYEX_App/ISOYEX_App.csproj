@@ -167,11 +167,8 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <!-- <<<<<<< HEAD -->
     <Content Include="Login.aspx" />
-    <!-- ======= -->
     <Content Include="Registrarse.aspx" />
-    <!-- >>>>>>> Back-End -->
     <Content Include="Perfil.aspx" />
     <Content Include="Publicacion.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -255,18 +252,8 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
-<<<<<<< HEAD
     <Compile Include="Class Library\Helper.cs" />
     <Compile Include="Class Library\ManejadorData.cs" />
-    <Compile Include="Contact.aspx.cs">
-      <DependentUpon>Contact.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Contact.aspx.designer.cs">
-      <DependentUpon>Contact.aspx</DependentUpon>
-    </Compile>
-=======
->>>>>>> Front-End
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -294,21 +281,20 @@
     </Compile>
     <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-<<<<<<< HEAD
     <Compile Include="Registrarse.aspx.cs">
       <DependentUpon>Registrarse.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Registrarse.aspx.designer.cs">
       <DependentUpon>Registrarse.aspx</DependentUpon>
-=======
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Publicacion.aspx.cs">
       <DependentUpon>Publicacion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Publicacion.aspx.designer.cs">
       <DependentUpon>Publicacion.aspx</DependentUpon>
->>>>>>> Front-End
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>

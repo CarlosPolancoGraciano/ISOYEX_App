@@ -22,27 +22,18 @@
     <div class="container-fluid no-padding">
         <div class="hero-section text-white">
         </div>
-<<<<<<< HEAD
         <!-- /.row -->
         <!-- Filter form -->
-        <div class="container">
-            <div class="card my-4 text-center">
-                <div class="card-body">
-                    <form>
-=======
-       <!-- /.row -->
-       <!-- Filter form -->
         <div id="startchange">
             <div class="p-5">
                 <div class="row">
                     <div class="col-8 text-center">
-                    <h1 class="display-6">Uso filtro de donantes.</h1>
-                    <p class="lead">Puede realizar el filtrado seleccionando todos los campos (provincia, direccion y tipo de sangre) o seleccionando la direccion (provincia y municipio) o seleccionando el tipo de sangre.</p>
-                        </div>
+                        <h1 class="display-6">Uso filtro de donantes.</h1>
+                        <p class="lead">Puede realizar el filtrado seleccionando todos los campos (provincia, direccion y tipo de sangre) o seleccionando la direccion (provincia y municipio) o seleccionando el tipo de sangre.</p>
+                    </div>
                 </div>
                 <div class="card my-4 text-center p-4">
                     <div class="card-body">
->>>>>>> Front-End
                         <div class="form-inline">
                             <div class="form-group">
                                 <asp:Label ID="ProvinciaLabel" runat="server" Text="Provincia: " AssociatedControlID="ProvinciaDropDown"></asp:Label>
@@ -66,49 +57,49 @@
                                 <asp:Button ID="SearchButton" runat="server" Text="Buscar" CssClass="btn btn-wine-color btn-lg" OnClick="SearchButton_Click" />
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
-            </div>
-            <!-- Content Row -->
-            <div id="UserListHasData" class="container">
-                <div class="row-fluid p-4">
-                    <div class="col-md-4" data-bind=" foreach: UsersList">
-                        <div class="card">
-                            <div class="card-img-top">
-                                <!-- <img class="img-fluid"  alt=""> -->
-                            </div>
-                            <div class="card-body">
-                                <h2 class="card-title h2" data-bind="text: Nombre"></h2>
-                                <h6 class="card-subtitle mb-2 text-muted">Tipo de sangre: <span class="text-muted" data-bind="text: TipoSangre"></span></h6>
-                                <div class="card-text">
-                                    <p class="h4">Dirección</p>
-                                    <ul class="list-unstyled">
-                                        <li><span class="text-muted h6">Provincia</span>: <span class="font-weight-bold" data-bind="text: Provincia"></span></li>
-                                        <li><span class="text-muted h6">Municipio</span>: <span class="font-weight-bold" data-bind="text: Municipio"></span></li>
-                                    </ul>
+                <!-- Content Row -->
+                <div id="UserListHasData" class="container">
+                    <div class="row-fluid p-4">
+                        <div class="col-md-4" data-bind=" foreach: UsersList">
+                            <div class="card">
+                                <div class="card-img-top">
+                                    <!-- <img class="img-fluid"  alt=""> -->
+                                </div>
+                                <div class="card-body">
+                                    <h2 class="card-title h2" data-bind="text: Nombre"></h2>
+                                    <h6 class="card-subtitle mb-2 text-muted">Tipo de sangre: <span class="text-muted" data-bind="text: TipoSangre"></span></h6>
+                                    <div class="card-text">
+                                        <p class="h4">Dirección</p>
+                                        <ul class="list-unstyled">
+                                            <li><span class="text-muted h6">Provincia</span>: <span class="font-weight-bold" data-bind="text: Provincia"></span></li>
+                                            <li><span class="text-muted h6">Municipio</span>: <span class="font-weight-bold" data-bind="text: Municipio"></span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-footer text-center">
+                                    <a href="#" class="btn btn-wine-color">Más información</a>
                                 </div>
                             </div>
-                            <div class="card-footer text-center">
-                                <a href="#" class="btn btn-wine-color">Más información</a>
-                            </div>
                         </div>
+                        <!-- /.col-md-4 -->
                     </div>
-                    <!-- /.col-md-4 -->
                 </div>
-            </div>
-            <div id="UserListHasNoData" class="bg-light mt-4 mb-4">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="container-fluid p-4 m-4">
-                            <div class="text-center">
-                                <span class="h3 text-muted">No hay resultados previos</span>
+                <div id="UserListHasNoData" class="bg-light mt-4 mb-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="container-fluid p-4 m-4">
+                                <div class="text-center">
+                                    <span class="h3 text-muted">No hay resultados previos</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- /.row -->
         </div>
-        <!-- /.row -->
     </div>
     <!-- /.container -->
     <script>
