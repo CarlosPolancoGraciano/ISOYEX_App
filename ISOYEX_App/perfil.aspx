@@ -35,7 +35,7 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <asp:Label ID="txtEmailLabel" runat="server" Text="Correo electrónico" AssociatedControlID="txtEmail"></asp:Label>
-                                <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" placeholder="Ingresar Correo Electrónico"></asp:TextBox>
+                                <asp:TextBox ID="txtEmail" runat="server" Enabled="false" CssClass="form-control" placeholder="Ingresar Correo Electrónico"></asp:TextBox>
                             </div>
                         </div>
                         <div class="row">
@@ -61,7 +61,7 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <asp:Label ID="ddlProvinciaLabel" runat="server" Text="Provincia"></asp:Label>
-                                <asp:DropDownList ID="ddlProvincia" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlProvincia_SelectedIndexChanged"></asp:DropDownList>
+                                <asp:DropDownList ID="ddlProvincia" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlProvincia_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
                             </div>
                             <div class="form-group col-md-6">
                                 <asp:Label ID="ddlMunicipioLabel" runat="server" Text="Municipio"></asp:Label>
@@ -69,9 +69,10 @@
                             </div>
                         </div>
                         <div class="text-center mt-2">
-                            <div class="btn-group" role="group">
-                                <asp:Button ID="btnResetToDefault" Text="Valores por default" CssClass="btn btn-warning" runat="server" />
-                                <asp:Button ID="btnSaveChanges" Text="Guardar cambios" CssClass="btn btn-wine-color" runat="server" OnClick="btnSaveChanges_Click" />
+                            <div class="" role="group">
+                                <asp:Button ID="btnModificar" Text="Modificar" CssClass="btn btn-warning" runat="server" OnClick="btnModificar_Click" />
+                                <asp:Button ID="btnSaveChanges"  Text="Guardar" Visible="false" CssClass="btn btn-success" runat="server"  OnClick="btnSaveChanges_Click" />
+                                <asp:Button ID="btnCancelar" Text="Cancelar" Visible="false" CssClass="btn btn-wine-color" runat="server" OnClick="btnCancelar_Click"/>
                             </div>
                         </div>
                     </div>

@@ -169,7 +169,7 @@
                 dataType: "json",
                 url: 'api/FilteredUsers',
                 success: function (data) {
-                    debugger;
+                    //debugger;
                     if (data.length == 0) {
                         $("#UserListHasData").hide();
                         $("#UserListHasNoData").show();
