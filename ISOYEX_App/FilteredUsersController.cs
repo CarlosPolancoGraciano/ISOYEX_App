@@ -12,13 +12,18 @@ namespace ISOYEX_App
 {
     public class FilteredUsersController : ApiController
     {
+        private static bool executeUsersHttpGet = false;
         private static List<Users> users = new List<Users>();
         
         public void formatUsers(DataTable filteredUsers)
         {
+            /*Clear user list*/
+            users.Clear();
+            executeUsersHttpGet = true;
             foreach (DataRow row in filteredUsers.Rows)
             {
                 Users currentUser = new Users();
+                
                 if (filteredUsers.Rows.Count > 0)
                 {
                     currentUser.UserId = Convert.ToInt32(row["Id_Usuario"].ToString());
@@ -44,8 +49,19 @@ namespace ISOYEX_App
         [HttpGet]
         public List<Users> Get()
         {
-            return users;
+            if (executeUsersHttpGet)
+            {
+                executeUsersHttpGet = false;
+                return users;
+            }
+            else
+            {
+                users.Clear();
+                return new List<Users>();
+            }
+            
         }
+
         /*
         // GET: api/FilteredUsers/5
         public string Get(int id)

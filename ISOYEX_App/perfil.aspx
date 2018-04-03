@@ -45,7 +45,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <asp:Label ID="txtConfContrasenaLabel" runat="server" Text="Repite Nueva Contraseña" AssociatedControlID="txtConfContrasena"></asp:Label>
-                                <asp:TextBox ID="txtConfContrasena" runat="server" CssClass="form-control" placeholder="Repite Nueva Contraseña"></asp:TextBox>
+                                <asp:TextBox ID="txtConfContrasena" runat="server" TextMode="Password" CssClass="form-control" placeholder="Repite Nueva Contraseña"></asp:TextBox>
                             </div>
                         </div>
                         <div class="row">

@@ -76,6 +76,8 @@ namespace ISOYEX_App
             ddlMunicipio.SelectedValue = tabla.Rows[0]["Id_Municipio"].ToString();
 
             ddlTipoSangre.SelectedValue = tabla.Rows[0]["Id_TipoSangre"].ToString();
+
+            Session["FechaNacimiento"] = tabla.Rows[0]["FechaNacimiento"].ToString();
         }
 
         public void EnableControls(bool Activos)
@@ -103,15 +105,26 @@ namespace ISOYEX_App
                 "@Imagen","",
                 "@Email",txtEmail.Text,
                 "@Contrasena",txtPassword.Text,
-                "@FechaNacimiento",helper.dateFormat(txtFechaNacimiento.Text,"yyyy-dd-MM"),
+                "@FechaNacimiento",Session["FechaNacimiento"].ToString(),
                 "@NumeroTelefonico",txtTelefono.Text,
                 "@Id_TipoContacto",ddlTipoContacto.SelectedValue,
                 "@Id_TipoSangre",ddlTipoSangre.SelectedValue,
                 "@Id_Provincia",ddlProvincia.SelectedValue,
                 "@Id_Municipio",ddlMunicipio.SelectedValue
                  };
-
-                ManejadorData.Exec_Stp("spUpdateDonanteReceptorData", 'M', parametros);
+                try
+                {
+                    ManejadorData.Exec_Stp("spUpdateDonanteReceptorData", 'm', parametros);
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "saveFiledsSweetAlert", "sweetAlert('Perfil actualizado', 'Cambios guardados exitosamente', 'success')", true);
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+            else
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "emptyFieldsSweetAlert", "sweetAlert('Campos faltantes', 'En el fomulario existen campos vacios', 'error')", true);
             }
         }
 

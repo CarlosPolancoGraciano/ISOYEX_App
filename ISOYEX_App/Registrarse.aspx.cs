@@ -144,8 +144,8 @@ namespace ISOYEX_App
                     {
                         ManejadorData.Exec_Stp("spRegistrarDonanteReceptor", 'm', parametros);
                         Session["ImageUpload"] = null;
-                        Response.Write("<script>alert('Registrado con exito');</script>");
-                        Response.Redirect("Default.aspx");
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "saveFiledsSweetAlert", "sweetAlert('Perfil actualizado', 'Cambios guardados exitosamente', 'success')", true);
+                        Response.Redirect("Login.aspx");
                     }
                     catch (Exception)
                     {
@@ -171,8 +171,8 @@ namespace ISOYEX_App
                     {
                         ManejadorData.Exec_Stp("spRegistrarInstitucion", 'm', parametros);
                         Session["ImageUpload"] = null;
-                        Response.Write("<script>alert('Registrado con exito');</script>");
-                        Response.Redirect("Default.aspx");
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "saveFiledsSweetAlert", "sweetAlert('Perfil actualizado', 'Cambios guardados exitosamente', 'success')", true);
+                        Response.Redirect("Login.aspx");
                     }
                     catch (Exception)
                     {
@@ -184,10 +184,7 @@ namespace ISOYEX_App
             }
             else
             {
-                //Response.Write("<script>alert('Campos faltantes')</script>");
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "emptyFieldsSweetAlert", "sweetAlert('Campos faltantes', 'En el fomulario existen campos vacios', 'error')", true);
-                //Response.Write("<script>sweetAlert('Campos faltantes', 'En el fomulario existen campos vacios', 'error');</script>");
-                //Response.Write("<script>swal({ title: 'Error al registrar', text: 'Existen campos vacios que son requeridos', type: 'error'}); </script>");
             }
         }
 

@@ -42,3 +42,7 @@ button .btn-wine-color:hover {
 .filter-custom {
     background-color: #c23616;
 }
+
+.pointer {
+    cursor: pointer;
+}

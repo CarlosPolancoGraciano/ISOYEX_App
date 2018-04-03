@@ -121,7 +121,7 @@ BEGIN
 		/*Blood Type*/
 		inner join TipoSangre as ts on ts.Id_TipoSangre = u.Id_TipoSangre
 		inner join AutenticacionUsuario as au on au.Id_AutenticacionUsuario = u.Id_AutenticacionUsuario
-		WHERE u.Id_TipoSangre = @Id_TipoSangre AND u.Id_Direccion = @Id_Direccion
+		WHERE u.Id_TipoSangre LIKE @Id_TipoSangre AND u.Id_Direccion LIKE @Id_Direccion
 
 END
 GO

@@ -30,29 +30,29 @@
         <!-- Filter form -->
         <div class="container">
             <div class="row">
-                <div class="card my-4 col-12 btn-wine-color">
-                    <div class="card-body text-center text-white">
+                <div class="card my-2 col-12 bg-light">
+                    <div class="card-body text-center">
                         <div class="form-inline">
-                            <div class="form-group ml-5">
+                            <div class="form-group ml-2">
                                 <asp:Label ID="ProvinciaLabel" runat="server" Text="Provincia: " AssociatedControlID="ProvinciaDropDown"></asp:Label>
-                                <div class="ml-2 mr-2">
+                                <div class="ml-2">
                                     <asp:DropDownList ID="ProvinciaDropDown" CssClass="form-control" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlProvincia_SelectedIndexChanged"></asp:DropDownList>
                                 </div>
                             </div>
-                            <div class="form-group ml-5">
+                            <div class="form-group ml-2">
                                 <asp:Label ID="MunicipioLabel" runat="server" Text="Municipio: " AssociatedControlID="MunicipioDropDown"></asp:Label>
-                                <div class="ml-2 mr-2">
+                                <div class="ml-2">
                                     <asp:DropDownList ID="MunicipioDropDown" CssClass="form-control" runat="server"></asp:DropDownList>
                                 </div>
                             </div>
-                            <div class="form-group ml-5">
+                            <div class="form-group ml-2">
                                 <asp:Label ID="TipoSangreLabel" runat="server" Text="Tipo de sangre: " AssociatedControlID="TipoSangreDropDown"></asp:Label>
-                                <div class="ml-2 mr-2">
+                                <div class="ml-2">
                                     <asp:DropDownList ID="TipoSangreDropDown" CssClass="form-control" runat="server"></asp:DropDownList>
                                 </div>
                             </div>
-                            <div class="ml-5">
-                                <asp:Button ID="SearchButton" runat="server" Text="Buscar" CssClass="btn btn-light btn-lg" OnClick="SearchButton_Click" />
+                            <div class="ml-4">
+                                <asp:Button ID="SearchButton" runat="server" Text="Buscar" CssClass="btn btn-wine-color btn-lg" OnClick="SearchButton_Click" />
                             </div>
                         </div>
                     </div>
@@ -60,9 +60,12 @@
             </div>
             <!-- Content Row -->
             <div id="UserListHasData">
+                <div class="text-center">
+                    <span class="text-muted h4">Resultado de busqueda de filtrado</span>
+                </div>
                 <div class="row p-4">
                     <!-- ko foreach: paginated -->
-                    <div class="col-md-4">
+                    <div class="col-md-4 mt-2">
                         <div class="card">
                             <div class="card-img-top">
                                 <img class="img-fluid" data-bind="attr: { src: $data.ImagenURL, alt: $data.Nombre }">
@@ -79,7 +82,7 @@
                                 </div>
                             </div>
                             <div class="card-footer text-center">
-                                <a href="#" class="btn btn-wine-color">Más información</a>
+                                <a class="btn btn-wine-color text-white" data-bind="click: function(){  $root.checkProfileInformation }">Más información</a>
                             </div>
                         </div>
                     </div>
@@ -102,7 +105,7 @@
                     <div class="col-12">
                         <div class="p-4 m-4">
                             <div class="text-center">
-                                <span class="h3 text-muted">No hay resultados previos</span>
+                                <span class="h3 text-muted">No hay resultados encontrados</span>
                             </div>
                         </div>
                     </div>
@@ -163,6 +166,11 @@
                 $("#nextButton").removeClass('disabled');
             }
             */
+
+            self.checkProfileInformation = function(userId){
+                console.log(userId);
+                debugger;
+            }
 
             self.GetUsers = function (){
               $.ajax({
