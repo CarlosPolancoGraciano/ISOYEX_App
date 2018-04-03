@@ -90,7 +90,7 @@
                                 </div>
                             </div>
                             <div class="card-footer text-center">
-                                <a class="btn btn-wine-color text-white" data-bind="click: function () { $root.checkProfileInformation }">Más información</a>
+                                <a class="btn btn-wine-color text-white" data-bind="click: function (data) { $root.checkProfileInformation($data.UserId(), data) }">Más información</a>
                             </div>
                         </div>
                     </div>
@@ -176,16 +176,14 @@
             */
 
             self.checkProfileInformation = function(userId){
-                console.log(userId);
-                debugger;
+                window.location.href = `/PerfilFiltrado.aspx?id=${userId}`;
             }
 
             self.GetUsers = function (){
               $.ajax({
                 dataType: "json",
                 url: 'api/FilteredUsers',
-                success: function (data) {
-                    //debugger;
+                  success: function (data) {
                     if (data.length == 0) {
                         $("#UserListHasData").hide();
                         $("#UserListHasNoData").show();
