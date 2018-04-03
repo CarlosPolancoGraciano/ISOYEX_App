@@ -14,22 +14,10 @@ namespace ISOYEX_App
     {
         Helper helper = new Helper();
         DataTable tabla = new DataTable();
-        Users user = null;
         protected void Page_Load(object sender, EventArgs e)
        {
             if (!IsPostBack)
             {
-                if(user == null)
-                {
-                    /*Obtaining User Id*/
-                    string idUsuario = Session["Id_Usuario"].ToString();
-                    /*Obtaining User Data*/
-                    string[] userParametros = { "@Id_Usuario", idUsuario };
-                    tabla = ManejadorData.Exec_Stp("spUsuarioData", 's', userParametros);
-                    user = UsuarioData(tabla);
-                    InsertPersistUserData(user);
-                }
-
                 /*Loading Blood Type*/
                 string[] parametros = { };
                 tabla = ManejadorData.Exec_Stp("spCargarTipoSangre", 's', parametros);
@@ -42,13 +30,12 @@ namespace ISOYEX_App
                 /*Loading Provincia Data*/
                 tabla = ManejadorData.Exec_Stp("spCargarProvincias", 'S', parametros);
                 helper.LLenaDrop(ddlProvincia, tabla, "Provincia", "Id_Provincia");
-
-                //Custom method
-                FillInputWithUserData(user);
+                
+                cargarDatos();
+                EnableControls(false);
             }
-            PersistUserData();
         }
-        /*Update user data*/
+
         protected void ddlProvincia_SelectedIndexChanged(object sender, EventArgs e)
         {
             DropDownList drop = (DropDownList)sender;
@@ -61,79 +48,77 @@ namespace ISOYEX_App
             }
         }
 
+        public void cargarDatos()
+        {
+            string idUsuario = Session["Id_Usuario"].ToString();
+            string[] userParametros = { "@Id_Usuario", idUsuario };
+            tabla = ManejadorData.Exec_Stp("spUsuarioData", 's', userParametros);
+
+            txtNombre.Text = tabla.Rows[0]["Nombre"].ToString();
+            txtApellido.Text = tabla.Rows[0]["Apellido"].ToString();
+            txtFechaNacimiento.Text = tabla.Rows[0]["FechaNacimiento"].ToString();
+            ddlTipoSangre.SelectedValue = tabla.Rows[0]["FechaNacimiento"].ToString();
+            txtEmail.Text = tabla.Rows[0]["Email"].ToString();
+            ddlTipoContacto.SelectedValue = tabla.Rows[0]["Id_TipoContacto"].ToString();
+            txtTelefono.Text = tabla.Rows[0]["Numero"].ToString();
+            ddlProvincia.SelectedValue = tabla.Rows[0]["Id_Provincia"].ToString();
+
+            string[] parametros = { "@idProvincia", tabla.Rows[0]["Id_Provincia"].ToString() };
+            DataTable tablita = ManejadorData.Exec_Stp("spCargarMunicipio", 'S', parametros);
+            helper.LLenaDrop(ddlMunicipio, tablita, "Municipio", "Id_Municipio");
+
+            ddlMunicipio.SelectedValue = tabla.Rows[0]["Id_Municipio"].ToString();
+
+            ddlTipoSangre.SelectedValue = tabla.Rows[0]["Id_TipoSangre"].ToString();
+        }
+
+        public void EnableControls(bool Activos)
+        {
+            txtNombre.Enabled = Activos;
+            txtApellido.Enabled = Activos;
+            txtFechaNacimiento.Enabled = Activos;
+            ddlTipoSangre.Enabled = Activos;
+            ddlTipoContacto.Enabled = Activos;
+            txtTelefono.Enabled = Activos;
+            ddlProvincia.Enabled = Activos;
+            ddlMunicipio.Enabled = Activos;
+            ddlTipoSangre.Enabled = Activos;
+            txtConfContrasena.Enabled = Activos;
+            txtPassword.Enabled = Activos;
+        }
         protected void btnSaveChanges_Click(object sender, EventArgs e)
         {
+            string[] parametros = {
+                "@Id_Usuario",Session["Id_Usuario"].ToString(),
+                "@Nombre",txtNombre.Text,
+                "@Apellido",txtApellido.Text,
+                "@Imagen","",
+                "@Email",txtEmail.Text,
+                "@Contrasena",txtPassword.Text,
+                "@FechaNacimiento",helper.dateFormat(txtFechaNacimiento.Text,"yyyy-dd-MM"),
+                "@NumeroTelefonico",txtTelefono.Text,
+                "@Id_TipoContacto",ddlTipoContacto.SelectedValue,
+                "@Id_TipoSangre",ddlTipoSangre.SelectedValue,
+                "@Id_Provincia",ddlProvincia.SelectedValue,
+                "@Id_Municipio",ddlMunicipio.SelectedValue
+            };
 
+            ManejadorData.Exec_Stp("spUpdateDonanteReceptorData",'M', parametros);
         }
 
-        /*Load user data*/
-        private Users UsuarioData(DataTable userData)
-        { 
-            Users user = new Users();
-            foreach (DataRow row in userData.Rows)
-            {
-                user.UserId = Convert.ToInt32(row["Id_Usuario"].ToString());
-                user.Nombre = row["Nombre"].ToString();
-                user.Apellido = row["Apellido"].ToString();
-                user.ImagenURL = row["Imagen"].ToString();
-                user.Email = row["Email"].ToString();
-                user.FechaNacimiento = row.Field<DateTime>("FechaNacimiento");
-                user.NumeroTelefonico = row["Numero"].ToString();
-                user.TipoContactoId = Convert.ToInt32(row["Id_TipoContacto"].ToString());
-                user.TipoContacto = row["Tipo"].ToString();
-                user.ProvinciaId = Convert.ToInt32(row["Id_Provincia"].ToString());
-                user.Provincia = row["Provincia"].ToString();
-                user.MunicipioId = Convert.ToInt32(row["Id_Municipio"].ToString());
-                user.Municipio = row["Municipio"].ToString();
-                user.TipoSangreId = Convert.ToInt32(row["Id_TipoSangre"].ToString());
-                user.TipoSangre = row["TipoSangre"].ToString();
-            }
-            return user;
-        }
-
-        private void PersistUserData()
+        protected void btnModificar_Click(object sender, EventArgs e)
         {
-            /*Retrieve and Save Current User Data to Session*/
-            /*If postback was made, persist the currentUser*/
-            if (Session["currentUser"] != null && (user == null))
-            {
-                user = (Users)Session["currentUser"];
 
-            }
+            EnableControls(true);
+            btnCancelar.Visible = true;
+            btnSaveChanges.Visible = true;
+            btnModificar.Visible = false;
+
         }
 
-        private void InsertPersistUserData(Users user)
+        protected void btnCancelar_Click(object sender, EventArgs e)
         {
-            /*Insert Current User Data to Session*/
-            /*The first time the user data get's retrieve from DB*/
-            if (Session["currentUser"] == null && user != null)
-            {
-                Session["currentUser"] = user;
-
-            }
-        }
-
-        private void FillInputWithUserData(Users user)
-        {
-            txtNombre.Text = user.Nombre;
-            txtApellido.Text = user.Apellido;
-            txtFechaNacimiento.Text = user.FechaNacimiento.ToString("dd-MM-yyyy");
-            ddlTipoSangre.Text = user.TipoSangre;
-            txtEmail.Text = user.Email;
-            ddlTipoContacto.Text = user.TipoContacto;
-            txtTelefono.Text = user.NumeroTelefonico;
-            ddlProvincia.Text = user.Provincia;
-            if (user.ProvinciaId.ToString() != "")
-            {
-                string[] parametros = { "@idProvincia", user.ProvinciaId.ToString() };
-                tabla = ManejadorData.Exec_Stp("spCargarMunicipio", 'S', parametros);
-                helper.LLenaDrop(ddlMunicipio, tabla, "Municipio", "Id_Municipio");
-                ddlMunicipio.Text = user.Municipio;
-            }
-            else
-            {
-                ddlMunicipio.Items.Clear();
-            }
+            Response.Redirect("Perfil.aspx");
         }
     }
 }
