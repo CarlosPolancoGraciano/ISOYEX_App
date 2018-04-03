@@ -124,3 +124,31 @@ BEGIN
 		WHERE u.Id_TipoSangre = @Id_TipoSangre AND u.Id_Direccion = @Id_Direccion
 
 END
+GO
+--PROCEDURE TO VALIDATE EMAIL
+ALTER procedure spValidateEmail(
+@Email nvarchar(100)
+)as
+Declare @emailExist int
+BEGIN
+IF EXISTS (SELECT *  FROM AutenticacionUsuario as u where  @Email = u.Email) BEGIN
+Set @emailExist = 1
+ END
+ Else BEGIN
+ Set @emailExist = 0
+ END
+END
+Go
+--PROCEDURE TO VALIDATE RNC
+Create procedure spValidateRNC(
+@Rnc nvarchar(100)
+)as
+Declare @rncExist int
+BEGIN
+IF EXISTS (SELECT *  FROM Usuario as u where u.RNC = @Rnc) BEGIN
+Set @rncExist = 1
+ END
+ Else BEGIN
+ Set @rncExist = 0
+ END
+END
