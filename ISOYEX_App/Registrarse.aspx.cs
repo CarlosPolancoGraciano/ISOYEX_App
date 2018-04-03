@@ -120,16 +120,14 @@ namespace ISOYEX_App
 
 
         protected void btnRegistrarse_Click(object sender, EventArgs e)
-        { if (ValidarVacio() == null)
+        {
+            if (ValidarControles())
             {
-
-                if (ValidarControles())
+                if (hdnOpcion.Value == "ind")
                 {
-                    if (hdnOpcion.Value == "ind")
+                    String url = SaveImage(this.ImageUpload);
+                    string[] parametros =
                     {
-                        String url = SaveImage(this.ImageUpload);
-                        string[] parametros =
-                        {
                         "@Nombre",txtNombre.Text,
                         "@Apellido",txtApellido.Text,
                         "@Imagen", url,
@@ -141,8 +139,7 @@ namespace ISOYEX_App
                         "@Id_TipoContacto",ddlTipoContacto.SelectedValue,
                         "@Id_Provincia",ddlProvincia.SelectedValue,
                         "@Id_Municipio",ddlMunicipio.SelectedValue
-                    };
-<<<<<<< HEAD
+                        };
                     try
                     {
                         ManejadorData.Exec_Stp("spRegistrarDonanteReceptor", 'm', parametros);
@@ -152,26 +149,14 @@ namespace ISOYEX_App
                     }
                     catch (Exception)
                     {
-=======
-                        try
-                        {
-                            ManejadorData.Exec_Stp("spRegistrarDonanteReceptor", 'm', parametros);
-                            Response.Write("<script>alert('Registrado con exito');</script>");
-                            Response.Redirect("Default.aspx");
-                        }
-                        catch (Exception)
-                        {
->>>>>>> 78707c85e6884aafd9e53f0bd4660a129e76efd2
-
-                            throw;
-                        }
-
+                        throw;
                     }
-                    else if (hdnOpcion.Value == "ins")
+                }
+                else if (hdnOpcion.Value == "ins")
+                {
+                    String url = SaveImage(this.ImageUpload);
+                    string[] parametros =
                     {
-                        String url = SaveImage(this.ImageUpload);
-                        string[] parametros =
-                         {
                         "@RNC",txtRNC.Text,
                         "@Nombre",txtNombre.Text,
                         "@Imagen", url,
@@ -181,8 +166,7 @@ namespace ISOYEX_App
                         "@Id_TipoContacto",ddlTipoContacto.SelectedValue,
                         "@Id_Provincia",ddlProvincia.SelectedValue,
                         "@Id_Municipio",ddlMunicipio.SelectedValue
-                    };
-<<<<<<< HEAD
+                        };
                     try
                     {
                         ManejadorData.Exec_Stp("spRegistrarInstitucion", 'm', parametros);
@@ -193,25 +177,17 @@ namespace ISOYEX_App
                     catch (Exception)
                     {
                         throw;
-                        
-=======
-                        try
-                        {
-                            ManejadorData.Exec_Stp("spRegistrarInstitucion", 'm', parametros);
-                            Response.Write("<script>alert('Registrado con exito');</script>");
-                            Response.Redirect("Default.aspx");
-                        }
-                        catch (Exception)
-                        {
-                            throw;
-
-                        }
-
->>>>>>> 78707c85e6884aafd9e53f0bd4660a129e76efd2
                     }
 
                 }
 
+            }
+            else
+            {
+                //Response.Write("<script>alert('Campos faltantes')</script>");
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "emptyFieldsSweetAlert", "sweetAlert('Campos faltantes', 'En el fomulario existen campos vacios', 'error')", true);
+                //Response.Write("<script>sweetAlert('Campos faltantes', 'En el fomulario existen campos vacios', 'error');</script>");
+                //Response.Write("<script>swal({ title: 'Error al registrar', text: 'Existen campos vacios que son requeridos', type: 'error'}); </script>");
             }
         }
 
@@ -225,7 +201,7 @@ namespace ISOYEX_App
                 {
                     if (imageUpload.PostedFile.ContentType == "image/jpeg" || imageUpload.PostedFile.ContentType == "image/png"
                        || imageUpload.PostedFile.ContentType == "image/webp" || imageUpload.PostedFile.ContentType == "image/bmp"
-                       || imageUpload.PostedFile.ContentType == "image/gif")
+                       || imageUpload.PostedFile.ContentType == "image/gif" || imageUpload.PostedFile.ContentType == "image/jpg")
                     {
                         string fileName = Path.GetFileName(imageUpload.FileName);
                         FolderSaveurl = Server.MapPath("Images/") + txtEmail.Text + "-" + fileName;

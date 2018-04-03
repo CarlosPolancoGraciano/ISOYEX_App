@@ -14,7 +14,6 @@ namespace ISOYEX_App
     {
         private static List<Users> users = new List<Users>();
         
-
         public void formatUsers(DataTable filteredUsers)
         {
             foreach (DataRow row in filteredUsers.Rows)

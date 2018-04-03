@@ -29,33 +29,33 @@
         <!-- /.row -->
         <!-- Filter form -->
         <div class="container">
-            <div class="card my-4 text-center">
-                <div class="card-body">
-                    <form>
+            <div class="row">
+                <div class="card my-4 col-12 btn-wine-color">
+                    <div class="card-body text-center text-white">
                         <div class="form-inline">
-                            <div class="form-group">
+                            <div class="form-group ml-5">
                                 <asp:Label ID="ProvinciaLabel" runat="server" Text="Provincia: " AssociatedControlID="ProvinciaDropDown"></asp:Label>
-                                <div class="ml-4">
+                                <div class="ml-2 mr-2">
                                     <asp:DropDownList ID="ProvinciaDropDown" CssClass="form-control" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlProvincia_SelectedIndexChanged"></asp:DropDownList>
                                 </div>
                             </div>
-                            <div class="form-group ml-4">
+                            <div class="form-group ml-5">
                                 <asp:Label ID="MunicipioLabel" runat="server" Text="Municipio: " AssociatedControlID="MunicipioDropDown"></asp:Label>
-                                <div class="ml-4">
+                                <div class="ml-2 mr-2">
                                     <asp:DropDownList ID="MunicipioDropDown" CssClass="form-control" runat="server"></asp:DropDownList>
                                 </div>
                             </div>
-                            <div class="form-group ml-4">
+                            <div class="form-group ml-5">
                                 <asp:Label ID="TipoSangreLabel" runat="server" Text="Tipo de sangre: " AssociatedControlID="TipoSangreDropDown"></asp:Label>
-                                <div class="ml-4">
+                                <div class="ml-2 mr-2">
                                     <asp:DropDownList ID="TipoSangreDropDown" CssClass="form-control" runat="server"></asp:DropDownList>
                                 </div>
                             </div>
-                            <div class="ml-4">
-                                <asp:Button ID="SearchButton" runat="server" Text="Buscar" CssClass="btn btn-wine-color btn-lg" OnClick="SearchButton_Click" />
+                            <div class="ml-5">
+                                <asp:Button ID="SearchButton" runat="server" Text="Buscar" CssClass="btn btn-light btn-lg" OnClick="SearchButton_Click" />
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
             <!-- Content Row -->
@@ -88,9 +88,9 @@
                 <div class="mt-4">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination pagination-lg justify-content-center">
-                            <li class="page-item"><a class="page-link" data-bind="click: previous">&laquo;</a></li>
-                            <li class="page-item"><a class="page-link active" data-bind="text: $root.pageNumber"></a></li>
-                            <li class="page-item"><a class="page-link" data-bind="click: next">&raquo;</a></li>
+                            <li id="previousButton" class="page-item"><a class="page-link text-primary" data-bind="click: previous">&laquo;</a></li>
+                            <li class="page-item"><a class="page-link text-primary active" data-bind="text: $root.pageNumber"></a></li>
+                            <li id="nextButton" class="page-item"><a class="page-link text-primary" data-bind="click: next">&raquo;</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -150,6 +150,19 @@
 		        }
             }
             /* END PAGINATOR */
+            /*
+            if (self.pageNumber() > 0) {
+                $("#previousButton").removeClass('disabled');
+            } else {
+                $("#previousButton").addClass('disabled');
+            }
+
+            if (sel.pageNumber() == self.totalPages()) {
+                $("#nextButton").addClass('disabled');
+            } else {
+                $("#nextButton").removeClass('disabled');
+            }
+            */
 
             self.GetUsers = function (){
               $.ajax({
