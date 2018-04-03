@@ -11,21 +11,21 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <asp:Label ID="txtNombreLabel" runat="server" Text="Nombre" AssociatedControlID="txtNombre"></asp:Label>
-                                <asp:TextBox ID="txtNombre" placeholder="Ingresar Nombre" CssClass="form-control" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="txtNombre"  Enabled="false" placeholder="Ingresar Nombre" CssClass="form-control" runat="server"></asp:TextBox>
                             </div>
                             <div class="form-group col-md-6 ">
                                 <asp:Label ID="txtApellidoLabel" runat="server" Text="Apellido" AssociatedControlID="txtApellido"></asp:Label>
-                                <asp:TextBox ID="txtApellido" placeholder="Ingresar Apellido" CssClass="form-control" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="txtApellido"  Enabled="false" placeholder="Ingresar Apellido" CssClass="form-control" runat="server"></asp:TextBox>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <asp:Label ID="txtFechaNacimientoLabel" runat="server" Text="Fecha de Nacimiento" AssociatedControlID="txtFechaNacimiento"></asp:Label>
-                                <asp:TextBox ID="txtFechaNacimiento" placeholder="Ingresar fecha de nacimiento" CssClass="form-control" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="txtFechaNacimiento"  Enabled="false" placeholder="Ingresar fecha de nacimiento" CssClass="form-control" runat="server"></asp:TextBox>
                             </div>
                             <div class="form-group col-md-6">
                                 <asp:Label ID="ddlTipoSangreLabel" runat="server" Text="Tipo de Sangre" AssociatedControlID="ddlTipoSangre"></asp:Label>
-                                <asp:DropDownList ID="ddlTipoSangre" CssClass="form-control" runat="server"></asp:DropDownList>
+                                <asp:DropDownList ID="ddlTipoSangre"  Enabled="false" CssClass="form-control" runat="server"></asp:DropDownList>
                             </div>
                         </div>
                         <hr />

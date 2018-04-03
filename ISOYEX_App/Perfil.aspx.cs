@@ -15,15 +15,16 @@ namespace ISOYEX_App
         Helper helper = new Helper();
         DataTable tabla = new DataTable();
         protected void Page_Load(object sender, EventArgs e)
-       {
+        {
             if (!IsPostBack)
             {
 
-                if(Session["Id_Usuario"] == null){
+                if (Session["Id_Usuario"] == null)
+                {
 
                     Response.Redirect("Login.aspx");
                 }
-                
+
                 string[] parametros = { };
                 tabla = ManejadorData.Exec_Stp("spCargarTipoSangre", 's', parametros);
                 helper.LLenaDrop(ddlTipoSangre, tabla, "TipoSangre", "Id_TipoSangre");
@@ -35,7 +36,7 @@ namespace ISOYEX_App
                 /*Loading Provincia Data*/
                 tabla = ManejadorData.Exec_Stp("spCargarProvincias", 'S', parametros);
                 helper.LLenaDrop(ddlProvincia, tabla, "Provincia", "Id_Provincia");
-                
+
                 cargarDatos();
                 EnableControls(false);
             }
@@ -61,7 +62,7 @@ namespace ISOYEX_App
 
             txtNombre.Text = tabla.Rows[0]["Nombre"].ToString();
             txtApellido.Text = tabla.Rows[0]["Apellido"].ToString();
-            txtFechaNacimiento.Text = tabla.Rows[0]["FechaNacimiento"].ToString();
+            txtFechaNacimiento.Text = helper.dateFormat(tabla.Rows[0]["FechaNacimiento"].ToString(), "dd-MM-yyyy");
             ddlTipoSangre.SelectedValue = tabla.Rows[0]["FechaNacimiento"].ToString();
             txtEmail.Text = tabla.Rows[0]["Email"].ToString();
             ddlTipoContacto.SelectedValue = tabla.Rows[0]["Id_TipoContacto"].ToString();
@@ -79,21 +80,23 @@ namespace ISOYEX_App
 
         public void EnableControls(bool Activos)
         {
-            txtNombre.Enabled = Activos;
-            txtApellido.Enabled = Activos;
-            txtFechaNacimiento.Enabled = Activos;
-            ddlTipoSangre.Enabled = Activos;
+            //txtNombre.Enabled = Activos;
+            //txtApellido.Enabled = Activos;
+            //txtFechaNacimiento.Enabled = Activos;
+            //ddlTipoSangre.Enabled = Activos;
             ddlTipoContacto.Enabled = Activos;
             txtTelefono.Enabled = Activos;
             ddlProvincia.Enabled = Activos;
             ddlMunicipio.Enabled = Activos;
-            ddlTipoSangre.Enabled = Activos;
+            //ddlTipoSangre.Enabled = Activos;
             txtConfContrasena.Enabled = Activos;
             txtPassword.Enabled = Activos;
         }
         protected void btnSaveChanges_Click(object sender, EventArgs e)
         {
-            string[] parametros = {
+            if (!validarControls())
+            {
+                string[] parametros = {
                 "@Id_Usuario",Session["Id_Usuario"].ToString(),
                 "@Nombre",txtNombre.Text,
                 "@Apellido",txtApellido.Text,
@@ -106,9 +109,38 @@ namespace ISOYEX_App
                 "@Id_TipoSangre",ddlTipoSangre.SelectedValue,
                 "@Id_Provincia",ddlProvincia.SelectedValue,
                 "@Id_Municipio",ddlMunicipio.SelectedValue
-            };
+                 };
 
-            ManejadorData.Exec_Stp("spUpdateDonanteReceptorData",'M', parametros);
+                ManejadorData.Exec_Stp("spUpdateDonanteReceptorData", 'M', parametros);
+            }
+        }
+
+        public bool validarControls()
+        {
+            if (helper.validarVacio(txtNombre))
+                return true;
+            else if (helper.validarVacio(txtApellido))
+                return true;
+            else if (helper.validarVacio(txtFechaNacimiento))
+                return true;
+            else if (helper.validarNoSeleccionado(ddlTipoSangre))
+                return true;
+            else if (helper.validarVacio(txtEmail))
+                return true;
+            else if (helper.validarVacio(txtPassword))
+                return true;
+            else if (helper.validarVacio(txtConfContrasena) || txtConfContrasena.Text != txtPassword.Text)
+                return true;
+            else if (helper.validarNoSeleccionado(ddlTipoContacto))
+                return true;
+            else if (helper.validarVacio(txtTelefono))
+                return true;
+            else if (helper.validarNoSeleccionado(ddlProvincia))
+                return true;
+            else if (helper.validarNoSeleccionado(ddlMunicipio))
+                return true;
+
+            return false;
         }
 
         protected void btnModificar_Click(object sender, EventArgs e)
