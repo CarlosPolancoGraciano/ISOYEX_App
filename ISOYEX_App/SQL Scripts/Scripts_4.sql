@@ -121,6 +121,41 @@ BEGIN
 		/*Blood Type*/
 		inner join TipoSangre as ts on ts.Id_TipoSangre = u.Id_TipoSangre
 		inner join AutenticacionUsuario as au on au.Id_AutenticacionUsuario = u.Id_AutenticacionUsuario
-		WHERE u.Id_TipoSangre = @Id_TipoSangre AND u.Id_Direccion = @Id_Direccion
+		WHERE u.Id_TipoSangre LIKE @Id_TipoSangre AND u.Id_Direccion LIKE @Id_Direccion
 
+END
+GO
+--PROCEDURE TO VALIDATE EMAIL
+CREATE PROCEDURE spValidateEmail(
+@Email nvarchar(100)
+)AS
+BEGIN
+	DECLARE @emailExist int
+	 IF EXISTS (SELECT *  FROM AutenticacionUsuario as u where  @Email = u.Email) 
+	 BEGIN
+		Set @emailExist = 1
+		SELECT @emailExist
+	 END
+	 Else 
+	 BEGIN
+		Set @emailExist = 0
+		SELECT @emailExist
+	 END
+END
+GO
+--PROCEDURE TO VALIDATE RNC
+CREATE PROCEDURE spValidateRNC(
+@Rnc nvarchar(100)
+)AS
+BEGIN
+	DECLARE @rncExist int
+	IF EXISTS (SELECT *  FROM Usuario as u where u.RNC = @Rnc) BEGIN
+		Set @rncExist = 1
+		SELECT @rncExist
+	END
+	Else 
+	BEGIN
+		Set @rncExist = 0
+		SELECT @rncExist
+	END
 END

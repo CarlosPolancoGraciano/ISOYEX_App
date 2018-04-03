@@ -14,7 +14,6 @@ namespace ISOYEX_App
     {
         Helper helper = new Helper();
         DataTable filteredUsers = new DataTable();
-        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -31,9 +30,9 @@ namespace ISOYEX_App
         {
             DropDownList provinciaDrop = (DropDownList)sender;
             string[] parametros = { "@idProvincia", provinciaDrop.SelectedValue.ToString() };
-            DataTable table = ManejadorData.Exec_Stp("spCargarMunicipio", 's', parametros);
             if(provinciaDrop.SelectedValue.ToString() != "")
             {
+                DataTable table = ManejadorData.Exec_Stp("spCargarMunicipio", 's', parametros);
                 helper.LLenaDrop(MunicipioDropDown, table, "Municipio", "Id_Municipio");
             }
             else
