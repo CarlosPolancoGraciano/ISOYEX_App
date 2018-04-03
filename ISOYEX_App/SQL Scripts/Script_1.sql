@@ -63,7 +63,7 @@ Id_Usuario int identity(1,1) PRIMARY KEY,
 RNC nvarchar(20),
 Nombre nvarchar(100) not null,
 Apellido nvarchar(100),
-Imagen varbinary(max),
+Imagen nvarchar(100),
 FechaNacimiento datetime,
 Id_AutenticacionUsuario int,
 Id_TipoSangre int,
@@ -276,7 +276,7 @@ go
 ALTER TABLE Usuario
 ADD FechaNacimiento date
 
-/*Run this code*/
+/*Delete all info related to users in website*/
 TRUNCATE TABLE Publicacion
 ALTER TABLE Publicacion
 DROP CONSTRAINT fk_PublicacionUsuario
@@ -308,6 +308,8 @@ TRUNCATE TABLE ContactoTipoContacto
 ALTER TABLE ContactoTipoContacto
 ADD CONSTRAINT fk_ContactoTipoContactoContacto
 FOREIGN KEY (Id_Contacto) REFERENCES Contacto(Id_Contacto);
+
+/*Change user field*/
 ALTER TABLE Usuario
 DROP CONSTRAINT fk_UsuarioTipoSangre
 TRUNCATE TABLE TipoSangre

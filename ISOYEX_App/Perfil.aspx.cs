@@ -18,7 +18,12 @@ namespace ISOYEX_App
        {
             if (!IsPostBack)
             {
-                /*Loading Blood Type*/
+
+                if(Session["Id_Usuario"] == null){
+
+                    Response.Redirect("Login.aspx");
+                }
+                
                 string[] parametros = { };
                 tabla = ManejadorData.Exec_Stp("spCargarTipoSangre", 's', parametros);
                 helper.LLenaDrop(ddlTipoSangre, tabla, "TipoSangre", "Id_TipoSangre");
