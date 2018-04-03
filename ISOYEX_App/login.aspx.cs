@@ -33,5 +33,10 @@ namespace ISOYEX_App
                     pnlError.Visible = true;
             }
         }
+
+        protected void RegistrarmeBtn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Registrarse.aspx");
+        }
     }
 }
