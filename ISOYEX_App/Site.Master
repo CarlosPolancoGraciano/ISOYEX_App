@@ -57,9 +57,6 @@
                             <a runat="server" class="nav-link red-text" href="~/About">About</a>
                         </li>
                         <li class="nav-item">
-                            <a runat="server" class="nav-link red-text" href="~/Contact">Contact</a>
-                        </li>
-                        <li class="nav-item">
                             <a runat="server" class="nav-link red-text" href="Login.aspx">Login</a>
                         </li>
                         <li class="nav-item">
