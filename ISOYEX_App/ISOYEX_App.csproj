@@ -171,6 +171,7 @@
     </Content>
     <Content Include="Login.aspx" />
     <Content Include="PerfilFiltrado.aspx" />
+    <Content Include="Publicaciones.aspx" />
     <Content Include="Registrarse.aspx" />
     <Content Include="Perfil.aspx" />
     <Content Include="Publicacion.aspx" />
@@ -291,6 +292,13 @@
       <DependentUpon>PerfilFiltrado.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Publicaciones.aspx.cs">
+      <DependentUpon>Publicaciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Publicaciones.aspx.designer.cs">
+      <DependentUpon>Publicaciones.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Registrarse.aspx.cs">
       <DependentUpon>Registrarse.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

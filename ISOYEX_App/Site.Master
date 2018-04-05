@@ -56,6 +56,10 @@
                         <li class="nav-item">
                             <a runat="server" class="nav-link red-text" href="~/About">About</a>
                         </li>
+                         <li class="nav-item">
+                            <a runat="server" class="nav-link red-text" href="~/Perfil">Perfil</a>
+                        </li>
+                        
                         <!--
                         <li class="nav-item">
                             <a runat="server" id="itemNologin" class="nav-link red-text" href="Registrarse.aspx">Registrarme</a>
@@ -63,6 +67,9 @@
                         -->
                         <li class="nav-item">
                             <a runat="server" id="itemNologin2" class="nav-link red-text" href="Login.aspx">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a runat="server" class="nav-link red-text" href="~/Publicaciones">Publicaciones</a>
                         </li>
                         <li class="nav-item dropdown" id="itemLogin" runat="server" style="cursor:pointer;">
                             <asp:Label class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" runat="server" Text=""></asp:Label>
