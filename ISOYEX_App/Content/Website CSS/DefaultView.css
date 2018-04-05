@@ -1,8 +1,8 @@
 ﻿/* HERO SECTION - DEFAULT.ASPX */
 .hero-section {
     /*background-color: #0a3d62;*/
-    background: url("https://images.pexels.com/photos/748780/pexels-photo-748780.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260") no-repeat center center fixed;
-    filter: brightness(75%);
+    background: url("https://viviendosanos.com/wp-content/uploads/2017/08/donacion-de-sangre-istock.jpg") no-repeat center center fixed;
+    filter: brightness(50%);
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;

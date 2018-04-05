@@ -73,6 +73,7 @@
                 </div>
                 <div class="row p-4">
                     <!-- ko foreach: paginated -->
+
                     <div class="col-md-4 mt-2">
                         <div class="card">
                             <div class="card-img-top">
@@ -176,7 +177,7 @@
             */
 
             self.checkProfileInformation = function(userId){
-                window.location.href = `/PerfilFiltrado.aspx?id=${userId}`;
+                window.location.href = `/PerfilFiltrado.aspx?q=${userId}`;
             }
 
             self.GetUsers = function (){

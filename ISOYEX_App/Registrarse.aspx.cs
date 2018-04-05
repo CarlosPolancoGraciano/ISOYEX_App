@@ -125,66 +125,94 @@ namespace ISOYEX_App
             {
                 if (hdnOpcion.Value == "ind")
                 {
-                    String url = SaveImage(this.ImageUpload);
-                    string[] parametros =
+                    if (validateEmailExistence())
                     {
-                        "@Nombre",txtNombre.Text,
-                        "@Apellido",txtApellido.Text,
-                        "@Imagen", url,
-                        "@Email",txtEmail.Text,
-                        "@Contrasena",txtContrasena.Text,
-                        "@FechaNacimiento",helper.dateFormat(txtFechaNacimiento.Text,"yyyy-dd-MM"),
-                        "@Id_TipoSangre",ddlTipoSangre.SelectedValue,
-                        "@NumeroTelefonico",txtTelefono.Text,
-                        "@Id_TipoContacto",ddlTipoContacto.SelectedValue,
-                        "@Id_Provincia",ddlProvincia.SelectedValue,
-                        "@Id_Municipio",ddlMunicipio.SelectedValue
-                        };
-                    try
-                    {
-                        ManejadorData.Exec_Stp("spRegistrarDonanteReceptor", 'm', parametros);
-                        Session["ImageUpload"] = null;
-                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "saveFiledsSweetAlert", "sweetAlert('Perfil actualizado', 'Cambios guardados exitosamente', 'success')", true);
-                        Response.Redirect("Login.aspx");
+                        String url = SaveImage(this.ImageUpload);
+                        if (url != "Imagen grande")
+                        {
+                            string[] parametros =
+                            {
+                            "@Nombre",txtNombre.Text,
+                            "@Apellido",txtApellido.Text,
+                            "@Imagen", url,
+                            "@Email",txtEmail.Text,
+                            "@Contrasena",txtContrasena.Text,
+                            "@FechaNacimiento",helper.dateFormat(txtFechaNacimiento.Text,"yyyy-dd-MM"),
+                            "@Id_TipoSangre",ddlTipoSangre.SelectedValue,
+                            "@NumeroTelefonico",txtTelefono.Text,
+                            "@Id_TipoContacto",ddlTipoContacto.SelectedValue,
+                            "@Id_Provincia",ddlProvincia.SelectedValue,
+                            "@Id_Municipio",ddlMunicipio.SelectedValue
+                            };
+                            try
+                            {
+                                ManejadorData.Exec_Stp("spRegistrarDonanteReceptor", 'm', parametros);
+                                // Validacion que eliminar imagen de session luego de registrar
+                                Session["ImageUpload"] = null;
+                                ScriptManager.RegisterStartupScript(this, this.GetType(), "saveFiledsSweetAlert", "swal('Registro hecho', 'Bienvenido, tu registro fue hecho exitosamente', 'success')", true);
+                                Response.Redirect("Login.aspx");
+                            }
+                            catch (Exception)
+                            {
+                                throw;
+                            }
+                        }
+                        else
+                        {
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), "imageTooBig", "swal('Error con imagen', 'La imagen es muy grande (debe ser igual o menor de 6 MB)', 'error')", true);
+                        }
                     }
-                    catch (Exception)
+                    else
                     {
-                        throw;
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "emailAlreadyInUse", "swal('Error: Email ya existe', 'El correo electronico o email que fue ingresado está siendo utilizado por otro usuario', 'error')", true);
                     }
                 }
                 else if (hdnOpcion.Value == "ins")
                 {
-                    String url = SaveImage(this.ImageUpload);
-                    string[] parametros =
+                    if (validateRNCExistence())
                     {
-                        "@RNC",txtRNC.Text,
-                        "@Nombre",txtNombre.Text,
-                        "@Imagen", url,
-                        "@Email",txtEmail.Text,
-                        "@Contrasena",txtContrasena.Text,
-                        "@NumeroTelefonico",txtTelefono.Text,
-                        "@Id_TipoContacto",ddlTipoContacto.SelectedValue,
-                        "@Id_Provincia",ddlProvincia.SelectedValue,
-                        "@Id_Municipio",ddlMunicipio.SelectedValue
-                        };
-                    try
-                    {
-                        ManejadorData.Exec_Stp("spRegistrarInstitucion", 'm', parametros);
-                        Session["ImageUpload"] = null;
-                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "saveFiledsSweetAlert", "sweetAlert('Perfil actualizado', 'Cambios guardados exitosamente', 'success')", true);
-                        Response.Redirect("Login.aspx");
+                        String url = SaveImage(this.ImageUpload);
+                        if (url != "Imagen grande")
+                        {
+                            string[] parametros =
+                            {
+                            "@RNC",txtRNC.Text,
+                            "@Nombre",txtNombre.Text,
+                            "@Imagen", url,
+                            "@Email",txtEmail.Text,
+                            "@Contrasena",txtContrasena.Text,
+                            "@NumeroTelefonico",txtTelefono.Text,
+                            "@Id_TipoContacto",ddlTipoContacto.SelectedValue,
+                            "@Id_Provincia",ddlProvincia.SelectedValue,
+                            "@Id_Municipio",ddlMunicipio.SelectedValue
+                            };
+                            try
+                            {
+                                ManejadorData.Exec_Stp("spRegistrarInstitucion", 'm', parametros);
+                                // Validacion que eliminar imagen de session luego de registrar
+                                Session["ImageUpload"] = null;
+                                ScriptManager.RegisterStartupScript(this, this.GetType(), "saveFiledsSweetAlert", "swal('Registro hecho', 'Bienvenido, tu registro fue hecho exitosamente', 'success')", true);
+                                Response.Redirect("Login.aspx");
+                            }
+                            catch (Exception)
+                            {
+                                throw;
+                            }
+                        }
+                        else
+                        {
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), "imageTooBig", "swal('Error con imagen','La imagen es muy grande (debe ser igual o menor de 6 MB)', 'error')", true);
+                        }
                     }
-                    catch (Exception)
+                    else
                     {
-                        throw;
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "rncAlreadyInUse", "swal('Error: RNC ya existe', 'El RNC que fue ingresado está siendo utilizado por otro usuario', 'error')", true);
                     }
-
                 }
-
             }
             else
             {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "emptyFieldsSweetAlert", "sweetAlert('Campos faltantes', 'En el fomulario existen campos vacios', 'error')", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "emptyFieldsSweetAlert", "swal('Campos faltantes', 'En el fomulario existen campos vacios','error')", true);
             }
         }
 
@@ -194,28 +222,58 @@ namespace ISOYEX_App
             String DBUrl = string.Empty;
             if (imageUpload.HasFile)
             {
-                try
+                // Byte limit size: 6 MB
+                if (Convert.ToInt32(imageUpload.FileBytes) >= 6291456)
                 {
-                    if (imageUpload.PostedFile.ContentType == "image/jpeg" || imageUpload.PostedFile.ContentType == "image/png"
-                       || imageUpload.PostedFile.ContentType == "image/webp" || imageUpload.PostedFile.ContentType == "image/bmp"
-                       || imageUpload.PostedFile.ContentType == "image/gif" || imageUpload.PostedFile.ContentType == "image/jpg")
+                    try
                     {
-                        string fileName = Path.GetFileName(imageUpload.FileName);
-                        FolderSaveurl = Server.MapPath("Images/") + txtEmail.Text + "-" + fileName;
-                        DBUrl = "../Images/" + txtEmail.Text + "-" + fileName;
-                        imageUpload.SaveAs(FolderSaveurl);
+                        if (imageUpload.PostedFile.ContentType == "image/jpeg" || imageUpload.PostedFile.ContentType == "image/png"
+                           || imageUpload.PostedFile.ContentType == "image/webp" || imageUpload.PostedFile.ContentType == "image/bmp"
+                           || imageUpload.PostedFile.ContentType == "image/gif" || imageUpload.PostedFile.ContentType == "image/jpg")
+                        {
+                            string fileName = Path.GetFileName(imageUpload.FileName);
+                            FolderSaveurl = Server.MapPath("Images/") + txtEmail.Text + "-" + fileName;
+                            DBUrl = "../Images/" + txtEmail.Text + "-" + fileName;
+                            imageUpload.SaveAs(FolderSaveurl);
+                        }
+                        else
+                        {
+                            return DBUrl;
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        return DBUrl;
+                        throw ex;
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    throw ex;
+                    return "Imagen grande";
                 }
             }
             return DBUrl;
+        }
+
+        private bool validateEmailExistence()
+        {
+            string[] emailValidation = { "@Email", txtEmail.Text };
+            DataTable respuestaValidacion = ManejadorData.Exec_Stp("spValidateEmail", 's', emailValidation);
+            if (Convert.ToInt32(respuestaValidacion.Rows[0].ItemArray[0]) != 0)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool validateRNCExistence()
+        {
+            string[] rncValidation = { "@@Rnc", txtRNC.Text };
+            DataTable respuestaValidacion = ManejadorData.Exec_Stp("spValidateRNC", 's', rncValidation);
+            if (Convert.ToInt32(respuestaValidacion.Rows[0].ItemArray[0]) != 0)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

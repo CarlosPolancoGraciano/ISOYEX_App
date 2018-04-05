@@ -30,7 +30,14 @@ namespace ISOYEX_App
                     Response.Redirect("Default.aspx");
                 }
                 else
-                    pnlError.Visible = true;
+                {
+                    //pnlError.Visible = true;
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "unvalidLogin", "swal('Acceso invalido', 'Tu usuario o contraseña es incorrecto', 'error')", true);
+                }
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "emptyFieldsLogin", "swal('Acceso invalido', 'Los campos para iniciar sesión están vacios', 'error')", true);
             }
         }
 

@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <asp:Label ID="labeltelefono" runat="server" Text="Numero Telefonico"></asp:Label>
-                                    <asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control" placeholder="Ingresar Numero Telefonico"></asp:TextBox>
+                                    <asp:TextBox ID="txtTelefono" runat="server" MaxLength="10" CssClass="form-control" placeholder="Ingresar Numero Telefonico"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="row">

@@ -115,7 +115,7 @@ namespace ISOYEX_App
                 try
                 {
                     ManejadorData.Exec_Stp("spUpdateDonanteReceptorData", 'm', parametros);
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "saveFiledsSweetAlert", "sweetAlert('Perfil actualizado', 'Cambios guardados exitosamente', 'success')", true);
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "saveFiledsSweetAlert", "swal('Perfil actualizado', 'Cambios guardados exitosamente', 'success')", true);
                 }
                 catch (Exception)
                 {
@@ -124,7 +124,7 @@ namespace ISOYEX_App
             }
             else
             {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "emptyFieldsSweetAlert", "sweetAlert('Campos faltantes', 'En el fomulario existen campos vacios', 'error')", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "emptyFieldsSweetAlert", "swal('Campos faltantes', 'En el fomulario existen campos requeridos que se encuentran vacios', 'error')", true);
             }
         }
 

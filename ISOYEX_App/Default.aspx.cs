@@ -67,7 +67,6 @@ namespace ISOYEX_App
                 {
                     filteredUsers = ManejadorData.Exec_Stp("spFiltradoPorDireccion", 's', parametros);
                     ajaxFilteredUseres.formatUsers(filteredUsers);
-                    //Response.Write("<script>alert('Funcionando')</script>");
                 }
                 catch (Exception ex)
                 {
@@ -85,7 +84,6 @@ namespace ISOYEX_App
                 {
                     filteredUsers = ManejadorData.Exec_Stp("spFiltradoPorSangre", 's', parametros);
                     ajaxFilteredUseres.formatUsers(filteredUsers);
-                    //Response.Write("<script>alert('Funcionando')</script>");
                 }
                 catch (Exception ex)
                 {
@@ -106,12 +104,17 @@ namespace ISOYEX_App
                 {
                     filteredUsers = ManejadorData.Exec_Stp("spFiltradoPorDireccionYSangre", 's', parametros);
                     ajaxFilteredUseres.formatUsers(filteredUsers);
-                    //Response.Write("<script>alert('Funcionando')</script>");
                 }
                 catch(Exception ex)
                 {
                     throw ex;
                 }
+            }
+            else if (indexProvincia == string.Empty &&
+                    indexMunicipio == string.Empty &&
+                    indexTipoSangre == string.Empty)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "unvalidFilteredAction", "swal('Busqueda invalida', 'Debes seleccionar un tipo de sangre o dirección o ambos a la vez para poder filtrar', 'error')", true);
             }
         }
     }

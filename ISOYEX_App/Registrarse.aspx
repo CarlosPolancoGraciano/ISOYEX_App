@@ -1,8 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Registrarse.aspx.cs" Inherits="ISOYEX_App.Registrarse" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentHeader" runat="server">
-    <script src="Scripts/sweetalert.js"></script>
-    <script src="Scripts/sweetalert.min.js"></script>
-    <link href="Content/sweetalert.css" rel="stylesheet" type="text/css"/>
     <script>
         $(document).ready(function () {
 
@@ -38,19 +35,6 @@
                     $(".VisiInst").show();
                 }
             });
-            
-            /* NOT USED
-            if ($("#hdnOpcion").val() == 'ind') {
-                $(".AllControl").show();
-                $(".form-group").show();
-                $(".VisiInst").hide();
-            }
-            else if ($("#hdnOpcion").val() == 'ins') {
-                $(".AllControl").show();
-                $(".form-group").show();
-                $(".VisiIndi").hide();
-            }
-            */
             
             function ResetControls() {
                 $(".txt").val("");
@@ -102,7 +86,7 @@
                             <div class="form-group col-md-6">
                                 <div class="VisiInst">
                                     <asp:Label ID="txtRNCLabel" runat="server" Text="RNC*" AssociatedControlID="txtRNC"></asp:Label>
-                                    <asp:TextBox ID="txtRNC" onKeyPress="return soloNumeros(event)" class="form-control txt" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtRNC" onKeyPress="return soloNumeros(event)" class="form-control txt" MaxLength="11" runat="server"></asp:TextBox>
                                     <asp:Label ID="txtRNCError" runat="server" CssClass="text-danger" Text="" AssociatedControlID="txtRNC"></asp:Label>
                                 </div>
                                 <div class="VisiIndi">
@@ -146,7 +130,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <asp:Label ID="txtTelefonoLabel" runat="server" Text="No. Telefono*" AssociatedControlID="txtTelefono"></asp:Label>
-                                <asp:TextBox ID="txtTelefono" TextMode="Phone" onKeyPress="return soloNumeros(event)" CssClass="form-control txt" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="txtTelefono" TextMode="Phone" MaxLength="10" onKeyPress="return soloNumeros(event)" CssClass="form-control txt" runat="server"></asp:TextBox>
                                 <asp:Label ID="txtTelefonoError" runat="server" CssClass="text-danger" Text="" AssociatedControlID="txtTelefono"></asp:Label>
                             </div>
                         </div>
@@ -179,7 +163,7 @@
                         </div>
                         <div class="text-center mx-auto">
                             <asp:Button ID="btnRegistrarse" CssClass="btn btn-wine-color AllControl" runat="server" Text="Registrarme" OnClick="btnRegistrarse_Click" />
-                            <asp:HiddenField ID="hdnOpcion" ClientIDMode="Static" Value="ind" runat="server" />
+                            <asp:HiddenField ID="hdnOpcion" ClientIDMode="Static" runat="server" />
                         </div>
                     </div>
                 </div>

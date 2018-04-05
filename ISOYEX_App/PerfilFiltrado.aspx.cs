@@ -15,7 +15,11 @@ namespace ISOYEX_App
         {
             if (!IsPostBack)
             {
-                if (Session["Id_Usuario"] == null && Request.QueryString["id"] == null)
+                if (Request.QueryString["q"] == null)
+                {
+                    Response.Redirect("Default.aspx");
+                }
+                if (Session["Id_Usuario"] == null)
                 {
                     Response.Redirect("Login.aspx");
                 }
@@ -25,7 +29,7 @@ namespace ISOYEX_App
 
         public void cargarDatos()
         {
-            String sFilteredUserId = Request.QueryString["id"];
+            String sFilteredUserId = Request.QueryString["q"];
             string[] userParametros = { "@Id_Usuario", sFilteredUserId };
             DataTable tabla = new DataTable();
             tabla = ManejadorData.Exec_Stp("spUsuarioData", 's', userParametros);
