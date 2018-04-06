@@ -33,10 +33,18 @@ button .btn-wine-color:hover {
     color: #FFF;
 }
 
+a .btn-wine-color:hover {
+    color: #FFF;
+}
+
 .btn-wine-color {
     color: #FFF;
     background-color: #b71540;
     border-color: #b71540;
+}
+
+.text-wine-red {
+    color: #b71540 !important;
 }
 
 .filter-custom {

@@ -97,12 +97,25 @@ REFERENCES AutenticacionUsuario(Id_AutenticacionUsuario)
 )
 go
 CREATE TABLE Publicacion(
-IdPublicacion int identity(1,1) PRIMARY KEY,
+Id_Publicacion int identity(1,1) PRIMARY KEY,
+Titulo nvarchar(150) not null,
+Imagen nvarchar(100) not null,
 Contenido text not null,
 Fecha datetime not null,
 Id_Usuario int,
 CONSTRAINT fk_PublicacionUsuario FOREIGN KEY(Id_Usuario)
 REFERENCES Usuario(Id_Usuario)
+)
+go
+CREATE TABLE Comentario(
+Id_Comentario int identity(1,1) PRIMARY KEY,
+Contenido text not null,
+Id_Usuario int not null,
+Id_Publicacion int not null
+CONSTRAINT fk_ComentarioUsuario FOREIGN KEY(Id_Usuario)
+REFERENCES Usuario(Id_Usuario),
+CONSTRAINT fk_ComentarioPublicacion FOREIGN KEY(Id_Publicacion)
+REFERENCES Publicacion(Id_Publicacion)
 )
 go
 INSERT INTO Rol VALUES ('Donante')
@@ -263,18 +276,20 @@ INSERT INTO Municipio VALUES ('Bayahibe', 1), ('Boca de Yuma', 1), ('Higuey', 1)
 ('Jicome', 32),('La Caya', 32),('Laguna Salada', 32),
 ('Maizal', 32),('Mao', 32),('Paradero', 32)
 
-/*Modificación para tabla de Usuario*/
+/*Modificación para tabla de Usuario
 ALTER TABLE Usuario
 DROP COLUMN Imagen
 ALTER TABLE Usuario
 ADD Imagen nvarchar(100)
+*/
 
-/* Modificación para datetime a date en campo de FechaNacimiento*/
+/* Modificación para datetime a date en campo de FechaNacimiento
 ALTER TABLE Usuario
 DROP COLUMN FechaNacimiento
 go
 ALTER TABLE Usuario
 ADD FechaNacimiento date
+*/
 
 /*Delete all info related to users in website*/
 TRUNCATE TABLE Publicacion
@@ -309,7 +324,7 @@ ALTER TABLE ContactoTipoContacto
 ADD CONSTRAINT fk_ContactoTipoContactoContacto
 FOREIGN KEY (Id_Contacto) REFERENCES Contacto(Id_Contacto);
 
-/*Change user field*/
+/*Change user field
 ALTER TABLE Usuario
 DROP CONSTRAINT fk_UsuarioTipoSangre
 TRUNCATE TABLE TipoSangre
@@ -320,3 +335,4 @@ ADD TipoSangre varchar(15) not null
 ALTER TABLE Usuario
 ADD CONSTRAINT fk_UsuarioTipoSangre 
 FOREIGN KEY (Id_TipoSangre) REFERENCES TipoSangre(Id_TipoSangre)
+*/

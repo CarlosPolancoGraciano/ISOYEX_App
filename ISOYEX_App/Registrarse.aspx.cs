@@ -149,8 +149,7 @@ namespace ISOYEX_App
                                 ManejadorData.Exec_Stp("spRegistrarDonanteReceptor", 'm', parametros);
                                 // Validacion que eliminar imagen de session luego de registrar
                                 Session["ImageUpload"] = null;
-                                ScriptManager.RegisterStartupScript(this, this.GetType(), "saveFiledsSweetAlert", "swal('Registro hecho', 'Bienvenido, tu registro fue hecho exitosamente', 'success')", true);
-                                Response.Redirect("Login.aspx");
+                                ScriptManager.RegisterStartupScript(this, this.GetType(), "saveFiledsSweetAlert", "swal('Registro hecho', 'Bienvenido, tu registro fue hecho exitosamente', 'success').then((value) => { window.location.href = '/Login.aspx'; })", true);
                             }
                             catch (Exception)
                             {
@@ -191,8 +190,7 @@ namespace ISOYEX_App
                                 ManejadorData.Exec_Stp("spRegistrarInstitucion", 'm', parametros);
                                 // Validacion que eliminar imagen de session luego de registrar
                                 Session["ImageUpload"] = null;
-                                ScriptManager.RegisterStartupScript(this, this.GetType(), "saveFiledsSweetAlert", "swal('Registro hecho', 'Bienvenido, tu registro fue hecho exitosamente', 'success')", true);
-                                Response.Redirect("Login.aspx");
+                                ScriptManager.RegisterStartupScript(this, this.GetType(), "saveFiledsSweetAlert", "swal('Registro exitoso', 'Bienvenido, tu registro fue hecho exitosamente', 'success').then((value) => { window.location.href = '/Login.aspx'; })", true);
                             }
                             catch (Exception)
                             {
@@ -223,7 +221,7 @@ namespace ISOYEX_App
             if (imageUpload.HasFile)
             {
                 // Byte limit size: 6 MB
-                if (Convert.ToInt32(imageUpload.FileBytes) >= 6291456)
+                if (BitConverter.ToInt32(imageUpload.FileBytes, 0) <= 6291456)
                 {
                     try
                     {

@@ -25,11 +25,13 @@
         <!-- /.row -->
         <!-- Filter form -->
         <div id="startchange">
-            <div class="p-5">
+            <div class="p-3">
                 <div class="row">
                     <div class="col-2"></div>
-                    <div class="col-8 text-center p-3">
-                        <h1 class="display-6">Uso filtro de donantes.</h1>
+                    <div class="col-8 text-justify p-2">
+                        <div class="text-center">
+                            <h1 class="display-6">Uso filtro de donantes.</h1>
+                        </div>
                         <p class="lead">Puede realizar el filtrado seleccionando todos los campos (provincia, direccion y tipo de sangre) o seleccionando la direccion (provincia y municipio) o seleccionando el tipo de sangre.</p>
                     </div>
                     <div class="col-2"></div>
@@ -73,12 +75,9 @@
                 </div>
                 <div class="row p-4">
                     <!-- ko foreach: paginated -->
-
                     <div class="col-md-4 mt-2">
                         <div class="card">
-                            <div class="card-img-top">
-                                <img class="img-fluid" data-bind="attr: { src: $data.ImagenURL, alt: $data.Nombre }">
-                            </div>
+                            <img class="img-fluid card-img-top" data-bind="attr: { src: $data.ImagenURL, alt: $data.Nombre }">
                             <div class="card-body">
                                 <h2 class="card-title h2" data-bind="text: $data.Nombre"></h2>
                                 <h6 class="card-subtitle mb-2 text-muted">Tipo de sangre: <span class="text-muted" data-bind="text: $data.TipoSangre"></span></h6>
@@ -100,9 +99,9 @@
                 <div class="mt-4">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination pagination-lg justify-content-center">
-                            <li id="previousButton" class="page-item"><a class="page-link text-primary" data-bind="click: previous">&laquo;</a></li>
-                            <li class="page-item"><a class="page-link text-primary active" data-bind="text: $root.pageNumber"></a></li>
-                            <li id="nextButton" class="page-item"><a class="page-link text-primary" data-bind="click: next">&raquo;</a></li>
+                            <li id="previousButton" class="page-item"><a class="page-link text-danger" data-bind="click: previous">&laquo;</a></li>
+                            <li class="page-item"><a class="page-link text-danger" data-bind="text: $root.pageNumber"></a></li>
+                            <li id="nextButton" class="page-item"><a class="page-link text-danger" data-bind="click: next">&raquo;</a></li>
                         </ul>
                     </nav>
                 </div>
