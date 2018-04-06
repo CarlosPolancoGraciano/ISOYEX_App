@@ -291,7 +291,7 @@ ALTER TABLE Usuario
 ADD FechaNacimiento date
 */
 
-/*Delete all info related to users in website*/
+/*Delete all info related to users in website
 TRUNCATE TABLE Publicacion
 ALTER TABLE Publicacion
 DROP CONSTRAINT fk_PublicacionUsuario
@@ -323,6 +323,17 @@ TRUNCATE TABLE ContactoTipoContacto
 ALTER TABLE ContactoTipoContacto
 ADD CONSTRAINT fk_ContactoTipoContactoContacto
 FOREIGN KEY (Id_Contacto) REFERENCES Contacto(Id_Contacto);
+*/
+
+/*Delete all information related to "Publicaciones" y "Comentarios"
+TRUNCATE TABLE Comentario
+ALTER TABLE Comentario
+DROP CONSTRAINT fk_ComentarioPublicacion
+TRUNCATE TABLE Publicacion
+ALTER TABLE Comentario
+ADD CONSTRAINT fk_ComentarioPublicacion FOREIGN KEY(Id_Publicacion)
+REFERENCES Publicacion(Id_Publicacion)
+*/
 
 /*Change user field
 ALTER TABLE Usuario
