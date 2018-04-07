@@ -152,6 +152,43 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Froala CSS\froala_editor.pkgd.css" />
+    <Content Include="Content\Froala CSS\froala_style.min.css" />
+    <Content Include="Scripts\FroalaEditor\Plugins\align.min.js" />
+    <Content Include="Scripts\FroalaEditor\Plugins\char_counter.min.js" />
+    <Content Include="Scripts\FroalaEditor\Plugins\code_beautifier.min.js" />
+    <Content Include="Scripts\FroalaEditor\Plugins\code_view.min.js" />
+    <Content Include="Scripts\FroalaEditor\Plugins\colors.min.js" />
+    <Content Include="Scripts\FroalaEditor\Plugins\draggable.min.js" />
+    <Content Include="Scripts\FroalaEditor\Plugins\emoticons.min.js" />
+    <Content Include="Scripts\FroalaEditor\Plugins\entities.min.js" />
+    <Content Include="Scripts\FroalaEditor\Plugins\file.min.js" />
+    <Content Include="Scripts\FroalaEditor\Plugins\font_family.min.js" />
+    <Content Include="Scripts\FroalaEditor\Plugins\font_size.min.js" />
+    <Content Include="Scripts\FroalaEditor\Plugins\forms.min.js" />
+    <Content Include="Scripts\FroalaEditor\Plugins\fullscreen.min.js" />
+    <Content Include="Scripts\FroalaEditor\Plugins\help.min.js" />
+    <Content Include="Scripts\FroalaEditor\Plugins\image.min.js" />
+    <Content Include="Scripts\FroalaEditor\Plugins\image_manager.min.js" />
+    <Content Include="Scripts\FroalaEditor\Plugins\inline_style.min.js" />
+    <Content Include="Scripts\FroalaEditor\Plugins\line_breaker.min.js" />
+    <Content Include="Scripts\FroalaEditor\Plugins\link.min.js" />
+    <Content Include="Scripts\FroalaEditor\Plugins\lists.min.js" />
+    <Content Include="Scripts\FroalaEditor\Plugins\paragraph_format.min.js" />
+    <Content Include="Scripts\FroalaEditor\Plugins\paragraph_style.min.js" />
+    <Content Include="Scripts\FroalaEditor\Plugins\print.min.js" />
+    <Content Include="Scripts\FroalaEditor\Plugins\quick_insert.min.js" />
+    <Content Include="Scripts\FroalaEditor\Plugins\quote.min.js" />
+    <Content Include="Scripts\FroalaEditor\Plugins\save.min.js" />
+    <Content Include="Scripts\FroalaEditor\Plugins\special_characters.min.js" />
+    <Content Include="Scripts\FroalaEditor\Plugins\table.min.js" />
+    <Content Include="Scripts\FroalaEditor\Plugins\url.min.js" />
+    <Content Include="Scripts\FroalaEditor\Plugins\video.min.js" />
+    <Content Include="Scripts\FroalaEditor\Plugins\word_paste.min.js" />
+    <Content Include="Content\Froala CSS\Theme\dark.min.css" />
+    <Content Include="Content\Froala CSS\Theme\gray.min.css" />
+    <Content Include="Content\Froala CSS\Theme\red.min.css" />
+    <Content Include="Content\Froala CSS\Theme\royal.min.css" />
     <Content Include="Content\Imagenes\About.jpg" />
     <Content Include="Content\Imagenes\About2.jpg" />
     <Content Include="Content\Imagenes\Avatar2_Login.png" />
@@ -170,8 +207,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Login.aspx" />
+    <Content Include="Scripts\FroalaEditor\froala_editor.min.js" />
+    <Content Include="Scripts\FroalaEditor\froala_editor.pkgd.min.js" />
     <Content Include="PerfilFiltrado.aspx" />
-    <Content Include="Publicaciones.aspx" />
+    <Content Include="CrearPublicacion.aspx" />
     <Content Include="Registrarse.aspx" />
     <Content Include="Perfil.aspx" />
     <Content Include="Publicacion.aspx" />
@@ -292,12 +331,12 @@
       <DependentUpon>PerfilFiltrado.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Publicaciones.aspx.cs">
-      <DependentUpon>Publicaciones.aspx</DependentUpon>
+    <Compile Include="CrearPublicacion.aspx.cs">
+      <DependentUpon>CrearPublicacion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Publicaciones.aspx.designer.cs">
-      <DependentUpon>Publicaciones.aspx</DependentUpon>
+    <Compile Include="CrearPublicacion.aspx.designer.cs">
+      <DependentUpon>CrearPublicacion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Registrarse.aspx.cs">
       <DependentUpon>Registrarse.aspx</DependentUpon>

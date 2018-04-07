@@ -7,8 +7,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%: Page.Title %></title>
+    <!-- JS Scripts -->
     <script src="Scripts/jquery-3.0.0.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- JS Scripts -->
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
@@ -18,6 +20,15 @@
      <asp:ContentPlaceHolder ID="ContentHeader" runat="server">
             </asp:ContentPlaceHolder>
     <link href="Content/Website CSS/WebsiteCSS.css" rel="stylesheet" type="text/css"/>
+    <!-- Froala Editor Style -->
+    <link href="Content/Froala CSS/Theme/red.min.css" type="text/css" rel="stylesheet" />
+    <link href="Content/Froala CSS/Theme/gray.min.css" rel="stylesheet" type="text/css" />
+    <link href="Content/Froala CSS/Theme/dark.min.css" rel="stylesheet" type="text/css" />
+    <link href="Content/Froala CSS/Theme/royal.min.css" rel="stylesheet" type="text/css" />
+    <link href="Content/Froala CSS/froala_editor.pkgd.css" rel="stylesheet" type="text/css"/>
+    <link href="Content/Froala CSS/froala_style.min.css" rel="stylesheet" type="text/css"/>
+    <!-- Font Awesome 4 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <form runat="server">
@@ -56,10 +67,6 @@
                         <li class="nav-item">
                             <a runat="server" class="nav-link red-text" href="~/About">About</a>
                         </li>
-                         <li class="nav-item">
-                            <a runat="server" class="nav-link red-text" href="~/Perfil">Perfil</a>
-                        </li>
-                        
                         <!--
                         <li class="nav-item">
                             <a runat="server" id="itemNologin" class="nav-link red-text" href="Registrarse.aspx">Registrarme</a>
@@ -67,9 +74,6 @@
                         -->
                         <li class="nav-item">
                             <a runat="server" id="itemNologin2" class="nav-link red-text" href="Login.aspx">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a runat="server" class="nav-link red-text" href="~/Publicaciones">Publicaciones</a>
                         </li>
                         <li class="nav-item dropdown" id="itemLogin" runat="server" style="cursor:pointer;">
                             <asp:Label class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" runat="server" Text=""></asp:Label>
