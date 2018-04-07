@@ -99,10 +99,12 @@ go
 CREATE TABLE Publicacion(
 Id_Publicacion int identity(1,1) PRIMARY KEY,
 Titulo nvarchar(150) not null,
-Imagen nvarchar(100) not null,
 Contenido text not null,
 Fecha datetime not null,
+Id_TipoSangre int,
 Id_Usuario int,
+CONSTRAINT fk_PublicacionTipoSangre FOREIGN KEY(Id_TipoSangre)
+REFERENCES TipoSangre(Id_TipoSangre),
 CONSTRAINT fk_PublicacionUsuario FOREIGN KEY(Id_Usuario)
 REFERENCES Usuario(Id_Usuario)
 )
@@ -115,6 +117,17 @@ Id_Publicacion int not null
 CONSTRAINT fk_ComentarioUsuario FOREIGN KEY(Id_Usuario)
 REFERENCES Usuario(Id_Usuario),
 CONSTRAINT fk_ComentarioPublicacion FOREIGN KEY(Id_Publicacion)
+REFERENCES Publicacion(Id_Publicacion)
+)
+go
+CREATE TABLE Notificacion(
+Id_Notificacion int identity(1,1) PRIMARY KEY,
+Contenido text not null,
+Id_Usuario int not null,
+Id_Publicacion int not null,
+CONSTRAINT fk_NotificacionUsuario FOREIGN KEY(Id_Usuario)
+REFERENCES Usuario(Id_Usuario),
+CONSTRAINT fk_NotificacionPublicacion FOREIGN KEY(Id_Publicacion)
 REFERENCES Publicacion(Id_Publicacion)
 )
 go

@@ -4,19 +4,19 @@ go
 CREATE PROCEDURE spCrearPublicacion
 (
 	@Titulo nvarchar(150),
-	@Imagen nvarchar(100),
+	@Id_TipoSangre int,
 	@Contenido text,
 	@Fecha datetime,
 	@Id_Usuario int
 )as
 BEGIN
 	INSERT INTO Publicacion 
-		(Titulo, Imagen, Contenido, Fecha, Id_Usuario) 
+		(Titulo, Contenido, Fecha, Id_TipoSangre, Id_Usuario) 
 	VALUES
-		(@Titulo, @Imagen, @Contenido, @Fecha, @Id_Usuario)
+		(@Titulo, @Contenido, @Fecha, @Id_TipoSangre, @Id_Usuario)
 END
-/* Prueba de crearPublicaciones
-EXEC spCrearPublicacion 'Busqueda de sangre tipo A+', '../Somewhere', '<b>El hospital necesita sangre urgente</b>', '2018-04-05 23:39:21', 1
+/*Prueba de crearPublicaciones
+EXEC spCrearPublicacion 'Busqueda de sangre tipo A+', 1, '<b>El hospital necesita sangre urgente</b>', '2018-04-05 23:39:21', 1
 SELECT * FROM Publicacion
 */
 go
@@ -24,13 +24,13 @@ CREATE PROCEDURE spModificarPublicacion
 (
 	@Id_Publicacion int,
 	@Titulo nvarchar(150),
-	@Imagen nvarchar(100),
+	@Id_TipoSangre int,
 	@Contenido text,
 	@Fecha datetime
 )as
 BEGIN
 	UPDATE [dbo].[Publicacion]
-	SET Titulo = @Titulo, Imagen = @Imagen, Contenido = @Contenido, Fecha = @Fecha
+	SET Titulo = @Titulo, Id_TipoSangre = @Id_TipoSangre, Contenido = @Contenido, Fecha = @Fecha
 	FROM Publicacion
 	WHERE Id_Publicacion = @Id_Publicacion
 END
@@ -44,7 +44,11 @@ CREATE PROCEDURE spRetornarPublicaciones
 as
 BEGIN
 	/*Retuns newer to old publication*/
-	SELECT * FROM Publicacion
+	SELECT p.Titulo, p.Contenido, p.Fecha,
+		   u.Nombre, ts.TipoSangre
+	FROM Publicacion as p
+	inner join TipoSangre as ts on ts.Id_TipoSangre = p.Id_TipoSangre
+	inner join Usuario as u on u.Id_Usuario = p.Id_Usuario
 	ORDER BY Id_Publicacion DESC
 END
 go
@@ -58,11 +62,12 @@ CREATE PROCEDURE spEliminarPublicacion
 	@Id_Publicacion int
 )as
 BEGIN
+	DELETE FROM Comentario WHERE Id_Publicacion = @Id_Publicacion
 	DELETE FROM Publicacion WHERE Id_Publicacion = @Id_Publicacion
 END
 go
-/* Prueba eliminar publicacion
-EXEC spEliminarPublicacion 4
+/*Prueba eliminar publicacion
+EXEC spEliminarPublicacion 1
 SELECT * FROM Publicacion
 */
 /*Comentarios de publicaciones*/
@@ -81,7 +86,7 @@ BEGIN
 END
 go
  /*Prueba de crearComentario
-EXEC spCrearComentario 'Yo deseo ayudar, contacteme', 2, 3
+EXEC spCrearComentario 'Yo deseo ayudar, contacteme', 2, 1
 SELECT * FROM Comentario
 */
 go
@@ -147,3 +152,21 @@ Prueba de spEliminarComentariosPublicacion
 EXEC spEliminarComentariosPublicacion 3
 SELECT * FROM Comentario
 */
+go
+/*Create trigger to add notification - IS = INSERT*/
+CREATE TRIGGER [dbo].[TR_Notificacion_IS]
+	ON [dbo].[Comentario]
+	FOR INSERT
+AS
+BEGIN
+	DECLARE @Contenido text, @Id_Usuario int, @Id_Publicacion int
+
+	SET @Contenido = 'Notificacion de comentario'
+	SET @Id_Usuario = (SELECT Id_Usuario FROM inserted)
+	SET @Id_Publicacion = (SELECT Id_Publicacion FROM inserted)
+
+	INSERT INTO 
+		Notificacion (Contenido, Id_Publicacion, Id_Usuario)
+	VALUES
+		(@Contenido, @Id_Publicacion, @Id_Usuario)
+END
