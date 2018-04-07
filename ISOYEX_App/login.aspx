@@ -17,7 +17,7 @@
                                 <div class="col-2"></div>
                                 <div class="form-group col-8">
                                     <asp:Label ID="labelEmail" runat="server" Text="Correo electrónico" AssociatedControlID="txtemail"></asp:Label>
-                                    <asp:TextBox ID="txtemail" runat="server" CssClass="form-control" placeholder="Ingresar Correo Electrónico"></asp:TextBox>
+                                    <asp:TextBox ID="txtemail" runat="server" CssClass="form-control icon" placeholder="Ingresar Correo Electrónico"></asp:TextBox>
                                 </div>
                                 <div class="col-2"></div>
                             </div>
@@ -25,7 +25,7 @@
                                 <div class="col-2"></div>
                                 <div class="form-group col-8">
                                     <asp:Label ID="labelPassword" runat="server" Text="Contraseña" AssociatedControlID="txtemail"></asp:Label>
-                                    <asp:TextBox ID="txtpassword" runat="server" TextMode="Password" CssClass="form-control" placeholder="Ingresar contraseña"></asp:TextBox>
+                                    <asp:TextBox ID="txtpassword" runat="server" TextMode="Password" CssClass="form-control icon" placeholder="Ingresar contraseña"></asp:TextBox>
                                 </div>
                                 <div class="col-2"></div>
                             </div>
@@ -34,9 +34,11 @@
                                 <div class="col-8">
                                     <div class="text-center">
                                         <asp:Button ID="btningresar" runat="server" Text="Iniciar sesión" CssClass="btn btn-wine-color btn-block" OnClick="btningresar_Click" />
+                                        <!--
                                         <asp:Panel Visible="false" class="form-group col-12 offset-3" ID="pnlError" runat="server">
                                             <small id="emailHelp" class="form-text text-muted" style="color: red !important;">Error en Email y/o Contraseña.</small>
                                         </asp:Panel>
+                                        -->
                                     </div>
                                     <div class="mt-1 text-right">
                                         <asp:LinkButton ID="RegistrarmeBtn" CssClass="text-muted" runat="server" OnClick="RegistrarmeBtn_Click">Registrarme</asp:LinkButton>
