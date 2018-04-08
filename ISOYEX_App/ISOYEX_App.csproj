@@ -154,6 +154,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Froala CSS\froala_editor.pkgd.css" />
     <Content Include="Content\Froala CSS\froala_style.min.css" />
+    <Content Include="Content\Website CSS\PerfilFiltradoView.css" />
     <Content Include="Scripts\FroalaEditor\Plugins\align.min.js" />
     <Content Include="Scripts\FroalaEditor\Plugins\char_counter.min.js" />
     <Content Include="Scripts\FroalaEditor\Plugins\code_beautifier.min.js" />

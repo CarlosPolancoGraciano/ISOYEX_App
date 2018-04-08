@@ -3,57 +3,26 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container-fluid">
-        <div class="row mt-5"></div>
-        <div class="row mt-5"></div>
-        <div class="row mt-5"></div>
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="text-center">
-                                <asp:Image ID="userProfilePicture" CssClass="img-fluid rounded-circle" Width="200" Height="200" runat="server" />
+        <!-- User Details - START -->
+        <div class="container" style="padding-top: 10%;">
+            <div class="row">
+                <div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
+                    <div class="well details">
+                        <div class="col-sm-12">
+                            <div class="col-xs-12 col-sm-8">
+                                <asp:Label ID="txtNombreLabel" CssClass="h2" tyle="text-decoration: underline;" runat="server" Text=""></asp:Label>
+                                <p><strong>Edad: </strong><asp:Label ID="txtEdadLabel" runat="server" Text=""></asp:Label> </p>
+                                <p><strong>Tipo de sangre: </strong><asp:Label ID="ddlTipoSangreLabel" runat="server" Text=""></asp:Label> </p>
+                                <p><strong>Email: </strong><asp:Label ID="txtEmailLabel" runat="server" Text=""></asp:Label> </p>
+                                <p><strong>Tipo de contacto: </strong><asp:Label ID="labelcontacto" runat="server" Text=""></asp:Label></p>
+                                <p><strong>Telefono: </strong><asp:Label ID="labeltelefono" runat="server" Text=""></asp:Label> </p>
+                                <p><strong>Provincia: </strong><asp:Label ID="ddlProvinciaLabel" runat="server" Text=""></asp:Label> </p>
+                                <p><strong>Municipio: </strong><asp:Label ID="ddlMunicipioLabel" runat="server" Text=""></asp:Label></p>
                             </div>
-                            <div class="text-center mb-3">
-                                <div class="mt-3">
-                                    <span class="h3">Datos Personales</span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <asp:Label ID="txtNombreLabel" runat="server" Text=""></asp:Label>
-                                </div>
-                                <div class="col-md-2">
-                                    <asp:Label ID="txtEdadLabel" runat="server" Text=""></asp:Label>
-                                </div>
-                                <div class="col-md-2">
-                                    <asp:Label ID="ddlTipoSangreLabel" runat="server" Text=""></asp:Label>
-                                </div>
-                            </div>
-                            <hr />
-                            <div class="text-center mb-3">
-                                <span class="h3">Datos de cuenta & dirección</span>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <asp:Label ID="txtEmailLabel" runat="server" Text=""></asp:Label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <asp:Label ID="labelcontacto" runat="server" Text=""></asp:Label>
-                                </div>
-                                <div class="col-md-6">
-                                    <asp:Label ID="labeltelefono" runat="server" Text=""></asp:Label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <asp:Label ID="ddlProvinciaLabel" runat="server" Text=""></asp:Label>
-                                </div>
-                                <div class="col-md-6">
-                                    <asp:Label ID="ddlMunicipioLabel" runat="server" Text=""></asp:Label>
-                                </div>
+                            <div class="col-xs-12 col-sm-4 col-lg-1 text-center">
+                                <figure>
+                                    <asp:Image ID="userProfilePicture" CssClass="img-fluid rounded-circle"  style="width: 127px; padding-top: 20px;" runat="server" />
+                                </figure>
                             </div>
                         </div>
                     </div>
@@ -63,10 +32,7 @@
         <div class="row mt-5"></div>
         <div class="row mt-5"></div>
         <div class="row mt-5"></div>
-        <div class="row mt-5"></div>
-        <div class="row mt-5"></div>
-        <div class="row mt-5"></div>
-        <div class="row mt-5"></div>
-        <div class="row mt-4"></div>
+        <link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light/all.min.css" />
+        <script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
     </div>
 </asp:Content>
