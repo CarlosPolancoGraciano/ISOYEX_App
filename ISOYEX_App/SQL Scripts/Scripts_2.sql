@@ -151,7 +151,7 @@ BEGIN
 		tc.Id_TipoContacto, tc.Tipo, d.Id_Provincia,
 	 	p.Provincia, d.Id_Municipio, m.Municipio, 
 		ts.Id_TipoSangre, ts.TipoSangre,au.Email, 
-		au.Contrasena, r.Nombre
+		au.Contrasena, r.Id_Rol, r.Nombre
 		FROM Usuario as u
 		/*Address*/
 		inner join Direccion as d on d.Id_Direccion = u.Id_Direccion

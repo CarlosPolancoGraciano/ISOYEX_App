@@ -1,170 +1,234 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Publicacion.aspx.cs" Inherits="ISOYEX_App.Publicacion" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentHeader" runat="server">
+    <script src="Scripts/knockout-3.4.2.js"></script>
+    <script src="Scripts/jquery-3.0.0.min.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <!-- Page Content -->
     <div class="container mt-5">
 
-      <div class="row">
+        <div class="row">
 
-        <!-- Post Content Column -->
-        <div class="col-lg-8">
+            <!-- Post Content Column -->
+            <div class="col-lg-8">
 
-          <!-- Title -->
-          <h1 class="mt-4">Post Title</h1>
+                <!-- Title -->
+                <h1 class="mt-4" id="postTitle" runat="server"></h1>
 
-          <!-- Author -->
-          <p class="lead">
-            by
-            <a href="#">Start Bootstrap</a>
-          </p>
+                <!-- Author -->
+                <p class="lead">
+                    por
+                <label id="publishOwner" runat="server"></label>
+                </p>
 
-          <hr>
+                <hr>
 
-          <!-- Date/Time -->
-          <p>Posted on January 1, 2018 at 12:00 PM</p>
+                <!-- Date/Time -->
+                <p>Publicado el <span id="postDate" runat="server"></span> a las <span id="postHour" runat="server"></span></p>
 
-          <hr>
-
-          <!-- Preview Image -->
-          <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
-
-          <hr>
-
-          <!-- Post Content -->
-          <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?</p>
-
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
-
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, doloribus, dolorem iusto blanditiis unde eius illum consequuntur neque dicta incidunt ullam ea hic porro optio ratione repellat perspiciatis. Enim, iure!</p>
-
-          <blockquote class="blockquote">
-            <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-            <footer class="blockquote-footer">Someone famous in
-              <cite title="Source Title">Source Title</cite>
-            </footer>
-          </blockquote>
-
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nostrum, aliquid, animi, ut quas placeat totam sunt tempora commodi nihil ullam alias modi dicta saepe minima ab quo voluptatem obcaecati?</p>
-
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!</p>
-
-          <hr>
-
-          <!-- Comments Form -->
-          <div class="card my-4">
-            <h5 class="card-header">Leave a Comment:</h5>
-            <div class="card-body">
-              <form>
-                <div class="form-group">
-                  <textarea class="form-control" rows="3"></textarea>
+                <hr>
+                <!-- Post Content -->
+                <div class="fr-view" id="contentFroalaView" runat="server">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
-            </div>
-          </div>
 
-          <!-- Single Comment -->
-          <div class="media mb-4">
-            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-            <div class="media-body">
-              <h5 class="mt-0">Commenter Name</h5>
-              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-            </div>
-          </div>
+                <hr>
 
-          <!-- Comment with nested comments -->
-          <div class="media mb-4">
-            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-            <div class="media-body">
-              <h5 class="mt-0">Commenter Name</h5>
-              Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-
-              <div class="media mt-4">
-                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                <div class="media-body">
-                  <h5 class="mt-0">Commenter Name</h5>
-                  Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                <!-- Comments Form -->
+                <div class="card my-4">
+                    <h5 class="card-header">Responde la publicación</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6 border-right border-danger text-center">
+                                <div class="form-group">
+                                    <textarea id="txtComentario" class="form-control" rows="3" runat="server"></textarea>
+                                </div>
+                                <div class="text-right">
+                                    <asp:Button ID="btnGuardarComentario" CssClass="btn btn-wine-color" runat="server" Text="Comentar" OnClick="btnGuardarComentario_Click" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6 text-center">
+                                <label>Respuestas rapidas</label>
+                                <div class="row mb-2">
+                                    <div class="col-12">
+                                        <asp:Button ID="btnMensajeRapido1" CssClass="btn btn-outline-danger" runat="server" Text="Me ofrezco a donar" OnClick="btnMensajeRapido1_Click" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <asp:Button ID="btnMensajeRapido2" CssClass="btn btn-outline-danger" runat="server" Text="Contactemé, puedo donar" OnClick="btnMensajeRapido2_Click" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-
-              <div class="media mt-4">
-                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                <div class="media-body">
-                  <h5 class="mt-0">Commenter Name</h5>
-                  Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                <!-- Single Comment -->
+                <div id="UserListHasData">
+                    <div class="row">
+                        <!-- ko foreach: paginated -->
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="media mb-4">
+                                        <a data-bind="click: function (data) { $root.sendToUserProfile($data.UsuarioId(), data) }">
+                                            <img class="d-flex mr-3 rounded-circle" width="50" height="50" data-bind="attr: { src: $data.UsuarioImagen, alt: $data.UsuarioNombre }">
+                                        </a>
+                                        <div class="media-body">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <h5 class="mt-0" data-bind="text: $data.UsuarioNombre "></h5>
+                                                </div>
+                                                <div class="col-md-4 offset-md-4">
+                                                    <button type="button" class="close" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <span data-bind="text: $data.Contenido"></span>
+                                            <div class="text-right">
+                                                <span data-bind="$data.Fecha"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                    <div class="mt-4">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination pagination-lg justify-content-center">
+                                <li id="previousButton" class="page-item"><a class="page-link text-danger" data-bind="click: previous">&laquo;</a></li>
+                                <li class="page-item"><a class="page-link text-danger" data-bind="text: $root.pageNumber"></a></li>
+                                <li id="nextButton" class="page-item"><a class="page-link text-danger" data-bind="click: next">&raquo;</a></li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
-              </div>
-
+                <div class="container">
+                    <div id="UserListHasNoData" class="bg-light mt-4 mb-4">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="p-4 m-4">
+                                    <div class="text-center">
+                                        <span class="h3 text-muted">No hay comentarios</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </div>
             </div>
-          </div>
+
+            <div class="mt-3"></div>
+            <!-- Sidebar Widgets Column -->
+            <div class="col-md-4 mt-5">
+
+                <!-- Search Widget -->
+                <div class="card my-4">
+                    <div class="card-body">
+                        <div class="avatar">
+                            <asp:Image ID="postOwnerImage" CssClass="rounded-circle mx-auto d-block img-fluid" alt="Foto del publicador" Height="90" Width="90" runat="server" />
+                        </div>
+                        <div class="text-center">
+                            <span class="h3" id="nombreSpan" runat="server">Papito Plata</span>
+                        </div>
+                        <hr />
+                        <div class="mt-2">
+                            <h5 class="text-muted mb-3">Datos de publicador</h5>
+                            <p><strong>Email: </strong><span id="emailSpan" runat="server">carlos@gmail.com</span></p>
+                            <p><strong>Provincia: </strong><span id="provinciaSpan" runat="server">Santiago</span></p>
+                            <p><strong>Municipio: </strong><span id="MunicipioSpan" runat="server">Tamboril</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
-
-        <!-- Sidebar Widgets Column -->
-        <div class="col-md-4">
-
-          <!-- Search Widget -->
-          <div class="card my-4">
-            <h5 class="card-header">Search</h5>
-            <div class="card-body">
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for...">
-                <span class="input-group-btn">
-                  <button class="btn btn-secondary" type="button">Go!</button>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Categories Widget -->
-          <div class="card my-4">
-            <h5 class="card-header">Categories</h5>
-            <div class="card-body">
-              <div class="row">
-                <div class="col-lg-6">
-                  <ul class="list-unstyled mb-0">
-                    <li>
-                      <a href="#">Web Design</a>
-                    </li>
-                    <li>
-                      <a href="#">HTML</a>
-                    </li>
-                    <li>
-                      <a href="#">Freebies</a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="col-lg-6">
-                  <ul class="list-unstyled mb-0">
-                    <li>
-                      <a href="#">JavaScript</a>
-                    </li>
-                    <li>
-                      <a href="#">CSS</a>
-                    </li>
-                    <li>
-                      <a href="#">Tutorials</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Side Widget -->
-          <div class="card my-4">
-            <h5 class="card-header">Side Widget</h5>
-            <div class="card-body">
-              You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-      <!-- /.row -->
-
+        <!-- /.row -->
     </div>
     <!-- /.container -->
+    <script>
+        /*Knockout.js*/
+        function HomeAppViewModel() {
+            var self = this;
+            let PersistUsersList = [];
+            /* BEGIN PAGINATOR */
+            self.CommentsList = ko.observableArray([]);
+            self.pageNumber = ko.observable(0);
+            self.nbPerPage = 3;
+
+	        self.totalPages = ko.computed(function() {
+		        let div = Math.floor(self.CommentsList().length / self.nbPerPage);
+		        div += self.CommentsList().length % self.nbPerPage > 0 ? 1 : 0;
+		        return div - 1;
+	        });
+    
+            self.paginated = ko.computed(function() {
+                let first = self.pageNumber() * self.nbPerPage;
+                return self.CommentsList.slice(first, first + self.nbPerPage);
+            });
+	        self.hasPrevious = ko.computed(function() {
+		        return self.pageNumber() !== 0;
+	        });
+	        self.hasNext = ko.computed(function() {
+		        return self.pageNumber() !== self.totalPages();
+	        });
+	        self.next = function() {
+		        if(self.pageNumber() < self.totalPages()) {
+			        self.pageNumber(self.pageNumber() + 1);
+		        }
+	        }
+	
+	        self.previous = function() {
+		        if(self.pageNumber() != 0) {
+			        self.pageNumber(self.pageNumber() - 1);
+		        }
+            }
+
+            self.sendToUserProfile = function (usuarioId) {
+                window.location.href = `/PerfilFiltrado.aspx?q=${usuarioId}`;
+            }
+
+            self.GetComments = function (){
+              $.ajax({
+                dataType: "json",
+                url: 'api/PostComments',
+                  success: function (data) {
+                      debugger;
+                    if (data.length == 0) {
+                        $("#UserListHasData").hide();
+                        $("#UserListHasNoData").show();
+                    } else {
+                        $("#UserListHasNoData").hide();
+                        $("#UserListHasData").show();
+                    }
+                    if (data.length != self.CommentsList().length) {
+                        //Here you map and create a new instance of userDetailVM
+                        self.CommentsList($.map(data, function (comment) {
+                            return new FilteredUsersViewModel(comment);
+                        }));
+                    }
+                }
+              });
+            }
+           //call to get users list when the VM is loading or you can call it on any event on your model
+           self.GetComments();
+        }
+
+        function FilteredUsersViewModel(data){
+            var self = this;
+            debugger;
+            self.ComentarioId = ko.observable(data.ComentarioId);
+            self.Contenido = ko.observable(data.Contenido);
+            self.Fecha = 
+            self.UsuarioId = ko.observable(data.UsuarioId)
+            self.UsuarioNombre = ko.observable(data.UsuarioNombre);
+            self.UsuarioApellido = ko.observable(data.UsuarioApellido);
+            self.UsuarioImagen = ko.observable(data.UsuarioImagen);
+        }
+        
+        ko.applyBindings(new HomeAppViewModel());
+    </script>
 </asp:Content>

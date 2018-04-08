@@ -1,6 +1,15 @@
-/*Procedures para publicaciones*/
 USE ISOYEX
 go
+/*Procedures para obtener roles*/
+CREATE PROCEDURE spObtenerRolPorNombre(
+	@Nombre nvarchar(128)
+)as
+BEGIN
+	SELECT Id_Rol FROM Rol
+	WHERE Nombre LIKE @Nombre
+END
+go
+/*Procedures para publicaciones*/
 CREATE PROCEDURE spCrearPublicacion
 (
 	@Titulo nvarchar(150),
@@ -44,8 +53,8 @@ CREATE PROCEDURE spRetornarPublicaciones
 as
 BEGIN
 	/*Retuns newer to old publication*/
-	SELECT p.Titulo, p.Contenido, p.Fecha,
-		   u.Nombre, ts.TipoSangre
+	SELECT  p.Titulo, p.Contenido,p.Fecha,
+	u.Nombre, ts.TipoSangre
 	FROM Publicacion as p
 	inner join TipoSangre as ts on ts.Id_TipoSangre = p.Id_TipoSangre
 	inner join Usuario as u on u.Id_Usuario = p.Id_Usuario
@@ -57,6 +66,27 @@ EXEC spRetornarPublicaciones
 SELECT * FROM Publicacion
 */
 go
+ALTER PROCEDURE spRetornarPublicacionPorId(
+	@Id_Publicacion int
+)as
+BEGIN
+	SELECT p.Id_Publicacion,p.Titulo, p.Contenido, 
+		   p.Fecha, u.Nombre, u.Imagen, au.Email,
+		   pr.Provincia, mu.Municipio, ts.TipoSangre
+	FROM Publicacion as p
+	inner join TipoSangre as ts on ts.Id_TipoSangre = p.Id_TipoSangre
+	inner join Usuario as u on u.Id_Usuario = p.Id_Usuario
+	inner join AutenticacionUsuario as au on au.Id_AutenticacionUsuario = u.Id_AutenticacionUsuario
+	inner join Direccion as d on d.Id_Direccion = u.Id_Direccion
+	inner join Provincia as pr on pr.Id_Provincia = d.Id_Provincia
+	inner join Municipio as mu on mu.Id_Municipio = d.Id_Municipio
+	WHERE p.Id_Publicacion = @Id_Publicacion
+END
+go
+/*Prueba de retornarPublicacionPorId
+EXEC spRetornarPublicacionPorId 2
+SELECT * FROM Publicacion
+*/
 CREATE PROCEDURE spEliminarPublicacion
 (
 	@Id_Publicacion int
@@ -75,14 +105,15 @@ go
 CREATE PROCEDURE spCrearComentario
 (
 	@Contenido text,
+	@Fecha datetime,
 	@Id_Usuario int,
 	@Id_Publicacion int
 )as
 BEGIN
 	INSERT INTO Comentario 
-		(Contenido, Id_Usuario, Id_Publicacion)
+		(Contenido, Fecha, Id_Usuario, Id_Publicacion)
 	VALUES
-		(@Contenido, @Id_Usuario, @Id_Publicacion)
+		(@Contenido, @Fecha, @Id_Usuario, @Id_Publicacion)
 END
 go
  /*Prueba de crearComentario
@@ -125,8 +156,9 @@ CREATE PROCEDURE spRetornarComentariosPublicacion
 	@Id_Publicacion int
 )as
 BEGIN
-	SELECT  c.Contenido, u.Id_Usuario, u.Nombre, 
-			u.Apellido, u.Imagen 
+	SELECT  c.Id_Comentario, c.Contenido, c.Fecha, 
+			u.Id_Usuario, u.Nombre, u.Apellido, 
+			u.Imagen 
 	FROM Comentario as c
 	inner join Usuario as u on u.Id_Usuario = c.Id_Usuario
 	WHERE c.Id_Publicacion = @Id_Publicacion

@@ -112,6 +112,7 @@ go
 CREATE TABLE Comentario(
 Id_Comentario int identity(1,1) PRIMARY KEY,
 Contenido text not null,
+Fecha datetime not null,
 Id_Usuario int not null,
 Id_Publicacion int not null
 CONSTRAINT fk_ComentarioUsuario FOREIGN KEY(Id_Usuario)

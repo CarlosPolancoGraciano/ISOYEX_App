@@ -21,7 +21,7 @@
                                     <asp:TextBox ID="txtTitulo" placeholder="Ingresar Titulo de Publicación" CssClass="form-control" runat="server"></asp:TextBox>
                                 </div>
                                 <div class="col-6 form-group">
-                                    <asp:Label ID="Label1" runat="server" Text="Tipo de Sangre*" AssociatedControlID="ddlTipoSangre"></asp:Label>
+                                    <asp:Label ID="txtTipoSangreLabel" runat="server" Text="Tipo de Sangre*" AssociatedControlID="ddlTipoSangre"></asp:Label>
                                     <asp:DropDownList ID="ddlTipoSangre" CssClass="form-control ddl" runat="server"></asp:DropDownList>
                                 </div>
                             </div>
@@ -35,7 +35,7 @@
                                 <span class="text-muted">Todos los campos con <b>*</b> son requeridos</span>
                             </div>
                             <div class="text-center">
-                                <asp:Button ID="btnSavePost" CssClass="btn btn-wine-color" runat="server" Text="Crear publicación" />
+                                <asp:Button ID="btnSavePost" CssClass="btn btn-wine-color" runat="server" Text="Crear publicación" OnClick="btnSavePost_Click" />
                             </div>
                         </div>
                         <!-- /.row -->

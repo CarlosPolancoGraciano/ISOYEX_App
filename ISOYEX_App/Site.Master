@@ -20,6 +20,9 @@
      <asp:ContentPlaceHolder ID="ContentHeader" runat="server">
             </asp:ContentPlaceHolder>
     <link href="Content/Website CSS/WebsiteCSS.css" rel="stylesheet" type="text/css"/>
+    <!-- Moment.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.0/moment-with-locales.min.js"></script>
+    <!-- Moment.js -->
     <!-- Froala Editor Style -->
     <link href="Content/Froala CSS/Theme/red.min.css" type="text/css" rel="stylesheet" />
     <link href="Content/Froala CSS/Theme/gray.min.css" rel="stylesheet" type="text/css" />

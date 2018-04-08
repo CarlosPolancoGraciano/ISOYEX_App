@@ -31,13 +31,13 @@ namespace ISOYEX_App {
         protected global::System.Web.UI.WebControls.TextBox txtTitulo;
         
         /// <summary>
-        /// Label1 control.
+        /// txtTipoSangreLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label txtTipoSangreLabel;
         
         /// <summary>
         /// ddlTipoSangre control.

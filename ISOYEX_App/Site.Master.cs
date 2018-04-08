@@ -29,6 +29,7 @@ namespace ISOYEX_App
         {
             Session["NombreUsuario"] = null;
             Session["Id_Usuario"] = null;
+            Session["Id_Rol"] = null;
             /*Used in Perfil.aspx*/
             Session["currentUser"] = null;
             Response.Redirect("Default.aspx");

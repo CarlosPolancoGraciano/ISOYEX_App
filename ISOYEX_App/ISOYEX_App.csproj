@@ -298,6 +298,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Class Library\Helper.cs" />
     <Compile Include="Class Library\ManejadorData.cs" />
+    <Compile Include="Controllers\PostCommentsController.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -305,7 +306,7 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="FilteredUsersController.cs" />
+    <Compile Include="Controllers\FilteredUsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -316,6 +317,7 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Comments.cs" />
     <Compile Include="Perfil.aspx.cs">
       <DependentUpon>Perfil.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
