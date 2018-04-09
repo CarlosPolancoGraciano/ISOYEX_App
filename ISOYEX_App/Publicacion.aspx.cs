@@ -27,17 +27,40 @@ namespace ISOYEX_App
                     Response.Redirect("Login.aspx");
                 }
 
+                ComentarPorRol(Session["Id_Usuario"].ToString());
+
+                /*Request for the post content to DB*/
                 string[] parametros = { "@Id_Publicacion", Request.QueryString["q"].ToString() };
                 tabla = ManejadorData.Exec_Stp("spRetornarPublicacionPorId", 's', parametros);
                 MaquetarInformacion(tabla);
+
+                /*Request for the post comments to DB*/
+                string[] parametros2 = { "@Id_Publicacion", Request.QueryString["q"].ToString() };
+                tabla = ManejadorData.Exec_Stp("spRetornarComentariosPublicacion", 's', parametros2);
+                postComments.formatComments(tabla);
             }
-            string[] parametros2 = { "@Id_Publicacion", Request.QueryString["q"].ToString() };
-            tabla = ManejadorData.Exec_Stp("spRetornarComentariosPublicacion", 's', parametros2);
-            postComments.formatComments(tabla);
         }
-        
+
+        private void ComentarPorRol(string currentUserId)
+        {
+            string[] parametros = { "@Nombre", "Donante" };
+            tabla = ManejadorData.Exec_Stp("spRetonarRolId", 's', parametros);
+            Int32 donanteId = Convert.ToInt32(tabla.Rows[0]["Id_Rol"].ToString());
+            if (Convert.ToInt32(currentUserId) == donanteId)
+            {
+                noAbleToCommentDiv.Style.Add("display", "none");
+            }
+            else
+            {
+                ableToCommentDiv.Style.Add("display", "none");
+            }
+        }
+
         private void MaquetarInformacion(DataTable table)
         {
+            /*Add current user id to span*/
+            currentUserIdSpan.InnerText = Session["Id_Usuario"].ToString();
+
             /*Post content*/
             postTitle.InnerText = table.Rows[0]["Titulo"].ToString();
             publishOwner.InnerText = table.Rows[0]["Nombre"].ToString();
@@ -50,6 +73,9 @@ namespace ISOYEX_App
             emailSpan.InnerText = table.Rows[0]["Email"].ToString();
             provinciaSpan.InnerText = table.Rows[0]["Provincia"].ToString();
             MunicipioSpan.InnerText = table.Rows[0]["Municipio"].ToString();
+
+            /*Add post owner id to span*/
+            postOwnerId.InnerText = table.Rows[0]["Id_Usuario"].ToString();
         }
 
         private void MapDate(DataTable table)
@@ -74,8 +100,15 @@ namespace ISOYEX_App
                     "@Id_Usuario", Session["Id_Usuario"].ToString(),
                     "@Id_Publicacion", Request.QueryString["q"].ToString()
                 };
-                ManejadorData.Exec_Stp("spCrearComentario", 'm', parametros);
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "emptyFieldsSweetAlert", "swal('Comentario agregado!', '','success')", true);
+                try
+                {
+                    ManejadorData.Exec_Stp("spCrearComentario", 'm', parametros);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "emptyFieldsSweetAlert", "swal('Comentario agregado!', '','success').then((value) => { window.location.reload() })", true);
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
             }
             else
             {
@@ -91,8 +124,15 @@ namespace ISOYEX_App
                 "@Id_Usuario", Session["Id_Usuario"].ToString(),
                 "@Id_Publicacion", Request.QueryString["q"].ToString()
             };
-            ManejadorData.Exec_Stp("spCrearComentario", 'm', parametros);
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "emptyFieldsSweetAlert", "swal('Comentario agregado!', '','success')", true);
+            try
+            {
+                ManejadorData.Exec_Stp("spCrearComentario", 'm', parametros);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "emptyFieldsSweetAlert", "swal('Comentario agregado!', '','success').then((value) => { location.reload() })", true);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         protected void btnMensajeRapido2_Click(object sender, EventArgs e)
@@ -103,8 +143,16 @@ namespace ISOYEX_App
                 "@Id_Usuario", Session["Id_Usuario"].ToString(),
                 "@Id_Publicacion", Request.QueryString["q"].ToString()
             };
-            ManejadorData.Exec_Stp("spCrearComentario", 'm', parametros);
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "emptyFieldsSweetAlert", "swal('Comentario agregado!', '','success')", true);
+            try
+            {
+                ManejadorData.Exec_Stp("spCrearComentario", 'm', parametros);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "emptyFieldsSweetAlert", "swal('Comentario agregado!', '','success').then((value) => { location.reload() })", true);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
+
     }
 }

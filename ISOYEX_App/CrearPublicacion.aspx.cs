@@ -19,6 +19,7 @@ namespace ISOYEX_App
                 if (Session["Id_Usuario"] != null)
                 {
                     string[] parametros = { };
+                    /*Request for all blood type*/
                     DataTable tabla = ManejadorData.Exec_Stp("spCargarTipoSangre", 's', parametros);
                     helper.LLenaDrop(ddlTipoSangre, tabla, "TipoSangre", "Id_TipoSangre");
                 }
@@ -64,8 +65,15 @@ namespace ISOYEX_App
                     "@Fecha", DateTime.Now.ToString(),
                     "@Id_Usuario", Session["Id_Usuario"].ToString()
                     };
-                ManejadorData.Exec_Stp("spCrearPublicacion", 'm', parametros);
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "emptyFieldsSweetAlert", "swal('Publicación hecha!', 'El post fue publicado exitosamente, todos los donantes han sido notificados','success').then((value) => { window.location.href = '/Default.aspx'; })", true);
+                try
+                {
+                    ManejadorData.Exec_Stp("spCrearPublicacion", 'm', parametros);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "emptyFieldsSweetAlert", "swal('Publicación hecha!', 'El post fue publicado exitosamente, todos los donantes han sido notificados','success').then((value) => { window.location.href = '/Default.aspx'; })", true);
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
                 /*if (ValidarRolUsuario())
                 {
                     

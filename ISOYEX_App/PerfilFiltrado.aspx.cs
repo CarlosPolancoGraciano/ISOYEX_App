@@ -11,6 +11,7 @@ namespace ISOYEX_App
 {
     public partial class PerfilFiltrado : System.Web.UI.Page
     {
+        DataTable tabla = new DataTable();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -31,8 +32,14 @@ namespace ISOYEX_App
         {
             String sFilteredUserId = Request.QueryString["q"];
             string[] userParametros = { "@Id_Usuario", sFilteredUserId };
-            DataTable tabla = new DataTable();
-            tabla = ManejadorData.Exec_Stp("spUsuarioData", 's', userParametros);
+            try
+            {
+                tabla = ManejadorData.Exec_Stp("spUsuarioData", 's', userParametros);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
             DateTime BirthDate = DateTime.Parse(tabla.Rows[0]["FechaNacimiento"].ToString());
             var age = (DateTime.Now.Year - BirthDate.Year);

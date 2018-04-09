@@ -71,7 +71,7 @@ ALTER PROCEDURE spRetornarPublicacionPorId(
 )as
 BEGIN
 	SELECT p.Id_Publicacion,p.Titulo, p.Contenido, 
-		   p.Fecha, u.Nombre, u.Imagen, au.Email,
+		   p.Fecha, p.Id_Usuario, u.Nombre, u.Imagen, au.Email,
 		   pr.Provincia, mu.Municipio, ts.TipoSangre
 	FROM Publicacion as p
 	inner join TipoSangre as ts on ts.Id_TipoSangre = p.Id_TipoSangre

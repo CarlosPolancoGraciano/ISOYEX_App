@@ -33,7 +33,7 @@ namespace ISOYEX_App
                 else
                 {
                     //pnlError.Visible = true;
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "unvalidLogin", "swal('Acceso invalido', 'Tu usuario o contraseña es incorrecto', 'error')", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "invalidLogin", "swal('Acceso invalido', 'Tu usuario o contraseña es incorrecto', 'error')", true);
                 }
             }
             else

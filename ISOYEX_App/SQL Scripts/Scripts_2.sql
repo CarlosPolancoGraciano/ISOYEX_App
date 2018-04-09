@@ -390,3 +390,11 @@ BEGIN
 	WHERE Usuario.Id_Usuario = @Id_Usuario
 
 END
+go
+CREATE PROCEDURE spRetonarRolId(
+	@Nombre nvarchar(128)
+) as
+BEGIN
+	SELECT r.Id_Rol  FROM Rol as r
+	WHERE r.Nombre = @Nombre
+END

@@ -68,11 +68,25 @@ namespace ISOYEX_App.Controllers
         public void Put(int id, [FromBody]string value)
         {
         }
+        */
 
         // DELETE: api/PostComentarios/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
+            /*Delete comments*/
+            var response = new HttpResponseMessage();
+            string[] parametros = { "@Id_Comentario", id.ToString() };
+            try
+            {
+                ManejadorData.Exec_Stp("spEliminarComentario", 'm', parametros);
+                response.Headers.Add("DeleteMessage", "Succsessfuly Deleted!!!");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return response;
         }
-        */
+        
     }
 }
