@@ -53,8 +53,9 @@ CREATE PROCEDURE spRetornarPublicaciones
 as
 BEGIN
 	/*Retuns newer to old publication*/
-	SELECT  p.Titulo, p.Contenido,p.Fecha,
-	u.Nombre, ts.TipoSangre
+	SELECT  p.Id_Publicacion,p.Titulo, p.Contenido,
+	p.Fecha, u.Id_Usuario, u.Nombre, 
+	ts.TipoSangre
 	FROM Publicacion as p
 	inner join TipoSangre as ts on ts.Id_TipoSangre = p.Id_TipoSangre
 	inner join Usuario as u on u.Id_Usuario = p.Id_Usuario
@@ -184,6 +185,98 @@ Prueba de spEliminarComentariosPublicacion
 EXEC spEliminarComentariosPublicacion 3
 SELECT * FROM Comentario
 */
+go
+/*Filtro de publicaciones*/
+CREATE PROCEDURE spFiltrarPostPorDireccionUsuario(
+	@Id_Provincia int,
+	@Id_Municipio int
+)as
+BEGIN
+	DECLARE @Id_Direccion int, @DireccionId int, @MyProvinciaId int, @MyMunicipioId int
+
+	DECLARE c_direccion CURSOR FOR
+		SELECT Id_Direccion, Id_Provincia, Id_Municipio FROM Direccion 
+
+	OPEN c_direccion
+		WHILE 1=1
+		BEGIN
+			FETCH NEXT FROM c_direccion INTO @DireccionId, @MyProvinciaId, @MyMunicipioId
+			IF(@@FETCH_STATUS <> 0)
+			BEGIN
+				BREAK;
+			END
+			ELSE IF(@Id_Provincia = @MyProvinciaId AND @Id_Municipio = @MyMunicipioId)
+			BEGIN
+				SET @Id_Direccion = @DireccionId;
+				BREAK;
+			END
+		END;
+	CLOSE c_direccion;
+	DEALLOCATE c_direccion;
+
+	SELECT p.Id_Publicacion,p.Titulo, p.Contenido,
+	p.Fecha, u.Id_Usuario, u.Nombre, 
+	ts.TipoSangre
+	FROM Publicacion as p
+	inner join Usuario as u on u.Id_Usuario = p.Id_Usuario
+	inner join TipoSangre as ts on ts.Id_TipoSangre = p.Id_TipoSangre
+	WHERE u.Id_Direccion = @Id_Direccion 
+	ORDER BY Id_Publicacion DESC
+
+END
+go
+CREATE PROCEDURE spFiltradoPostPorTipoSangre(
+	@Id_TipoSangre int
+)as
+BEGIN
+	SELECT p.Id_Publicacion,p.Titulo, p.Contenido,
+	p.Fecha, u.Id_Usuario, u.Nombre, 
+	ts.TipoSangre
+	FROM Publicacion as p
+	inner join Usuario as u on u.Id_Usuario = p.Id_Usuario
+	inner join TipoSangre as ts on ts.Id_TipoSangre = p.Id_TipoSangre
+	WHERE p.Id_TipoSangre = @Id_TipoSangre
+	ORDER BY Id_Publicacion DESC
+END
+go
+CREATE PROCEDURE spFiltradoPostDireccionTipoSangre(
+	@Id_Provincia int,
+	@Id_Municipio int,
+	@Id_TipoSangre int
+)as
+BEGIN
+	DECLARE @Id_Direccion int, @DireccionId int, @MyProvinciaId int, @MyMunicipioId int
+
+	DECLARE c_direccion CURSOR FOR
+		SELECT Id_Direccion, Id_Provincia, Id_Municipio FROM Direccion 
+
+	OPEN c_direccion
+		WHILE 1=1
+		BEGIN
+			FETCH NEXT FROM c_direccion INTO @DireccionId, @MyProvinciaId, @MyMunicipioId
+			IF(@@FETCH_STATUS <> 0)
+			BEGIN
+				BREAK;
+			END
+			ELSE IF(@Id_Provincia = @MyProvinciaId AND @Id_Municipio = @MyMunicipioId)
+			BEGIN
+				SET @Id_Direccion = @DireccionId;
+				BREAK;
+			END
+		END;
+	CLOSE c_direccion;
+	DEALLOCATE c_direccion;
+
+	SELECT p.Id_Publicacion,p.Titulo, p.Contenido,
+	p.Fecha, u.Id_Usuario, u.Nombre, 
+	ts.TipoSangre
+	FROM Publicacion as p
+	inner join Usuario as u on u.Id_Usuario = p.Id_Usuario
+	inner join TipoSangre as ts on ts.Id_TipoSangre = p.Id_TipoSangre
+	WHERE u.Id_Direccion = @Id_Direccion AND p.Id_TipoSangre = @Id_TipoSangre
+	ORDER BY Id_Publicacion DESC
+
+END
 go
 /*Create trigger to add notification - IS = INSERT*/
 CREATE TRIGGER [dbo].[TR_Notificacion_IS]

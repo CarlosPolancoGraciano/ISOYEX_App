@@ -300,6 +300,7 @@
     <Compile Include="Class Library\Helper.cs" />
     <Compile Include="Class Library\ManejadorData.cs" />
     <Compile Include="Controllers\PostCommentsController.cs" />
+    <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -319,6 +320,7 @@
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\Comments.cs" />
+    <Compile Include="Models\Posts.cs" />
     <Compile Include="Perfil.aspx.cs">
       <DependentUpon>Perfil.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

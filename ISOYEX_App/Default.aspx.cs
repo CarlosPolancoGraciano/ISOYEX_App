@@ -1,4 +1,5 @@
 ﻿using ISOYEX_App.Class_Library;
+using ISOYEX_App.Controllers;
 using ISOYEX_App.Models;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ namespace ISOYEX_App
     {
         Helper helper = new Helper();
         DataTable filteredUsers = new DataTable();
+        DataTable filteredPosts = new DataTable();
+        PostController postController = new PostController();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -21,8 +24,15 @@ namespace ISOYEX_App
                 string[] parametros = { };
                 DataTable table = ManejadorData.Exec_Stp("spCargarProvincias", 's', parametros);
                 helper.LLenaDrop(ProvinciaDropDown, table, "Provincia", "Id_Provincia");
+                helper.LLenaDrop(PostProvinciaDropDown, table, "Provincia", "Id_Provincia");
+
                 table = ManejadorData.Exec_Stp("spCargarTipoSangre", 's', parametros);
                 helper.LLenaDrop(TipoSangreDropDown, table, "TipoSangre", "Id_TipoSangre");
+                helper.LLenaDrop(PostTipoSangreDropDown, table, "TipoSangre", "Id_TipoSangre");
+
+                /*Send post to web api*/
+                table = ManejadorData.Exec_Stp("spRetornarPublicaciones", 's', parametros);
+                postController.formatPosts(table);
             }
         }
 
@@ -115,6 +125,91 @@ namespace ISOYEX_App
                     indexTipoSangre == string.Empty)
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "unvalidFilteredAction", "swal('Busqueda invalida', 'Debes seleccionar un tipo de sangre o dirección o ambos a la vez para poder filtrar', 'error')", true);
+            }
+        }
+
+        protected void SearchPostButton_Click(object sender, EventArgs e)
+        {
+            String indexProvincia = PostProvinciaDropDown.SelectedValue;
+            String indexMunicipio = PostMunicipioDropDown.SelectedValue;
+            String indexTipoSangre = PostTipoSangreDropDown.SelectedValue;
+
+            if (indexProvincia != string.Empty &&
+                indexMunicipio != string.Empty &&
+                indexTipoSangre == string.Empty)
+            {
+                //Filtrado por direccion
+                string[] parametros = {
+                    "@Id_Provincia", indexProvincia,
+                    "@Id_Municipio", indexMunicipio
+                };
+                try
+                {
+                    filteredPosts = ManejadorData.Exec_Stp("spFiltrarPostPorDireccionUsuario", 's', parametros);
+                    postController.formatPosts(filteredUsers);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+
+            }
+            else if (indexProvincia == string.Empty &&
+                      indexMunicipio == string.Empty &&
+                      indexTipoSangre != string.Empty)
+            {
+                //Filtrado por tipo de sangre
+                string[] parametros = { "@Id_TipoSangre", indexTipoSangre };
+                try
+                {
+                    filteredPosts = ManejadorData.Exec_Stp("spFiltradoPostPorTipoSangre", 's', parametros);
+                    postController.formatPosts(filteredUsers);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            else if (indexProvincia != string.Empty &&
+                    indexMunicipio != string.Empty &&
+                    indexTipoSangre != string.Empty)
+            {
+                //Filtrado por direccion y tipo de sangre
+                string[] parametros = {
+                    "@Id_Provincia", indexProvincia,
+                    "@Id_Municipio", indexMunicipio,
+                    "@Id_TipoSangre", indexTipoSangre
+                };
+                try
+                {
+                    filteredPosts = ManejadorData.Exec_Stp("spFiltradoPostDireccionTipoSangre", 's', parametros);
+                    postController.formatPosts(filteredUsers);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            else if (indexProvincia == string.Empty &&
+                    indexMunicipio == string.Empty &&
+                    indexTipoSangre == string.Empty)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "unvalidFilteredAction", "swal('Busqueda invalida', 'Debes seleccionar un tipo de sangre o dirección o ambos a la vez para poder filtrar', 'error')", true);
+            }
+        }
+
+        protected void PostProvinciaDropDown_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DropDownList provinciaDrop = (DropDownList)sender;
+            string[] parametros = { "@idProvincia", provinciaDrop.SelectedValue.ToString() };
+            if (provinciaDrop.SelectedValue.ToString() != "")
+            {
+                DataTable table = ManejadorData.Exec_Stp("spCargarMunicipio", 's', parametros);
+                helper.LLenaDrop(PostMunicipioDropDown, table, "Municipio", "Id_Municipio");
+            }
+            else
+            {
+                PostMunicipioDropDown.Items.Clear();
             }
         }
     }
