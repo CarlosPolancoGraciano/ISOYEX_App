@@ -60,24 +60,36 @@ namespace ISOYEX_App
             string[] userParametros = { "@Id_Usuario", idUsuario };
             tabla = ManejadorData.Exec_Stp("spUsuarioData", 's', userParametros);
 
+            if (Session["Id_Rol"].ToString() == "1")
+            {
+                txtApellido.Text = tabla.Rows[0]["Apellido"].ToString();
+                txtFechaNacimiento.Text = helper.dateFormat(tabla.Rows[0]["FechaNacimiento"].ToString(), "dd-MM-yyyy");
+                ddlTipoSangre.SelectedValue = tabla.Rows[0]["FechaNacimiento"].ToString();
+                Session["FechaNacimiento"] = tabla.Rows[0]["FechaNacimiento"].ToString();
+                ddlTipoSangre.SelectedValue = tabla.Rows[0]["Id_TipoSangre"].ToString();
+                CtrlRNC.Visible = false;
+                titulo.Text = "Datos Personales";
+            }
+            else if(Session["Id_Rol"].ToString() == "2")
+            {
+                btnModificar.Visible = false;
+                CtrlApellido.Visible = false;
+                CtrlFecha.Visible = false;
+                CtrlSangre.Visible = false;
+                txtRNC.Text = tabla.Rows[0]["RNC"].ToString();
+                titulo.Text = "Datos Institucionales";
+            }
+
             txtNombre.Text = tabla.Rows[0]["Nombre"].ToString();
-            txtApellido.Text = tabla.Rows[0]["Apellido"].ToString();
-            txtFechaNacimiento.Text = helper.dateFormat(tabla.Rows[0]["FechaNacimiento"].ToString(), "dd-MM-yyyy");
-            ddlTipoSangre.SelectedValue = tabla.Rows[0]["FechaNacimiento"].ToString();
             txtEmail.Text = tabla.Rows[0]["Email"].ToString();
             ddlTipoContacto.SelectedValue = tabla.Rows[0]["Id_TipoContacto"].ToString();
             txtTelefono.Text = tabla.Rows[0]["Numero"].ToString();
             ddlProvincia.SelectedValue = tabla.Rows[0]["Id_Provincia"].ToString();
-
             string[] parametros = { "@idProvincia", tabla.Rows[0]["Id_Provincia"].ToString() };
             DataTable tablita = ManejadorData.Exec_Stp("spCargarMunicipio", 'S', parametros);
             helper.LLenaDrop(ddlMunicipio, tablita, "Municipio", "Id_Municipio");
-
             ddlMunicipio.SelectedValue = tabla.Rows[0]["Id_Municipio"].ToString();
 
-            ddlTipoSangre.SelectedValue = tabla.Rows[0]["Id_TipoSangre"].ToString();
-
-            Session["FechaNacimiento"] = tabla.Rows[0]["FechaNacimiento"].ToString();
         }
 
         public void EnableControls(bool Activos)

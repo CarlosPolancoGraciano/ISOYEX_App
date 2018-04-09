@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Registrarse.aspx.cs" Inherits="ISOYEX_App.Registrarse" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentHeader" runat="server">
     <script>
         $(document).ready(function () {
@@ -12,11 +13,21 @@
             });
 
             /*Show ind inputs*/
-            $("#hdnOpcion").val('ind');
-            $(".form-group").show();
-            $(".VisiInst").hide();
-            $(".VisiIndi").show();
-
+            if ($("#hdnOpcion").val() != 'ind' && $("#hdnOpcion").val() != 'ins') {
+                $("#hdnOpcion").val('ind');
+                $(".form-group").show();
+                $(".VisiInst").hide();
+                $(".VisiIndi").show();
+            }
+            else if ($("#hdnOpcion").val() == 'ind')
+            {
+                $(".VisiInst").hide();
+                $(".VisiIndi").show();
+            }
+            else if ($("#hdnOpcion").val() == 'ins') {
+                $(".VisiIndi").hide();
+                $(".VisiInst").show();
+            }
             /*When radio button change, change the inputs*/
             $('input[type=radio][name=options]').change(function () {
                 $("#hdnOpcion").val(this.value);
@@ -35,19 +46,19 @@
                     $(".VisiInst").show();
                 }
             });
-            
+
             function ResetControls() {
                 $(".txt").val("");
                 $(".ddl").val('');
             }
-            
+
         });
 
         function soloNumeros(e) {
             var key = window.Event ? e.which : e.keyCode
             return (key >= 48 && key <= 57)
         }
-        
+
     </script>
 
 </asp:Content>
