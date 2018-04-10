@@ -21,10 +21,12 @@
             }
             else if ($("#hdnOpcion").val() == 'ind')
             {
+                $("#ind").click();
                 $(".VisiInst").hide();
                 $(".VisiIndi").show();
             }
             else if ($("#hdnOpcion").val() == 'ins') {
+                $("#ins").click();
                 $(".VisiIndi").hide();
                 $(".VisiInst").show();
             }
@@ -74,11 +76,11 @@
                         <h1 class="display-4">Registro de usuarios</h1>
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
                             <label class="btn btn-outline-danger active">
-                                <input type="radio" name="options" class="radio" value="ind">
+                                <input type="radio" id="ind" name="options" class="radio" value="ind">
                                 Donante
                             </label>
                             <label class="btn btn-outline-danger">
-                                <input type="radio" name="options" class="radio" value="ins">
+                                <input type="radio" id="ins" name="options" class="radio" value="ins">
                                 Institución
                             </label>
                         </div>
@@ -97,7 +99,7 @@
                             <div class="form-group col-md-6">
                                 <div class="VisiInst">
                                     <asp:Label ID="txtRNCLabel" runat="server" Text="RNC*" AssociatedControlID="txtRNC"></asp:Label>
-                                    <asp:TextBox ID="txtRNC" onKeyPress="return soloNumeros(event)" class="form-control txt" MaxLength="11" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtRNC" onKeyPress="return soloNumeros(event)" class="form-control txt" MaxLength="9" runat="server"></asp:TextBox>
                                     <asp:Label ID="txtRNCError" runat="server" CssClass="text-danger" Text="" AssociatedControlID="txtRNC"></asp:Label>
                                 </div>
                                 <div class="VisiIndi">

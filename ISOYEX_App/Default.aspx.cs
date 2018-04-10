@@ -21,6 +21,10 @@ namespace ISOYEX_App
         {
             if (!IsPostBack)
             {
+                if (Session["Id_Rol"] != null)
+                {
+                    showCreatePostButton(Session["Id_Rol"].ToString());
+                }
                 string[] parametros = { };
                 DataTable table = ManejadorData.Exec_Stp("spCargarProvincias", 's', parametros);
                 helper.LLenaDrop(ProvinciaDropDown, table, "Provincia", "Id_Provincia");
@@ -33,6 +37,17 @@ namespace ISOYEX_App
                 /*Send post to web api*/
                 table = ManejadorData.Exec_Stp("spRetornarPublicaciones", 's', parametros);
                 postController.formatPosts(table);
+            }
+        }
+
+        protected void showCreatePostButton(string currentUserRolId)
+        {
+            string[] parametros = { "@Nombre", "Institucion" };
+            DataTable tabla = ManejadorData.Exec_Stp("spRetonarRolId", 's', parametros);
+            Int32 donanteId = Convert.ToInt32(tabla.Rows[0]["Id_Rol"].ToString());
+            if (Convert.ToInt32(currentUserRolId) == donanteId)
+            {
+                btnCrearPost.Style.Remove("display");
             }
         }
 

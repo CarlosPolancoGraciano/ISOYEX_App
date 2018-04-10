@@ -59,7 +59,8 @@ namespace ISOYEX_App
         private void MaquetarInformacion(DataTable table)
         {
             /*Add current user id to span*/
-            currentUserIdSpan.InnerText = Session["Id_Usuario"].ToString();
+            string currentUser = Session["Id_Usuario"].ToString();
+            currentUserIdSpan.InnerText = currentUser;
 
             /*Post content*/
             postTitle.InnerText = table.Rows[0]["Titulo"].ToString();
@@ -75,7 +76,14 @@ namespace ISOYEX_App
             MunicipioSpan.InnerText = table.Rows[0]["Municipio"].ToString();
 
             /*Add post owner id to span*/
-            postOwnerId.InnerText = table.Rows[0]["Id_Usuario"].ToString();
+            var idPostOwner = table.Rows[0]["Id_Usuario"].ToString();
+            postOwnerId.InnerText = idPostOwner;
+
+            /*If currentUser is not the owner, unenable delete post button*/
+            if (idPostOwner != currentUser)
+            {
+                btnEliminarPublicacion.Style.Add("display","none");
+            }
         }
 
         private void MapDate(DataTable table)
@@ -154,5 +162,18 @@ namespace ISOYEX_App
             }
         }
 
+        protected void btnEliminarPublicacion_Click(object sender, EventArgs e)
+        {
+            string[] parametros = { "@Id_Publicacion", Request.QueryString["q"].ToString() };
+            try
+            {
+                ManejadorData.Exec_Stp("spEliminarPublicacion", 'm', parametros);
+                Response.Redirect("Default");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

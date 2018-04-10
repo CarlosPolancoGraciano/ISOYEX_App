@@ -265,7 +265,7 @@ namespace ISOYEX_App
 
         private bool validateRNCExistence()
         {
-            string[] rncValidation = { "@@Rnc", txtRNC.Text };
+            string[] rncValidation = { "@Rnc", txtRNC.Text };
             DataTable respuestaValidacion = ManejadorData.Exec_Stp("spValidateRNC", 's', rncValidation);
             if (Convert.ToInt32(respuestaValidacion.Rows[0].ItemArray[0]) != 0)
             {

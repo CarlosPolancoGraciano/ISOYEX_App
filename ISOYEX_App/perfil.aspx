@@ -78,6 +78,7 @@
                             </div>
                             <div class="text-center mt-2">
                                 <div class="" role="group">
+                                    <asp:Button ID="btnEliminar" Text="Eliminar cuenta" CssClass="btn btn-wine-color" runat="server" OnClick="btnEliminar_Click" />
                                     <asp:Button ID="btnModificar" Text="Modificar" CssClass="btn btn-warning" runat="server" OnClick="btnModificar_Click" />
                                     <asp:Button ID="btnSaveChanges" Text="Guardar" Visible="false" CssClass="btn btn-success" runat="server" OnClick="btnSaveChanges_Click" />
                                     <asp:Button ID="btnCancelar" Text="Cancelar" Visible="false" CssClass="btn btn-wine-color" runat="server" OnClick="btnCancelar_Click" />

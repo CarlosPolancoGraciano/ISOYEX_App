@@ -59,7 +59,7 @@ BEGIN
 	FROM Publicacion as p
 	inner join TipoSangre as ts on ts.Id_TipoSangre = p.Id_TipoSangre
 	inner join Usuario as u on u.Id_Usuario = p.Id_Usuario
-	ORDER BY Id_Publicacion DESC
+	ORDER BY Id_Publicacion ASC
 END
 go
 /* Prueba de retornarPublicaciones - newer to old

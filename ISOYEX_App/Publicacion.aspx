@@ -66,37 +66,32 @@
                                 </div>
                             </div>
                             <div id="noAbleToCommentDiv" runat="server">
-                                <div id="outer-box">
-                                    <div class="card my-4">
-                                        <h5 class="card-header">Responde la publicación</h5>
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-lg-6 border-right border-danger text-center">
-                                                    <div class="form-group">
-                                                        <textarea id="Textarea1" class="form-control" rows="3" runat="server"></textarea>
-                                                    </div>
-                                                    <div class="text-right">
-                                                        <asp:Button ID="Button1" CssClass="btn btn-wine-color" runat="server" Text="Comentar" OnClick="btnGuardarComentario_Click" />
+                                <div class="card my-4">
+                                    <h5 class="card-header">Responde la publicación</h5>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-6 border-right border-danger text-center">
+                                                <div class="form-group">
+                                                    <textarea id="Textarea1" class="form-control" rows="3" runat="server"></textarea>
+                                                </div>
+                                                <div class="text-right">
+                                                    <asp:Button ID="Button1" CssClass="btn btn-wine-color" runat="server" Text="Comentar" OnClick="btnGuardarComentario_Click" />
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 text-center">
+                                                <label>Respuestas rapidas</label>
+                                                <div class="row mb-2">
+                                                    <div class="col-12">
+                                                        <asp:Button ID="Button2" CssClass="btn btn-outline-danger" runat="server" Text="Me ofrezco a donar" OnClick="btnMensajeRapido1_Click" />
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-6 text-center">
-                                                    <label>Respuestas rapidas</label>
-                                                    <div class="row mb-2">
-                                                        <div class="col-12">
-                                                            <asp:Button ID="Button2" CssClass="btn btn-outline-danger" runat="server" Text="Me ofrezco a donar" OnClick="btnMensajeRapido1_Click" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <asp:Button ID="Button3" CssClass="btn btn-outline-danger" runat="server" Text="Contactemé, puedo donar" OnClick="btnMensajeRapido2_Click" />
-                                                        </div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <asp:Button ID="Button3" CssClass="btn btn-outline-danger" runat="server" Text="Contactemé, puedo donar" OnClick="btnMensajeRapido2_Click" />
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div id="inner-box">
-                                        <p>This is the overlay!</p>
                                     </div>
                                 </div>
                             </div>
@@ -179,6 +174,9 @@
                                         <p><strong>Email: </strong><span id="emailSpan" runat="server"></span></p>
                                         <p><strong>Provincia: </strong><span id="provinciaSpan" runat="server"></span></p>
                                         <p><strong>Municipio: </strong><span id="MunicipioSpan" runat="server"></span></p>
+                                        <div class="text-center">
+                                            <asp:Button ID="btnEliminarPublicacion" CssClass="btn btn-wine-color" runat="server" Text="Eliminar publicación" OnClick="btnEliminarPublicacion_Click" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>

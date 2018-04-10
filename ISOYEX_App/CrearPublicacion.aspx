@@ -9,9 +9,12 @@
                 <div class="card-body">
                     <div class="text-center">
                         <span class="display-4">Publicación para donantes</span>
+                        <div class="text-center">
+                            <p class="lead">Aquí puede publicar qué tipo de sangre busca para que los donantes puedan cooperar con la institución.</p>
+                        </div>
                     </div>
                     <hr />
-                    <div class="row mt-3">
+                    <div class="row mt-2">
                         <!-- Post Content Column -->
                         <div class="col-lg-12">
                             <div class="form-row ml-4">
@@ -27,7 +30,7 @@
                             </div>
                             <!-- WYSIWYG Form -->
                             <div class="my-4">
-                                <label class="h5">Contenido de la publicación</label>
+                                <label class="h5 text-muted">Contenido de la publicación*</label>
                                 <textarea id="postEditor" name="postEditor" class="postEditor" runat="server"></textarea>
                             </div>
                             <!-- WYSIWYG Form -->

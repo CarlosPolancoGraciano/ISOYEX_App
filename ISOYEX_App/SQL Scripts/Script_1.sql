@@ -144,6 +144,7 @@ INSERT INTO TipoSangre VALUES ('AB+')
 INSERT INTO TipoSangre VALUES ('AB-')
 INSERT INTO TipoSangre VALUES ('O+')
 INSERT INTO TipoSangre VALUES ('O-')
+INSERT INTO TipoSangre VALUES ('Ninguna')
 go
 /*Inserting Contact Type*/
 INSERT INTO TipoContacto VALUES ('Personal')

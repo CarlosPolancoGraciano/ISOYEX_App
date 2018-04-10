@@ -182,5 +182,27 @@ namespace ISOYEX_App
         {
             Response.Redirect("Perfil.aspx");
         }
+
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            string idUsuario = Session["Id_Usuario"].ToString();
+            string[] parametros = { "@Id_Usuario", idUsuario };
+            try
+            {
+                ManejadorData.Exec_Stp("spEliminarCuentaUsuario", 'm', parametros);
+                
+                /*Log-out from WebSite*/
+                Session["NombreUsuario"] = null;
+                Session["Id_Usuario"] = null;
+                Session["Id_Rol"] = null;
+                /*Used in Perfil.aspx*/
+                Session["currentUser"] = null;
+                Response.Redirect("Default.aspx");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

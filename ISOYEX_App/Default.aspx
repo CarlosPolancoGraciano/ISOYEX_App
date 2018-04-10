@@ -139,10 +139,16 @@
                     <div class="row">
                         <!-- Blog Entries Column -->
                         <div class="col-md-12">
-                            <h2 class="my-4">Publicaciones
-                               
-                                <small class="text-muted">Hechas por instituciones</small>
-                            </h2>
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                     <h2 class="my-4">Publicaciones
+                                        <small class="text-muted">Hechas por instituciones</small>
+                                    </h2>
+                                    <div class="mb-4">
+                                        <a href="/CrearPublicacion.aspx"  id="btnCrearPost" runat="server" class="btn btn-wine-color" style="display: none">Crear publicación</a>
+                                    </div>
+                                </div>
+                            </div>
                             <!--
                             <div class="row">
                                 <div class="card mb-2 col-12 bg-light">

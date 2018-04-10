@@ -87,7 +87,7 @@ ALTER PROCEDURE spRegistrarInstitucion
 	@Id_Municipio int
 )as
 BEGIN
-	DECLARE @Id_AutenticacionUsuario int, @Id_Direccion int, @DireccionId int, @MyProvinciaId int, @MyMunicipioId int, @Id_Contacto int, @Id_Usuario int
+	DECLARE @Id_AutenticacionUsuario int, @Id_Direccion int, @DireccionId int, @MyProvinciaId int, @MyMunicipioId int, @Id_Contacto int, @Id_Usuario int, @Id_TipoSangre int
 
 	DECLARE c_direccion CURSOR FOR
 		SELECT Id_Direccion, Id_Provincia, Id_Municipio FROM Direccion 
@@ -109,6 +109,9 @@ BEGIN
 	CLOSE c_direccion;
 	DEALLOCATE c_direccion;
 
+	SELECT @Id_TipoSangre=Id_TipoSangre FROM TipoSangre as ts
+	WHERE ts.TipoSangre = 'Ninguna'
+
 	INSERT INTO 
 	AutenticacionUsuario (Email, Contrasena) 
 	VALUES 
@@ -121,9 +124,9 @@ BEGIN
 	(2, @Id_AutenticacionUsuario)
 	
 	INSERT INTO 
-	Usuario (RNC, Nombre, Imagen, Id_AutenticacionUsuario, Id_Direccion)
+	Usuario (RNC, Nombre, Imagen, Id_AutenticacionUsuario, Id_Direccion, Id_TipoSangre)
 	VALUES
-	(@RNC, @Nombre,  @Imagen, @Id_AutenticacionUsuario, @Id_Direccion)
+	(@RNC, @Nombre,  @Imagen, @Id_AutenticacionUsuario, @Id_Direccion, @Id_TipoSangre)
 	
 	SELECT @Id_Usuario=SCOPE_IDENTITY()
 	
@@ -146,7 +149,7 @@ ALTER PROCEDURE spLoginEmail(
 )as
 BEGIN
 	SELECT 
-		u.Id_Usuario, u.Nombre, u.Apellido, 
+		u.Id_Usuario, u.Nombre, u.Apellido, u.RNC, 
 		u.Imagen, u.FechaNacimiento, c.Numero, 
 		tc.Id_TipoContacto, tc.Tipo, d.Id_Provincia,
 	 	p.Provincia, d.Id_Municipio, m.Municipio, 
@@ -397,4 +400,48 @@ CREATE PROCEDURE spRetonarRolId(
 BEGIN
 	SELECT r.Id_Rol  FROM Rol as r
 	WHERE r.Nombre = @Nombre
+END
+go
+ALTER PROCEDURE spEliminarCuentaUsuario(
+	@Id_Usuario int
+)as
+BEGIN
+	DECLARE @Id_Rol int, @InstitucionId int, @AutenticacionUsuarioId int, @ContactoId int
+
+	/*Delete related data from user*/
+	SELECT @Id_Rol=ur.Id_Rol FROM Usuario as u
+	inner join UsuarioRol as ur on ur.Id_AutenticacionUsuario = u.Id_AutenticacionUsuario
+	WHERE u.Id_Usuario = @Id_Usuario
+
+	SELECT @InstitucionId=Id_Rol FROM Rol as r
+	WHERE r.Nombre = 'Institucion'
+
+	SELECT @AutenticacionUsuarioId=Id_AutenticacionUsuario FROM Usuario as u
+	WHERE u.Id_Usuario = @Id_Usuario
+
+	SELECT @ContactoId=Id_Contacto FROM Usuario as u
+	WHERE u.Id_Usuario = @Id_Usuario
+
+	IF(@Id_Rol = @InstitucionId)
+	BEGIN
+		/*If is 'Institucion', delete user data and everything related*/
+		DELETE FROM Comentario WHERE Id_Usuario = @Id_Usuario
+		DELETE FROM Publicacion WHERE Id_Usuario = @Id_Usuario
+		DELETE FROM Usuario WHERE Id_Usuario = @Id_Usuario
+		DELETE FROM UsuarioRol WHERE Id_AutenticacionUsuario = @AutenticacionUsuarioId
+		DELETE FROM AutenticacionUsuario WHERE Id_AutenticacionUsuario = @AutenticacionUsuarioId
+		DELETE FROM ContactoTipoContacto WHERE Id_Contacto = @ContactoId
+		DELETE FROM Contacto WHERE Id_Contacto = @ContactoId
+	END
+	ELSE
+	BEGIN
+	/*Delete data from user*/
+		DELETE FROM Comentario WHERE Id_Usuario = @Id_Usuario
+		DELETE FROM Usuario WHERE Id_Usuario = @Id_Usuario
+		DELETE FROM UsuarioRol WHERE Id_AutenticacionUsuario = @AutenticacionUsuarioId
+		DELETE FROM AutenticacionUsuario WHERE Id_AutenticacionUsuario = @AutenticacionUsuarioId
+		DELETE FROM ContactoTipoContacto WHERE Id_Contacto = @ContactoId
+		DELETE FROM Contacto WHERE Id_Contacto = @ContactoId
+	END
+
 END
