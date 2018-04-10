@@ -45,14 +45,14 @@ namespace ISOYEX_App
             var age = (DateTime.Now.Year - BirthDate.Year);
 
             userProfilePicture.ImageUrl = tabla.Rows[0]["Imagen"].ToString();
-            txtNombreLabel.Text = "Nombre: " + tabla.Rows[0]["Nombre"].ToString() + " " + tabla.Rows[0]["Apellido"].ToString();
-            txtEdadLabel.Text = "Edad: " + age.ToString();
-            ddlTipoSangreLabel.Text = "Tipo de sangre: " + tabla.Rows[0]["TipoSangre"].ToString();
-            txtEmailLabel.Text = "Email: " + tabla.Rows[0]["Email"].ToString();
-            labelcontacto.Text = "Tipo de contacto: " + tabla.Rows[0]["Tipo"].ToString();
-            labeltelefono.Text = "Número telefónico: " + tabla.Rows[0]["Numero"].ToString();
-            ddlProvinciaLabel.Text = "Provincia: " + tabla.Rows[0]["Provincia"].ToString();
-            ddlMunicipioLabel.Text = "Municipio: " + tabla.Rows[0]["Municipio"].ToString();
+            txtNombreLabel.Text = tabla.Rows[0]["Nombre"].ToString() + " " + tabla.Rows[0]["Apellido"].ToString();
+            txtEdadLabel.Text = age.ToString();
+            ddlTipoSangreLabel.Text = tabla.Rows[0]["TipoSangre"].ToString();
+            txtEmailLabel.Text = tabla.Rows[0]["Email"].ToString();
+            labelcontacto.Text = tabla.Rows[0]["Tipo"].ToString();
+            labeltelefono.Text = tabla.Rows[0]["Numero"].ToString();
+            ddlProvinciaLabel.Text = tabla.Rows[0]["Provincia"].ToString();
+            ddlMunicipioLabel.Text = tabla.Rows[0]["Municipio"].ToString();
         }
     }
 }
