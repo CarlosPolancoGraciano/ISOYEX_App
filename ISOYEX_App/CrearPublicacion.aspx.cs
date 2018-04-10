@@ -58,31 +58,29 @@ namespace ISOYEX_App
         {
             if (ValidarControles())
             {
-                string[] parametros = {
+                if (ValidarRolUsuario())
+                {
+                    string[] parametros = {
                     "@Titulo", txtTitulo.Text,
                     "@Id_TipoSangre", ddlTipoSangre.SelectedValue,
                     "@Contenido", postEditor.Value,
                     "@Fecha", DateTime.Now.ToString(),
                     "@Id_Usuario", Session["Id_Usuario"].ToString()
                     };
-                try
-                {
-                    ManejadorData.Exec_Stp("spCrearPublicacion", 'm', parametros);
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "emptyFieldsSweetAlert", "swal('Publicación hecha!', 'El post fue publicado exitosamente, todos los donantes han sido notificados','success').then((value) => { window.location.href = '/Default.aspx'; })", true);
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
-                /*if (ValidarRolUsuario())
-                {
-                    
+                    try
+                    {
+                        ManejadorData.Exec_Stp("spCrearPublicacion", 'm', parametros);
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "emptyFieldsSweetAlert", "swal('Publicación hecha!', 'El post fue publicado exitosamente, todos los donantes han sido notificados','success').then((value) => { window.location.href = '/Default.aspx'; })", true);
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
                 }
                 else
                 {
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "emptyFieldsSweetAlert", "swal('Error!', 'Solo las instituciones pueden crear publicaciones','error')", true);
-                }*/
-
+                }
             }
             else
             {

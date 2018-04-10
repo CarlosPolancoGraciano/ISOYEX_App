@@ -270,7 +270,7 @@
             var self = this;
             /* Set moment.js locale zone (es-do) Republica Dominicana */
             moment.locale('es-do');
-
+            debugger;
             /* User Data */
             self.ComentarioId = ko.observable(data.ComentarioId);
             self.Contenido = ko.observable(data.Contenido);

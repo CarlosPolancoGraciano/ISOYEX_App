@@ -111,7 +111,8 @@ namespace ISOYEX_App
                 try
                 {
                     ManejadorData.Exec_Stp("spCrearComentario", 'm', parametros);
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "emptyFieldsSweetAlert", "swal('Comentario agregado!', '','success').then((value) => { window.location.reload() })", true);
+                    Response.Redirect("Publicacion.aspx?q=" + Request.QueryString["q"].ToString());
+                    //ScriptManager.RegisterStartupScript(this, this.GetType(), "emptyFieldsSweetAlert", "swal('Comentario agregado!', '','success').then((value) => { window.location.reload() })", true);
                 }
                 catch (Exception)
                 {
@@ -135,7 +136,7 @@ namespace ISOYEX_App
             try
             {
                 ManejadorData.Exec_Stp("spCrearComentario", 'm', parametros);
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "emptyFieldsSweetAlert", "swal('Comentario agregado!', '','success').then((value) => { location.reload() })", true);
+                Response.Redirect("Publicacion.aspx?q=" + Request.QueryString["q"].ToString());
             }
             catch (Exception)
             {
@@ -154,7 +155,8 @@ namespace ISOYEX_App
             try
             {
                 ManejadorData.Exec_Stp("spCrearComentario", 'm', parametros);
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "emptyFieldsSweetAlert", "swal('Comentario agregado!', '','success').then((value) => { location.reload() })", true);
+                Response.Redirect("Publicacion.aspx?q=" + Request.QueryString["q"].ToString());
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), "emptyFieldsSweetAlert", "swal('Comentario agregado!', '','success').then((value) => { location.reload() })", true);
             }
             catch (Exception)
             {
