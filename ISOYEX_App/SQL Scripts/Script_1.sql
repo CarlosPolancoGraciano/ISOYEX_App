@@ -58,6 +58,12 @@ CREATE TABLE Rol
 	Nombre nvarchar(128) not null
 )
 go
+CREATE TABLE AutenticacionUsuario(
+Id_AutenticacionUsuario int identity(1,1) PRIMARY KEY,
+Email nvarchar(128) not null,
+Contrasena nvarchar(100) not null,
+)
+go
 CREATE TABLE Usuario(
 Id_Usuario int identity(1,1) PRIMARY KEY,
 RNC nvarchar(20),
@@ -77,12 +83,6 @@ CONSTRAINT fk_UsuarioDireccion FOREIGN KEY(Id_Direccion)
 REFERENCES Direccion(Id_Direccion),
 CONSTRAINT fk_UsuarioTipoSangre FOREIGN KEY(Id_TipoSangre)
 REFERENCES TipoSangre(Id_TipoSangre)
-)
-go
-CREATE TABLE AutenticacionUsuario(
-Id_AutenticacionUsuario int identity(1,1) PRIMARY KEY,
-Email nvarchar(128) not null,
-Contrasena nvarchar(100) not null,
 )
 go
 CREATE TABLE UsuarioRol

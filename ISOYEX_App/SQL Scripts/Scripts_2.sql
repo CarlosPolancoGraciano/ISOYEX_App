@@ -2,7 +2,7 @@
 USE ISOYEX
 go
 /*REGISTER USERS PROCEDURES*/
-ALTER PROCEDURE spRegistrarDonanteReceptor
+CREATE PROCEDURE spRegistrarDonanteReceptor
 (		
 		 @Nombre nvarchar(100),
 		 @Apellido nvarchar(100), 
@@ -74,7 +74,7 @@ BEGIN
 
 END
 go
-ALTER PROCEDURE spRegistrarInstitucion
+CREATE PROCEDURE spRegistrarInstitucion
 (
 	@RNC nvarchar(20),
 	@Nombre nvarchar(100),
@@ -143,7 +143,7 @@ BEGIN
 END
 go
 /*LOGIN PROCEDURES*/
-ALTER PROCEDURE spLoginEmail(
+CREATE PROCEDURE spLoginEmail(
 @Email nvarchar(100),
 @contrasena nvarchar(128)
 )as
@@ -180,7 +180,7 @@ SELECT ur.Id_Rol, u.Id_Usuario FROM UsuarioRol as ur
 go
 */
 /*USER DATA PROCEDURES*/
-ALTER PROCEDURE spUsuarioData
+CREATE PROCEDURE spUsuarioData
 (
 	@Id_Usuario int
 )as
@@ -255,7 +255,7 @@ BEGIN
 END
 go
 /*MODIFY USER DATA PROCEDURES*/
-ALTER PROCEDURE spUpdateDonanteReceptorData
+CREATE PROCEDURE spUpdateDonanteReceptorData
 
 (
 	@Id_Usuario int,
@@ -330,7 +330,7 @@ BEGIN
 
 END
 go
-ALTER PROCEDURE spUpdateInstitucionData
+CREATE PROCEDURE spUpdateInstitucionData
 (
 	@Id_Usuario int,
 	@RNC nvarchar(20),
@@ -402,7 +402,7 @@ BEGIN
 	WHERE r.Nombre = @Nombre
 END
 go
-ALTER PROCEDURE spEliminarCuentaUsuario(
+CREATE PROCEDURE spEliminarCuentaUsuario(
 	@Id_Usuario int
 )as
 BEGIN

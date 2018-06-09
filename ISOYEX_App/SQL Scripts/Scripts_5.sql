@@ -67,7 +67,7 @@ EXEC spRetornarPublicaciones
 SELECT * FROM Publicacion
 */
 go
-ALTER PROCEDURE spRetornarPublicacionPorId(
+CREATE PROCEDURE spRetornarPublicacionPorId(
 	@Id_Publicacion int
 )as
 BEGIN

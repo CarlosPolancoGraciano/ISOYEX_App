@@ -1,6 +1,6 @@
 USE ISOYEX
 go
-ALTER PROCEDURE spFiltradoPorSangre
+CREATE PROCEDURE spFiltradoPorSangre
 (
 	@Id_TipoSangre int
 )
@@ -26,7 +26,7 @@ BEGIN
 END
 go
 /*PROCEDURE FiltradoPorDireccion - MAIKEL*/
-ALTER PROCEDURE spFiltradoPorDireccion
+CREATE PROCEDURE spFiltradoPorDireccion
 (
 	@Id_Provincia int,
 	@Id_Municipio int
@@ -77,7 +77,7 @@ BEGIN
 End
 go
 /*PROCEDURE FiltradoPorDireccionYSangre - CARLOS*/
-ALTER PROCEDURE spFiltradoPorDireccionYSangre (
+CREATE PROCEDURE spFiltradoPorDireccionYSangre (
 	@Id_Provincia int,
 	@Id_Municipio int,
 	@Id_TipoSangre int
